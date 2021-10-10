@@ -1,10 +1,9 @@
 import './App.css';
-
+import StoreHomePage from './Components/Store/StoreHomePage'
 function App() {
   return (
     <div className="App">
-     <h1>hi team</h1>
-    </div>
+<StoreHomePage/></div>
   );
 }
 
