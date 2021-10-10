@@ -1,11 +1,23 @@
-import './App.css';
+import React from "react";
+import {BrowserRouter as Router,Route,Switch }from 'react-router-dom';
 
-function App() {
+import HProducts from "./Components/Home/Products"
+
+function  App() {
   return (
-    <div className="App">
-     <h1>hi team</h1>
-    </div>
+    <Router>
+      <div className="Components">
+        <div className="content">
+          <Switch>
+            <Route exact path="/">
+              <HProducts />
+            </Route>
+          </Switch>
+        </div>
+        </div>
+        </Router>
   );
 }
+      
 
 export default App;

@@ -1,0 +1,22 @@
+body {
+  /* background-color: #f1f1f1;  */
+  color: rgb(255, 0, 0);
+  background-color: #ffffff;
+  padding: 10px;
+  font-family: Arial;
+  margin-left: 50%;
+}
+
+.categories {
+  height: 90%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 1; /* Stay at the top */
+  left: 1;
+  background-color: white; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 1%;
+  padding-left: 10%;
+  margin-left: 5%;
+}
