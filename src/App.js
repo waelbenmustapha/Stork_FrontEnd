@@ -1,7 +1,9 @@
 import React from "react";
 import {BrowserRouter as Router,Route,Switch }from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import HProducts from "./Components/Home/Products"
+import HProducts from "./Components/Home/Home";
+import ProdByCat from "./Components/Home/ProdByCat";
 
 function  App() {
   return (
