@@ -8,26 +8,33 @@ import {
   faImage,
   faImages,
   faTextHeight,
+  faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import SideNav, { NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
-
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
-
-import Modal from "react-bootstrap/Modal";
 import Nav from "react-bootstrap/Nav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ModalAddImg from "./modals/ModalAddImg";
+import ModalAddTxt from "./modals/ModalAddTxt";
+import ModalAddSlide from "./modals/ModalAddSlide";
+import ModalAdd3el from "./modals/ModalAdd3el";
+import ModalAdd2el from "./modals/ModalAdd2el";
 function StoreHomePage() {
   const [showtxt, setShowtxt] = useState(false);
   const [showimg, setShowimg] = useState(false);
   const [show2el, setShow2el] = useState(false);
   const [showaddslide, setShowaddslide] = useState(false);
   const [slideimgs, setslideimgs] = useState([]);
-  const [id, setid] = useState(0);
+  const[txtedit,settxtedit]=useState(false);
+  const[imgedit,setimgedit]=useState(false);
+  const[slideedit,setslideedit]=useState(false);
+  const[el3edit,set2eledit]=useState(false);
+  const[idtoedit,setidtoedit]=useState();
+  const[el2edit,set3eledit]=useState(false);
+  const [id, setid] = useState(1);
   const [show3el, setShow3el] = useState(false);
   const [txttoadd, settxttoadd] = useState("");
   const [itemslist, setitemlist] = useState([
@@ -39,7 +46,14 @@ function StoreHomePage() {
   const [el1, setel1] = useState("");
   const [el2, setel2] = useState("");
   const [el3, setel3] = useState("");
-  const [elements, setelements] = useState([{id:1,type:'image',url:'https://www.royalnutcompany.com.au/cms_images/11151_27-05-2020_5967.jpg'}]);
+  const [elements, setelements] = useState([
+    {
+      id: 0,
+      type: "image",
+      url: "https://www.royalnutcompany.com.au/cms_images/11151_27-05-2020_5967.jpg",
+    },
+  ]);
+ 
 
   function getelements() {
     axios.get("http://localhost:5000/items/getitems").then((res) => {
@@ -51,6 +65,9 @@ function StoreHomePage() {
   useEffect(() => {
     getelements();
   }, []);
+  function Tst(){
+    return(<div><h1>hello tst</h1></div>)
+  }
 
   return (
     <div>
@@ -60,18 +77,27 @@ function StoreHomePage() {
           switch (selected) {
             case "addtxt":
               setShowtxt(true);
+              settxtedit(false);
               break;
             case "addimg":
               setShowimg(true);
+              setimgedit(false);
+
               break;
             case "2el":
               setShow2el(true);
+              set2eledit(false);
+
               break;
             case "3el":
               setShow3el(true);
+              set3eledit(false);
+
               break;
             case "addslide":
               setShowaddslide(true);
+              setslideedit(false);
+
               break;
             default:
             // code block
@@ -141,323 +167,67 @@ function StoreHomePage() {
             backgroundColor: "#E8E8E8",
           }}
         >
-          <Modal
-            size="lg"
-            show={showtxt}
-            onHide={() => {
-              setShowtxt(false);
-            }}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Add text</Modal.Title>
-            </Modal.Header>
-            <Form style={{ margin: 15 }}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Text</Form.Label>
-                <Form.Control
-                  value={txttoadd}
-                  onChange={(e) => settxttoadd(e.target.value)}
-                  type="text"
-                  placeholder="Enter text"
-                />
-              </Form.Group>
-
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setid(id + 1);
-                  setelements([
-                    ...elements,
-                    { id: id, type: "text", value: txttoadd },
-                  ]);
-                  setShowtxt(false);
-                }}
-                style={{ marginTop: 25 }}
-                variant="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Form>
-          </Modal>
-          <Modal
-            size="lg"
-            show={showimg}
-            onHide={() => {
-              setShowimg(false);
-            }}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>ADD IMAGE</Modal.Title>
-            </Modal.Header>
-            <Form style={{ margin: 15 }}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Text</Form.Label>
-                <Form.Control
-                  value={imgtoadd}
-                  onChange={(e) => setimgtoadd(e.target.value)}
-                  type="text"
-                  placeholder="Enter image url"
-                />
-              </Form.Group>
-
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setid(id + 1);
-                  setelements([
-                    ...elements,
-                    { id: id, type: "image", url: imgtoadd },
-                  ]);
-                  setShowimg(false);
-                }}
-                style={{ marginTop: 25 }}
-                variant="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Form>
-          </Modal>
-          <Modal
-            size="lg"
-            show={showtxt}
-            onHide={() => {
-              setShowtxt(false);
-            }}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Add text</Modal.Title>
-            </Modal.Header>
-            <Form style={{ margin: 15 }}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Text</Form.Label>
-                <Form.Control
-                  value={txttoadd}
-                  onChange={(e) => settxttoadd(e.target.value)}
-                  type="text"
-                  placeholder="Enter text"
-                />
-              </Form.Group>
-
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setid(id + 1);
-
-                  setelements([
-                    ...elements,
-                    { id: id, type: "text", value: txttoadd },
-                  ]);
-                  setShowtxt(false);
-                }}
-                style={{ marginTop: 25 }}
-                variant="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Form>
-          </Modal>
-          <Modal
-            size="lg"
-            show={showaddslide}
-            onHide={() => {
-              setShowaddslide(false);
-            }}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>ADD slides</Modal.Title>
-            </Modal.Header>
-            <Form style={{ margin: 15 }}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Text</Form.Label>
-                <Form.Control
-                  value={imgtoadd}
-                  onChange={(e) => setimgtoadd(e.target.value)}
-                  type="text"
-                  placeholder="Enter image url"
-                />
-              </Form.Group>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                }}
-              >
-                {slideimgs.map((el) => (
-                  <img
-                    style={{ maxWidth: "100%", maxHeight: "100%" }}
-                    alt="slide"
-                    src={el}
-                  />
-                ))}
-              </div>
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setslideimgs([...slideimgs, imgtoadd]);
-                }}
-                style={{ marginTop: 25 }}
-                variant="primary"
-                type="submit"
-              >
-                Add slide image
-              </Button>
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setid(id + 1);
-
-                  setelements([
-                    ...elements,
-                    { id: id, type: "slideshow", img: slideimgs },
-                  ]);
-                  setslideimgs([]);
-                  setShowaddslide(false);
-                }}
-                style={{ marginTop: 25 }}
-                variant="primary"
-                type="submit"
-              >
-                Submit slide
-              </Button>
-            </Form>
-          </Modal>
-          <Modal
-            size="lg"
-            show={show3el}
-            onHide={() => {
-              setShow3el(false);
-            }}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Add 3 items</Modal.Title>
-            </Modal.Header>
-            <Form style={{ margin: 15 }}>
-              <Form.Group className="mb-3">
-                <Form.Select
-                  value={el1}
-                  onChange={(e) => {
-                    setel1(e.target.value);
-                  }}
-                  aria-label="Default select example"
-                >
-                  <option>Open this select menu</option>
-                  {itemslist.map((val) => (
-                    <option value={val.id}>{val.name}</option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Select
-                  value={el2}
-                  onChange={(e) => {
-                    setel2(e.target.value);
-                  }}
-                  aria-label="Default select example"
-                >
-                  <option>Open this select menu</option>
-                  {itemslist.map((val) => (
-                    <option value={val.id}>{val.name}</option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Select
-                  value={el3}
-                  onChange={(e) => {
-                    setel3(e.target.value);
-                  }}
-                  aria-label="Default select example"
-                >
-                  <option>Open this select menu</option>
-                  {itemslist.map((val) => (
-                    <option value={val.id}>{val.name}</option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setid(id + 1);
-
-                  setelements([
-                    ...elements,
-                    { id: id, type: "3el", el: [el1, el2, el3] },
-                  ]);
-                  setShow3el(false);
-                }}
-                style={{ marginTop: 25 }}
-                variant="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Form>
-            <Modal.Footer></Modal.Footer>
-          </Modal>
-          <Modal
-            size="lg"
-            show={show2el}
-            onHide={() => {
-              setShow2el(false);
-            }}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Add 3 items</Modal.Title>
-            </Modal.Header>
-            <Form style={{ margin: 15 }}>
-              <Form.Group className="mb-3">
-                <Form.Select
-                  value={el1}
-                  onChange={(e) => {
-                    setel1(e.target.value);
-                  }}
-                  aria-label="Default select example"
-                >
-                  <option>Open this select menu</option>
-                  {itemslist.map((val) => (
-                    <option value={val.id}>{val.name}</option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Select
-                  value={el2}
-                  onChange={(e) => {
-                    setel2(e.target.value);
-                  }}
-                  aria-label="Default select example"
-                >
-                  <option>Open this select menu</option>
-                  {itemslist.map((val) => (
-                    <option value={val.id}>{val.name}</option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setid(id + 1);
-
-                  setelements([
-                    ...elements,
-                    { id: id, type: "2el", el: [el1, el2] },
-                  ]);
-                  setShow2el(false);
-                }}
-                style={{ marginTop: 25 }}
-                variant="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Form>
-            <Modal.Footer></Modal.Footer>
-          </Modal>
+          <ModalAddTxt
+            id={id}
+            setid={setid}
+            setelements={setelements}
+            elements={elements}
+            settxttoadd={settxttoadd}
+            txttoadd={txttoadd}
+            showtxt={showtxt}
+            txtedit={txtedit}
+            idtoedit={idtoedit}
+            setShowtxt={setShowtxt}
+          />
+          <ModalAddImg
+            id={id}
+            setid={setid}
+            setelements={setelements}
+            elements={elements}
+            setimgtoadd={setimgtoadd}
+            imgtoadd={imgtoadd}
+            showimg={showimg}
+            setShowimg={setShowimg}
+          />
+          <ModalAddSlide
+            id={id}
+            setid={setid}
+            setelements={setelements}
+            elements={elements}
+            showaddslide={showaddslide}
+            setShowaddslide={setShowaddslide}
+            setslideimgs={setslideimgs}
+            slideimgs={slideimgs}
+            imgtoadd={imgtoadd}
+            setimgtoadd={setimgtoadd}
+          />
+          <ModalAdd3el
+            id={id}
+            setid={setid}
+            setelements={setelements}
+            elements={elements}
+            show3el={show3el}
+            setShow3el={setShow3el}
+            el1={el1}
+            setel1={setel1}
+            itemslist={itemslist}
+            el2={el2}
+            setel2={setel2}
+            el3={el3}
+            setel3={setel3}
+          />
+          <ModalAdd2el
+            setid={setid}
+            setelements={setelements}
+            elements={elements}
+            show2el={show2el}
+            setShow2el={setShow2el}
+            el1={el1}
+            setel1={setel1}
+            itemslist={itemslist}
+            el2={el2}
+            setel2={setel2}
+          />
           {elements.map((el) =>
             el.type === "text" ? (
               <div
@@ -469,14 +239,39 @@ function StoreHomePage() {
                 }}
               >
                 <h2 style={{ margin: 20 }}>{el.value}</h2>
-                <div style={{ right: 0, position: "absolute" }}>
+                <div
+                  style={{
+                    right: 0,
+                    position: "absolute",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
                   <FontAwesomeIcon
                     onClick={() => {
-                      console.log(el.id);
+                     settxtedit(true);
+                     setShowtxt(true);
+                  setidtoedit(el.id);
                     }}
                     className="btnicon"
-                    size="2x"
+                    size="1x"
                     icon={faEdit}
+                    style={{ margin: 10 }}
+                  />
+                  <FontAwesomeIcon
+                    style={{ margin: 10 }}
+                    onClick={() => {
+                      console.log(el.id);
+                      let newarr = elements;
+                      const objIndex = newarr.findIndex(
+                        (obj) => obj.id === el.id
+                      );
+                      newarr.splice(objIndex, 1);
+                      setelements([...newarr]);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faTrashAlt}
                   />
                 </div>
               </div>
@@ -529,14 +324,44 @@ function StoreHomePage() {
                     </div>
                   );
                 })}
-                <div style={{ right: 15, position: "absolute" }}>
+                <div
+                  style={{
+                    right: 15,
+                    position: "absolute",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
                   <FontAwesomeIcon
                     onClick={() => {
                       console.log(el.id);
+                      let newarr = elements;
+                      const objIndex = newarr.findIndex(
+                        (obj) => obj.id === el.id
+                      );
+                      newarr[objIndex].value = "changed text";
+                      console.log(newarr);
+                      setelements([...newarr]);
                     }}
                     className="btnicon"
-                    size="2x"
+                    size="1x"
                     icon={faEdit}
+                    style={{ margin: 10 }}
+                  />
+                  <FontAwesomeIcon
+                    style={{ margin: 10 }}
+                    onClick={() => {
+                      console.log(el.id);
+                      let newarr = elements;
+                      const objIndex = newarr.findIndex(
+                        (obj) => obj.id === el.id
+                      );
+                      newarr.splice(objIndex, 1);
+                      setelements([...newarr]);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faTrashAlt}
                   />
                 </div>
               </div>
@@ -562,15 +387,40 @@ function StoreHomePage() {
                     position: "absolute",
                     top: "30%",
                     transform: `translate(50%)`,
+                    display: "flex",
+                    flexDirection: "column",
                   }}
                 >
                   <FontAwesomeIcon
                     onClick={() => {
                       console.log(el.id);
+                      let newarr = elements;
+                      const objIndex = newarr.findIndex(
+                        (obj) => obj.id === el.id
+                      );
+                      newarr[objIndex].value = "changed text";
+                      console.log(newarr);
+                      setelements([...newarr]);
                     }}
                     className="btnicon"
-                    size="2x"
+                    size="1x"
                     icon={faEdit}
+                    style={{ margin: 10 }}
+                  />
+                  <FontAwesomeIcon
+                    style={{ margin: 10 }}
+                    onClick={() => {
+                      console.log(el.id);
+                      let newarr = elements;
+                      const objIndex = newarr.findIndex(
+                        (obj) => obj.id === el.id
+                      );
+                      newarr.splice(objIndex, 1);
+                      setelements([...newarr]);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faTrashAlt}
                   />
                 </div>
               </div>
@@ -590,14 +440,44 @@ function StoreHomePage() {
                   alt="img"
                   src={el.url}
                 />
-                <div style={{ right: 15, position: "absolute" }}>
+                <div
+                  style={{
+                    right: 15,
+                    position: "absolute",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
                   <FontAwesomeIcon
                     onClick={() => {
                       console.log(el.id);
+                      let newarr = elements;
+                      const objIndex = newarr.findIndex(
+                        (obj) => obj.id === el.id
+                      );
+                      newarr[objIndex].value = "changed text";
+                      console.log(newarr);
+                      setelements([...newarr]);
                     }}
                     className="btnicon"
-                    size="2x"
+                    size="1x"
                     icon={faEdit}
+                    style={{ margin: 10 }}
+                  />
+                  <FontAwesomeIcon
+                    style={{ margin: 10 }}
+                    onClick={() => {
+                      console.log(el.id);
+                      let newarr = elements;
+                      const objIndex = newarr.findIndex(
+                        (obj) => obj.id === el.id
+                      );
+                      newarr.splice(objIndex, 1);
+                      setelements([...newarr]);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faTrashAlt}
                   />
                 </div>
               </div>
@@ -656,20 +536,49 @@ function StoreHomePage() {
                   );
                 })}
 
-                <div style={{ right: 15, position: "absolute" }}>
+                <div
+                  style={{
+                    right: 15,
+                    position: "absolute",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
                   <FontAwesomeIcon
                     onClick={() => {
                       console.log(el.id);
+                      let newarr = elements;
+                      const objIndex = newarr.findIndex(
+                        (obj) => obj.id === el.id
+                      );
+                      newarr[objIndex].value = "changed text";
+                      console.log(newarr);
+                      setelements([...newarr]);
                     }}
                     className="btnicon"
-                    size="2x"
+                    size="1x"
                     icon={faEdit}
+                    style={{ margin: 10 }}
+                  />
+                  <FontAwesomeIcon
+                    style={{ margin: 10 }}
+                    onClick={() => {
+                      console.log(el.id);
+                      let newarr = elements;
+                      const objIndex = newarr.findIndex(
+                        (obj) => obj.id === el.id
+                      );
+                      newarr.splice(objIndex, 1);
+                      setelements([...newarr]);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faTrashAlt}
                   />
                 </div>
               </div>
             ) : null
           )}
-         
         </div>
       </div>
       <div className="footer">this is da footer boiii</div>
