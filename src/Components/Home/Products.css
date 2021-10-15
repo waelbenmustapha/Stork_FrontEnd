@@ -10,12 +10,10 @@ body {
   margin-bottom: 10%;
   margin-right: 10%;
   height: 50%;
-  position: fixed;
 }
 .categories {
   color: black;
   text-align: left;
-  position: fixed;
 }
 .gridCat {
   position: fixed;

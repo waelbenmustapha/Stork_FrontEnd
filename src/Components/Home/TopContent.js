@@ -6,7 +6,7 @@ import topProd from "./TopProdListe";
 const TopContent = () => {
   const getProductsCard = ProductObj => {
     return (
-      <Grid item xs={12} sm={3}>
+      <Grid label="Clickable" item xs={12} sm={3}>
         <ProductsCard {...ProductObj} />
       </Grid>
     );

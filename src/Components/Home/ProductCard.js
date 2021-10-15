@@ -9,8 +9,8 @@ import { CardMedia } from '@mui/material';
 const ProductCard = props => {
   const { price, name, description, image } = props;
   return (
-    <Card style={{ height: "300px"  }}> 
-      <CardMedia style={{ height: "150px" }} image={image} />
+    <Card  style={{ height: "300px"  }}> 
+      <CardMedia  style={{ height: "150px" }} image={image} />
       <CardContent>
       <Typography variant="body2" component="p" className="ProductTitel">
        <h3>{name}</h3>
