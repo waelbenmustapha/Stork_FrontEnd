@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import HProducts from "./Components/Home/Home";
-import ProdByCat from "./Components/Home/ProdByCat";
 
 function App() {
   return (
@@ -13,11 +12,6 @@ function App() {
           <Switch>
             <Route exact path="/">
               <HProducts />
-            </Route>
-          </Switch>
-          <Switch>
-            <Route exact path="/catpage">
-              <ProdByCat />
             </Route>
           </Switch>
         </div>
