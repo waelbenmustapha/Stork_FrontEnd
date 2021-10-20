@@ -3,6 +3,8 @@ import { Slide } from "react-slideshow-image";
 import axios from "axios";
 import "react-slideshow-image/dist/styles.css";
 import {
+  faArrowDown,
+  faArrowUp,
   faEdit,
   faGripHorizontal,
   faImage,
@@ -28,20 +30,16 @@ function StoreHomePage() {
   const [show2el, setShow2el] = useState(false);
   const [showaddslide, setShowaddslide] = useState(false);
   const [slideimgs, setslideimgs] = useState([]);
-  const[txtedit,settxtedit]=useState(false);
-  const[imgedit,setimgedit]=useState(false);
-  const[slideedit,setslideedit]=useState(false);
-  const[el3edit,set2eledit]=useState(false);
-  const[idtoedit,setidtoedit]=useState();
-  const[el2edit,set3eledit]=useState(false);
+  const [txtedit, settxtedit] = useState(false);
+  const [imgedit, setimgedit] = useState(false);
+  const [slideedit, setslideedit] = useState(false);
+  const [el2edit, set2eledit] = useState(false);
+  const [idtoedit, setidtoedit] = useState();
+  const [el3edit, set3eledit] = useState(false);
   const [id, setid] = useState(1);
   const [show3el, setShow3el] = useState(false);
   const [txttoadd, settxttoadd] = useState("");
-  const [itemslist, setitemlist] = useState([
-    { id: "1", name: "first item" },
-    { id: "2", name: "second item" },
-    { id: "3", name: "third item" },
-  ]);
+  const [itemslist, setitemlist] = useState([]);
   const [imgtoadd, setimgtoadd] = useState("");
   const [el1, setel1] = useState("");
   const [el2, setel2] = useState("");
@@ -53,7 +51,6 @@ function StoreHomePage() {
       url: "https://www.royalnutcompany.com.au/cms_images/11151_27-05-2020_5967.jpg",
     },
   ]);
- 
 
   function getelements() {
     axios.get("http://localhost:5000/items/getitems").then((res) => {
@@ -61,18 +58,24 @@ function StoreHomePage() {
       console.log(res.data);
     });
   }
+  function arraymove(arr, fromIndex, toIndex) {
+    console.log(arr);
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);
+    console.log(arr);
+
+    setelements([...arr]);
+  }
 
   useEffect(() => {
     getelements();
   }, []);
-  function Tst(){
-    return(<div><h1>hello tst</h1></div>)
-  }
 
   return (
     <div>
       <SideNav
-        style={{ position: "fixed" }}
+        style={{ position: "fixed", backgroundColor: "#f68b1e" }}
         onSelect={(selected) => {
           switch (selected) {
             case "addtxt":
@@ -186,7 +189,9 @@ function StoreHomePage() {
             elements={elements}
             setimgtoadd={setimgtoadd}
             imgtoadd={imgtoadd}
+            imgedit={imgedit}
             showimg={showimg}
+            idtoedit={idtoedit}
             setShowimg={setShowimg}
           />
           <ModalAddSlide
@@ -194,6 +199,8 @@ function StoreHomePage() {
             setid={setid}
             setelements={setelements}
             elements={elements}
+            slideedit={slideedit}
+            idtoedit={idtoedit}
             showaddslide={showaddslide}
             setShowaddslide={setShowaddslide}
             setslideimgs={setslideimgs}
@@ -204,6 +211,8 @@ function StoreHomePage() {
           <ModalAdd3el
             id={id}
             setid={setid}
+            idtoedit={idtoedit}
+            el3edit={el3edit}
             setelements={setelements}
             elements={elements}
             show3el={show3el}
@@ -218,6 +227,9 @@ function StoreHomePage() {
           />
           <ModalAdd2el
             setid={setid}
+            id={id}
+            el2edit={el2edit}
+            idtoedit={idtoedit}
             setelements={setelements}
             elements={elements}
             show2el={show2el}
@@ -228,16 +240,45 @@ function StoreHomePage() {
             el2={el2}
             setel2={setel2}
           />
-          {elements.map((el) =>
+          {elements.map((el, index) =>
             el.type === "text" ? (
               <div
                 style={{
+                  margin:35,
+
                   position: "relative",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
+                <div
+                  style={{
+                    left: 15,
+                    position: "absolute",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <FontAwesomeIcon
+                    onClick={() => {
+                      arraymove(elements, index, index - 1);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faArrowUp}
+                    style={{ margin: 10 }}
+                  />
+                  <FontAwesomeIcon
+                    style={{ margin: 10 }}
+                    onClick={() => {
+                      arraymove(elements, index, index + 1);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faArrowDown}
+                  />
+                </div>
                 <h2 style={{ margin: 20 }}>{el.value}</h2>
                 <div
                   style={{
@@ -249,9 +290,9 @@ function StoreHomePage() {
                 >
                   <FontAwesomeIcon
                     onClick={() => {
-                     settxtedit(true);
-                     setShowtxt(true);
-                  setidtoedit(el.id);
+                      settxtedit(true);
+                      setShowtxt(true);
+                      setidtoedit(el.id);
                     }}
                     className="btnicon"
                     size="1x"
@@ -280,11 +321,39 @@ function StoreHomePage() {
                 style={{
                   margin: 25,
                   display: "flex",
+                  position: "relative",
                   justifyContent: "space-evenly",
                   alignItems: "center",
                   flexDirection: "row",
                 }}
               >
+                <div
+                  style={{
+                    left: 15,
+                    position: "absolute",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <FontAwesomeIcon
+                    onClick={() => {
+                      arraymove(elements, index, index - 1);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faArrowUp}
+                    style={{ margin: 10 }}
+                  />
+                  <FontAwesomeIcon
+                    style={{ margin: 10 }}
+                    onClick={() => {
+                      arraymove(elements, index, index + 1);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faArrowDown}
+                  />
+                </div>
                 {el.el.map((val) => {
                   const found = itemslist.find((x) => x.id === parseInt(val));
                   return (
@@ -334,14 +403,9 @@ function StoreHomePage() {
                 >
                   <FontAwesomeIcon
                     onClick={() => {
-                      console.log(el.id);
-                      let newarr = elements;
-                      const objIndex = newarr.findIndex(
-                        (obj) => obj.id === el.id
-                      );
-                      newarr[objIndex].value = "changed text";
-                      console.log(newarr);
-                      setelements([...newarr]);
+                      set2eledit(true);
+                      setShow2el(true);
+                      setidtoedit(el.id);
                     }}
                     className="btnicon"
                     size="1x"
@@ -371,10 +435,38 @@ function StoreHomePage() {
                   position: "relative",
                 }}
               >
+                <div
+                  style={{
+                    left: 15,
+                    position: "absolute",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <FontAwesomeIcon
+                    onClick={() => {
+                      arraymove(elements, index, index - 1);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faArrowUp}
+                    style={{ margin: 10 }}
+                  />
+                  <FontAwesomeIcon
+                    style={{ margin: 10 }}
+                    onClick={() => {
+                      arraymove(elements, index, index + 1);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faArrowDown}
+                  />
+                </div>
                 <Slide>
                   {el.img.map((slideImage, index) => (
                     <div>
                       <img
+                        alt="slide img"
                         style={{ maxWidth: "100%", maxHeight: "100%" }}
                         src={slideImage}
                       />
@@ -393,14 +485,9 @@ function StoreHomePage() {
                 >
                   <FontAwesomeIcon
                     onClick={() => {
-                      console.log(el.id);
-                      let newarr = elements;
-                      const objIndex = newarr.findIndex(
-                        (obj) => obj.id === el.id
-                      );
-                      newarr[objIndex].value = "changed text";
-                      console.log(newarr);
-                      setelements([...newarr]);
+                      setslideedit(true);
+                      setShowaddslide(true);
+                      setidtoedit(el.id);
                     }}
                     className="btnicon"
                     size="1x"
@@ -435,6 +522,33 @@ function StoreHomePage() {
                   position: "relative",
                 }}
               >
+                <div
+                  style={{
+                    left: 15,
+                    position: "absolute",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <FontAwesomeIcon
+                    onClick={() => {
+                      arraymove(elements, index, index - 1);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faArrowUp}
+                    style={{ margin: 10 }}
+                  />
+                  <FontAwesomeIcon
+                    style={{ margin: 10 }}
+                    onClick={() => {
+                      arraymove(elements, index, index + 1);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faArrowDown}
+                  />
+                </div>{" "}
                 <img
                   style={{ maxHeight: "100%", maxWidth: "100%" }}
                   alt="img"
@@ -450,14 +564,9 @@ function StoreHomePage() {
                 >
                   <FontAwesomeIcon
                     onClick={() => {
-                      console.log(el.id);
-                      let newarr = elements;
-                      const objIndex = newarr.findIndex(
-                        (obj) => obj.id === el.id
-                      );
-                      newarr[objIndex].value = "changed text";
-                      console.log(newarr);
-                      setelements([...newarr]);
+                      setimgedit(true);
+                      setShowimg(true);
+                      setidtoedit(el.id);
                     }}
                     className="btnicon"
                     size="1x"
@@ -486,11 +595,39 @@ function StoreHomePage() {
                 style={{
                   margin: 25,
                   display: "flex",
-                  justifyContent: "space-between",
+                  position: "relative",
+                  justifyContent: "space-evenly",
                   alignItems: "center",
                   flexDirection: "row",
                 }}
               >
+                <div
+                  style={{
+                    left: 15,
+                    position: "absolute",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <FontAwesomeIcon
+                    onClick={() => {
+                      arraymove(elements, index, index - 1);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faArrowUp}
+                    style={{ margin: 10 }}
+                  />
+                  <FontAwesomeIcon
+                    style={{ margin: 10 }}
+                    onClick={() => {
+                      arraymove(elements, index, index + 1);
+                    }}
+                    className="btnicon"
+                    size="1x"
+                    icon={faArrowDown}
+                  />
+                </div>
                 {el.el.map((val) => {
                   const found = itemslist.find((x) => x.id === parseInt(val));
                   return (
@@ -499,6 +636,8 @@ function StoreHomePage() {
                         alt="item"
                         height="160"
                         width="200"
+
+                        style={{maxWidth:'100%',maxHeight:'100%'}}
                         src={found.image}
                       />
                       <div
@@ -508,7 +647,6 @@ function StoreHomePage() {
                           justifyContent: "space-between",
                         }}
                       >
-                        {" "}
                         <p
                           style={{
                             margin: 10,
@@ -546,14 +684,10 @@ function StoreHomePage() {
                 >
                   <FontAwesomeIcon
                     onClick={() => {
-                      console.log(el.id);
-                      let newarr = elements;
-                      const objIndex = newarr.findIndex(
-                        (obj) => obj.id === el.id
-                      );
-                      newarr[objIndex].value = "changed text";
-                      console.log(newarr);
-                      setelements([...newarr]);
+                      set3eledit(true);
+                      setShow3el(true);
+                      console.log("hii");
+                      setidtoedit(el.id);
                     }}
                     className="btnicon"
                     size="1x"

@@ -25,7 +25,22 @@ function ModalAddImg(props) {
             />
           </Form.Group>
 
-          <Button
+       {props.imgedit?<Button
+            onClick={(e) => {
+              e.preventDefault();
+              let newarr = props.elements;
+              const objIndex = newarr.findIndex(
+                (obj) => obj.id === props.idtoedit);
+              newarr[objIndex].url = props.imgtoadd;
+              props.setelements([...newarr]);
+              props.setShowimg(false);
+            }}
+            style={{ marginTop: 25 }}
+            variant="primary"
+            type="submit"
+          >
+            edit
+          </Button>: <Button
             onClick={(e) => {
               e.preventDefault();
               props.setid(props.id + 1);
@@ -40,7 +55,7 @@ function ModalAddImg(props) {
             type="submit"
           >
             Submit
-          </Button>
+          </Button>}
         </Form>
       </Modal>
     )

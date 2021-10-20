@@ -50,7 +50,24 @@ function ModalAddSlide(props) {
           >
             Add slide image
           </Button>
-          <Button
+          {props.slideedit?<Button
+            onClick={(e) => {
+              e.preventDefault();
+        
+              let newarr = props.elements;
+                  const objIndex = newarr.findIndex(
+                    (obj) => obj.id === props.idtoedit);
+                  newarr[objIndex].img = props.slideimgs;
+                  props.setelements([...newarr]);
+              props.setslideimgs([]);
+              props.setShowaddslide(false);
+            }}
+            style={{ marginTop: 25 }}
+            variant="primary"
+            type="submit"
+          >
+            Edit slide
+          </Button>: <Button
             onClick={(e) => {
               e.preventDefault();
               props.setid(props.id + 1);
@@ -67,7 +84,7 @@ function ModalAddSlide(props) {
             type="submit"
           >
             Submit slide
-          </Button>
+          </Button>}
         </Form>
         </Modal>
     )

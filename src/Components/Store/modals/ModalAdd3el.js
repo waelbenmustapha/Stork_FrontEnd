@@ -57,7 +57,23 @@ function ModalAdd3el(props) {
             ))}
           </Form.Select>
         </Form.Group>
-        <Button
+       {props.el3edit?<Button
+          onClick={(e) => {
+            e.preventDefault();
+            let newarr = props.elements;
+              const objIndex = newarr.findIndex(
+                (obj) => obj.id === props.idtoedit);
+                console.log(objIndex);
+                newarr[objIndex].el = [props.el1,props.el2,props.el3];
+                props.setelements([...newarr]);
+            props.setShow3el(false);
+          }}
+          style={{ marginTop: 25 }}
+          variant="primary"
+          type="submit"
+        >
+          Edit
+        </Button>:<Button
           onClick={(e) => {
             e.preventDefault();
             props.setid(props.id + 1);
@@ -77,7 +93,7 @@ function ModalAdd3el(props) {
           type="submit"
         >
           Submit
-        </Button>
+        </Button>}
       </Form>
       <Modal.Footer></Modal.Footer>
     </Modal>

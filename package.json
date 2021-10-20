@@ -14,13 +14,16 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@trendmicro/react-sidenav": "^0.5.0",
+    "antd": "^4.16.13",
     "axios": "^0.22.0",
     "bootstrap": "5.1.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-rc.0",
     "react-dom": "^17.0.2",
+    "react-pro-sidebar": "^0.7.1",
     "react-scripts": "4.0.3",
     "react-slideshow-image": "^3.5.1",
+    "sass": "^1.43.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

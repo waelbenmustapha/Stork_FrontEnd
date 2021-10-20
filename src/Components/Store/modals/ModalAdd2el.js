@@ -44,7 +44,25 @@ function ModalAdd2el(props) {
             </Form.Select>
           </Form.Group>
 
-          <Button
+        {props.el2edit?<Button
+            onClick={(e) => {
+              e.preventDefault();
+              let newarr = props.elements;
+              const objIndex = newarr.findIndex(
+                (obj) => obj.id === props.idtoedit);
+                console.log('objIndex');
+
+                console.log(objIndex);
+                newarr[objIndex].el = [props.el1,props.el2];
+                props.setelements([...newarr]);
+              props.setShow2el(false);
+            }}
+            style={{ marginTop: 25 }}
+            variant="primary"
+            type="submit"
+          >
+            Edit
+          </Button>:<Button
             onClick={(e) => {
               e.preventDefault();
               props.setid(props.id + 1);
@@ -60,7 +78,7 @@ function ModalAdd2el(props) {
             type="submit"
           >
             Submit
-          </Button>
+          </Button>}
         </Form>
         <Modal.Footer></Modal.Footer>
       </Modal>
