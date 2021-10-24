@@ -1,0 +1,41 @@
+body {
+  background-color: #f1f1f1;
+  margin: 2%;
+}
+.ads {
+  background-color: blueviolet;
+  float: left;
+  padding-bottom: 50%;
+  padding-bottom: auto;
+  margin-bottom: 10%;
+  margin-right: 10%;
+  height: 50%;
+}
+.categories {
+  color: black;
+  text-align: left;
+}
+.gridCat {
+  position: fixed;
+}
+.products {
+  background-color: rgb(209, 221, 33);
+}
+.ProductDescription {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ProductTitel {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.TopProducts {
+  padding-bottom: 2%;
+  margin: 20px;
+}
+
+.Pagination {
+  text-align: center;
+}
