@@ -24,7 +24,7 @@ import ModalAddTxt from "./modals/ModalAddTxt";
 import ModalAddSlide from "./modals/ModalAddSlide";
 import ModalAdd3el from "./modals/ModalAdd3el";
 import ModalAdd2el from "./modals/ModalAdd2el";
-function StoreHomePage() {
+function StoreHomePageCreate() {
   const [showtxt, setShowtxt] = useState(false);
   const [showimg, setShowimg] = useState(false);
   const [show2el, setShow2el] = useState(false);
@@ -57,6 +57,10 @@ function StoreHomePage() {
       setitemlist(res.data);
       console.log(res.data);
     });
+  }
+  function createhomepage(){
+axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:JSON.stringify(elements)})
+
   }
   function arraymove(arr, fromIndex, toIndex) {
     console.log(arr);
@@ -713,11 +717,13 @@ function StoreHomePage() {
               </div>
             ) : null
           )}
+        <button onClick={()=>{createhomepage()}}>Cliiiick Me pLEAAAAAAAAAAsESesE</button>
         </div>
+       
       </div>
       <div className="footer">this is da footer boiii</div>
     </div>
   );
 }
 
-export default StoreHomePage;
+export default StoreHomePageCreate;

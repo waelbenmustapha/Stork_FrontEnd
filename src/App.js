@@ -1,10 +1,11 @@
 import './App.css';
 import Sidebar from './Components/Store/Sidebar';
-import StoreHomePage from './Components/Store/StoreHomePage'
+import StoreHomePageCreate from './Components/Store/StoreHomePageCreate'
+import StoreHomePageShow from './Components/Store/StoreHomePageShow';
 function App() {
   return (
     <div className="App">
-<StoreHomePage/></div>
+<StoreHomePageCreate/></div>
   );
 }
 
