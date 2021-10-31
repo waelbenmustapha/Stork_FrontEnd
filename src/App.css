@@ -1,9 +1,14 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
 .test{
   display: flex; flex-flow: row;max-width: 100%;max-height: 100%; background: rgb(255, 255, 255); border-width: 2px; border-style: solid; border-color: rgb(219, 181, 128); box-shadow: rgba(163, 131, 85, 0.08) 0px 4px 24px 0px; border-radius: 8px; padding: 16px;
 }
 .btnicon:hover{
   cursor: pointer;
-}
+  transform: scale(1.5);
+  filter:drop-shadow(0 1px 1px #1a1a1a);
+color: #f68b1e;}
+  
 .footer{
   background-color: orangered;
 text-align: center;

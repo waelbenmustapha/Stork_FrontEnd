@@ -35,14 +35,14 @@ function ModalAddSlide(props) {
               <img
                 style={{ maxWidth: "100%", maxHeight: "100%" }}
                 alt="slide"
-                src={el}
+                src={el.original}
               />
             ))}
           </div>
           <Button
             onClick={(e) => {
               e.preventDefault();
-              props.setslideimgs([...props.slideimgs, props.imgtoadd]);
+              props.setslideimgs([...props.slideimgs, {original : props.imgtoadd}]);
             }}
             style={{ marginTop: 25 }}
             variant="primary"

@@ -14,11 +14,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SideNav, { NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
+import ImageGallery from "react-image-gallery";
 import Nav from "react-bootstrap/Nav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../../App.css";
 import ModalAddImg from "./modals/ModalAddImg";
 import ModalAddTxt from "./modals/ModalAddTxt";
 import ModalAddSlide from "./modals/ModalAddSlide";
@@ -32,6 +34,29 @@ function StoreHomePageCreate() {
   const [slideimgs, setslideimgs] = useState([]);
   const [txtedit, settxtedit] = useState(false);
   const [imgedit, setimgedit] = useState(false);
+  const [test, settest] = useState([
+    {
+      original: "https://assets.swappie.com/iphone11violetti-600x600.jpg",
+    },
+    {
+      original:
+        "https://www.royalnutcompany.com.au/cms_images/11151_27-05-2020_5967.jpg",
+      thumbnail:
+        "https://www.royalnutcompany.com.au/cms_images/11151_27-05-2020_5967.jpg",
+    },
+    {
+      original:
+        "https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_200x200.png",
+      thumbnail:
+        "https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_200x200.png",
+    },
+    {
+      original:
+        "https://i.pinimg.com/originals/03/db/fb/03dbfbb7115d44b751b05307d3d42fb5.jpg",
+      thumbnail:
+        "https://i.pinimg.com/originals/03/db/fb/03dbfbb7115d44b751b05307d3d42fb5.jpg",
+    },
+  ]);
   const [slideedit, setslideedit] = useState(false);
   const [el2edit, set2eledit] = useState(false);
   const [idtoedit, setidtoedit] = useState();
@@ -53,14 +78,16 @@ function StoreHomePageCreate() {
   ]);
 
   function getelements() {
-    axios.get("http://localhost:5000/items/getitems").then((res) => {
+    axios.get("http://localhost:8090/store/getstoreitems/1").then((res) => {
       setitemlist(res.data);
       console.log(res.data);
     });
   }
-  function createhomepage(){
-axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:JSON.stringify(elements)})
-
+  function createhomepage() {
+    axios.post("http://localhost:5000/stores/addstore", {
+      name: "store ml react",
+      home: JSON.stringify(elements),
+    });
   }
   function arraymove(arr, fromIndex, toIndex) {
     console.log(arr);
@@ -156,7 +183,7 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
       <div>
         <Navbar bg="dark" variant="dark">
           <Container>
-            <Navbar.Brand href="#home">Store Name</Navbar.Brand>
+            <Navbar.Brand href="#home"><img height={50} width={80} src="./Logo.png"/></Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="#home">Store Home</Nav.Link>
               <Nav.Link href="#features">Products</Nav.Link>
@@ -248,7 +275,7 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
             el.type === "text" ? (
               <div
                 style={{
-                  margin:35,
+                  margin: 35,
 
                   position: "relative",
                   display: "flex",
@@ -261,6 +288,12 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                     left: 15,
                     position: "absolute",
                     display: "flex",
+                    borderRadius: 15,
+                    zIndex: 9,
+                    backgroundColor: "white",
+                    padding: 10,
+                    boxSizing: "border-box",
+                    boxShadow: " 0 10px 25px rgba(0,0,0,0.4)",
                     flexDirection: "column",
                   }}
                 >
@@ -283,11 +316,19 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                     icon={faArrowDown}
                   />
                 </div>
-                <h2 style={{ margin: 20 }}>{el.value}</h2>
+                <p style={{ margin: 20, fontSize: 55, fontWeight: "600" }}>
+                  {el.value}
+                </p>
                 <div
                   style={{
                     right: 0,
                     position: "absolute",
+                    borderRadius: 15,
+                    zIndex: 9,
+                    backgroundColor: "white",
+                    padding: 10,
+                    boxSizing: "border-box",
+                    boxShadow: " 0 10px 25px rgba(0,0,0,0.4)",
                     display: "flex",
                     flexDirection: "column",
                   }}
@@ -335,6 +376,12 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                   style={{
                     left: 15,
                     position: "absolute",
+                    borderRadius: 15,
+                    zIndex: 9,
+                    backgroundColor: "white",
+                    padding: 10,
+                    boxSizing: "border-box",
+                    boxShadow: " 0 10px 25px rgba(0,0,0,0.4)",
                     display: "flex",
                     flexDirection: "column",
                   }}
@@ -400,6 +447,12 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                 <div
                   style={{
                     right: 15,
+                    borderRadius: 15,
+                    zIndex: 9,
+                    backgroundColor: "white",
+                    padding: 10,
+                    boxSizing: "border-box",
+                    boxShadow: " 0 10px 25px rgba(0,0,0,0.4)",
                     position: "absolute",
                     display: "flex",
                     flexDirection: "column",
@@ -414,10 +467,10 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                     className="btnicon"
                     size="1x"
                     icon={faEdit}
-                    style={{ margin: 10 }}
+                    style={{ margin: 10, zIndex: 10 }}
                   />
                   <FontAwesomeIcon
-                    style={{ margin: 10 }}
+                    style={{ margin: 10, zIndex: 10 }}
                     onClick={() => {
                       console.log(el.id);
                       let newarr = elements;
@@ -442,22 +495,28 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                 <div
                   style={{
                     left: 15,
+                    borderRadius: 15,
+                    zIndex: 9,
+                    backgroundColor: "white",
+                    padding: 10,
+                    boxSizing: "border-box",
+                    boxShadow: " 0 10px 25px rgba(0,0,0,0.4)",
                     position: "absolute",
                     display: "flex",
                     flexDirection: "column",
                   }}
                 >
                   <FontAwesomeIcon
-                    onClick={() => {
+                    onClick={(e) => {
                       arraymove(elements, index, index - 1);
                     }}
                     className="btnicon"
                     size="1x"
                     icon={faArrowUp}
-                    style={{ margin: 10 }}
+                    style={{ margin: 10, zIndex: 10 }}
                   />
                   <FontAwesomeIcon
-                    style={{ margin: 10 }}
+                    style={{ margin: 10, zIndex: 10 }}
                     onClick={() => {
                       arraymove(elements, index, index + 1);
                     }}
@@ -466,22 +525,25 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                     icon={faArrowDown}
                   />
                 </div>
-                <Slide>
-                  {el.img.map((slideImage, index) => (
-                    <div>
-                      <img
-                        alt="slide img"
-                        style={{ maxWidth: "100%", maxHeight: "100%" }}
-                        src={slideImage}
-                      />
-                    </div>
-                  ))}
-                </Slide>
+                <ImageGallery
+                  slideInterval={5000}
+                  autoPlay
+                  showPlayButton={false}
+                  showFullscreenButton={false}
+                  showThumbnails={false}
+                  items={el.img}
+                />
                 <div
                   style={{
                     right: 15,
                     position: "absolute",
-                    top: "30%",
+                    top: "0%",
+                    borderRadius: 15,
+                    zIndex: 9,
+                    backgroundColor: "white",
+                    padding: 10,
+                    boxSizing: "border-box",
+                    boxShadow: " 0 10px 25px rgba(0,0,0,0.4)",
                     transform: `translate(50%)`,
                     display: "flex",
                     flexDirection: "column",
@@ -496,10 +558,10 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                     className="btnicon"
                     size="1x"
                     icon={faEdit}
-                    style={{ margin: 10 }}
+                    style={{ margin: 10, zIndex: 10 }}
                   />
                   <FontAwesomeIcon
-                    style={{ margin: 10 }}
+                    style={{ margin: 10, zIndex: 10 }}
                     onClick={() => {
                       console.log(el.id);
                       let newarr = elements;
@@ -531,6 +593,12 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                     left: 15,
                     position: "absolute",
                     display: "flex",
+                    borderRadius: 15,
+                    zIndex: 9,
+                    backgroundColor: "white",
+                    padding: 10,
+                    boxSizing: "border-box",
+                    boxShadow: " 0 10px 25px rgba(0,0,0,0.4)",
                     flexDirection: "column",
                   }}
                 >
@@ -563,6 +631,12 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                     right: 15,
                     position: "absolute",
                     display: "flex",
+                    borderRadius: 15,
+                    zIndex: 9,
+                    backgroundColor: "white",
+                    padding: 10,
+                    boxSizing: "border-box",
+                    boxShadow: " 0 10px 25px rgba(0,0,0,0.4)",
                     flexDirection: "column",
                   }}
                 >
@@ -610,6 +684,12 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                     left: 15,
                     position: "absolute",
                     display: "flex",
+                    borderRadius: 15,
+                    zIndex: 9,
+                    backgroundColor: "white",
+                    padding: 10,
+                    boxSizing: "border-box",
+                    boxShadow: " 0 10px 25px rgba(0,0,0,0.4)",
                     flexDirection: "column",
                   }}
                 >
@@ -640,8 +720,7 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                         alt="item"
                         height="160"
                         width="200"
-
-                        style={{maxWidth:'100%',maxHeight:'100%'}}
+                        style={{ maxWidth: "100%", maxHeight: "100%" }}
                         src={found.image}
                       />
                       <div
@@ -682,6 +761,12 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
                   style={{
                     right: 15,
                     position: "absolute",
+                    borderRadius: 15,
+                    zIndex: 9,
+                    backgroundColor: "white",
+                    padding: 10,
+                    boxSizing: "border-box",
+                    boxShadow: " 0 10px 25px rgba(0,0,0,0.4)",
                     display: "flex",
                     flexDirection: "column",
                   }}
@@ -717,9 +802,7 @@ axios.post("http://localhost:5000/stores/addstore",{name:"store ml react",home:J
               </div>
             ) : null
           )}
-        <button onClick={()=>{createhomepage()}}>Cliiiick Me pLEAAAAAAAAAAsESesE</button>
         </div>
-       
       </div>
       <div className="footer">this is da footer boiii</div>
     </div>
