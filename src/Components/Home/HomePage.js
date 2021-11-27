@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import NavBar from "./NavBar";
 import { Carousel } from "react-responsive-carousel";
-
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../css/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -23,7 +23,7 @@ function Plusdemande(props) {
           justifyContent: "space-between",
         }}
       >
-        { props.items.map((el) => (
+        {props.items.map((el) => (
           <div
             className="box"
             style={{
@@ -48,29 +48,10 @@ function Plusdemande(props) {
                   -{el.discount}
                   <span style={{ fontSize: "14px", fontWeight: "400" }}>%</span>
                 </span>
-                <p
-                  style={{
-                    margin: "0px",
-                    padding: "0px 5px 0px 5px",
-                    textDecorationLine: "line-through",
-                    fontSize: "1rem",
-                    color: "#75757a",
-                  }}
-                >
-                  TND {el.price}
-                </p>
+                <p className="prcprc">TND {el.price}</p>
               </div>
             ) : (
-              <span
-                style={{
-                  fontSize: "18px",
-                  padding: "0px 5px 0px 5px",
-                  fontWeight: "700",
-                  margin: "0px",
-                }}
-              >
-                TND {el.price}
-              </span>
+              <span className="prcnrml">TND {el.price}</span>
             )}
           </div>
         ))}
@@ -89,7 +70,6 @@ function Footer() {
         justifyContent: "center",
       }}
     >
-      {" "}
       <output
         style={{
           borderColor: "#eaeaea",
@@ -135,9 +115,8 @@ function Footer() {
                           <FontAwesomeIcon icon={faTwitter} size="2x" />
                         </a>
                       </p>
-                    </div>{" "}
+                    </div>
                     <div>
-                      {" "}
                       <a
                         class="btn btn-icon btn-light"
                         title="Facebook"
@@ -146,7 +125,7 @@ function Footer() {
                         data-abc="true"
                       >
                         <i class="fab fa-facebook-f"></i>
-                      </a>{" "}
+                      </a>
                       <a
                         class="btn btn-icon btn-light"
                         title="Instagram"
@@ -155,7 +134,7 @@ function Footer() {
                         data-abc="true"
                       >
                         <i class="fab fa-instagram"></i>
-                      </a>{" "}
+                      </a>
                       <a
                         class="btn btn-icon btn-light"
                         title="Youtube"
@@ -164,7 +143,7 @@ function Footer() {
                         data-abc="true"
                       >
                         <i class="fab fa-youtube"></i>
-                      </a>{" "}
+                      </a>
                       <a
                         class="btn btn-icon btn-light"
                         title="Twitter"
@@ -173,7 +152,7 @@ function Footer() {
                         data-abc="true"
                       >
                         <i class="fab fa-twitter"></i>
-                      </a>{" "}
+                      </a>
                     </div>
                   </article>
                 </aside>
@@ -181,25 +160,21 @@ function Footer() {
                   <h6 class="title">A PROPOS</h6>
                   <ul class="list-unstyled">
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
                         About us
                       </a>
                     </li>
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
                         Services
                       </a>
                     </li>
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
                         Terms & Condition
                       </a>
                     </li>
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
                         Our Blogs
                       </a>
@@ -210,25 +185,21 @@ function Footer() {
                   <h6 class="title">Services</h6>
                   <ul class="list-unstyled">
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
                         Help center
                       </a>
                     </li>
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
                         Money refund
                       </a>
                     </li>
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
                         Terms and Policy
                       </a>
                     </li>
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
                         Open dispute
                       </a>
@@ -239,44 +210,36 @@ function Footer() {
                   <h6 class="title">Pour les utilisateurs</h6>
                   <ul class="list-unstyled">
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
-                        {" "}
-                        User Login{" "}
+                        User Login
                       </a>
                     </li>
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
-                        {" "}
-                        User register{" "}
+                        User register
                       </a>
                     </li>
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
-                        {" "}
-                        Account Setting{" "}
+                        Account Setting
                       </a>
                     </li>
                     <li>
-                      {" "}
                       <a href="#" data-abc="true">
-                        {" "}
-                        My Orders{" "}
+                        My Orders
                       </a>
                     </li>
                   </ul>
                 </aside>
                 <aside class="col-sm-2 col-md-2">
-                  <h6 class="title">Notre app</h6>{" "}
+                  <h6 class="title">Notre app</h6>
                   <a href="#" class="d-block mb-2" data-abc="true">
                     <img
                       class="img-responsive app"
                       src="https://i.imgur.com/nkZP7fe.png"
                       height="40"
                     />
-                  </a>{" "}
+                  </a>
                   <a href="#" class="d-block mb-2" data-abc="true">
                     <img
                       class="img-responsive app"
@@ -290,23 +253,21 @@ function Footer() {
             </section>
             <section class="footer-copyright border-top">
               <p class="float-left text-muted">
-                {" "}
-                © 2021 Stork All rights reserved{" "}
+                © 2021 Stork All rights reserved
               </p>
               <p target="_blank" class="float-right text-muted">
-                {" "}
                 <a href="#" data-abc="true">
                   Privacy &amp; Cookies
-                </a>{" "}
-                &nbsp; &nbsp;{" "}
+                </a>
+                &nbsp; &nbsp;
                 <a href="#" data-abc="true">
                   Accessibility
-                </a>{" "}
+                </a>
               </p>
             </section>
           </div>
         </footer>
-      </output>{" "}
+      </output>
     </div>
   );
 }
@@ -314,7 +275,7 @@ function Footer() {
 function HomePage() {
   const [height, setHeight] = useState(0);
   const ref = useRef(null);
-  
+
   const [allItems, setAllitems] = useState([
     {
       name: "Masque",
@@ -331,10 +292,7 @@ function HomePage() {
       solde: false,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/75/5044/1.jpg?2325",
     },
-   
-  
-  
-   
+
     {
       name: "Nutella",
       price: 45,
@@ -342,8 +300,7 @@ function HomePage() {
       discount: 40,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/67/1083/1.jpg?5706",
     },
-   
-    
+
     {
       name: "Infinix IRocker",
       price: 79,
@@ -351,7 +308,7 @@ function HomePage() {
       discount: 38,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/36/8234/1.jpg?0806",
     },
-   
+
     {
       name: "Rio Caviar kit",
       price: 110,
@@ -366,7 +323,7 @@ function HomePage() {
       discount: 29,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/66/8564/1.jpg?6642",
     },
-  
+
     {
       name: "Huile d'olive",
       price: 45,
@@ -380,7 +337,8 @@ function HomePage() {
       solde: true,
       discount: 33,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/24/7183/1.jpg?6223",
-    }, {
+    },
+    {
       name: "Masque",
       price: 100,
       solde: true,
@@ -395,10 +353,7 @@ function HomePage() {
       solde: false,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/75/5044/1.jpg?2325",
     },
-   
-  
-  
-   
+
     {
       name: "Nutella",
       price: 45,
@@ -406,8 +361,7 @@ function HomePage() {
       discount: 40,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/67/1083/1.jpg?5706",
     },
-   
-    
+
     {
       name: "Infinix IRocker",
       price: 79,
@@ -415,7 +369,7 @@ function HomePage() {
       discount: 38,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/36/8234/1.jpg?0806",
     },
-   
+
     {
       name: "Rio Caviar kit",
       price: 110,
@@ -430,7 +384,7 @@ function HomePage() {
       discount: 29,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/66/8564/1.jpg?6642",
     },
-  
+
     {
       name: "Huile d'olive",
       price: 45,
@@ -444,7 +398,8 @@ function HomePage() {
       solde: true,
       discount: 33,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/24/7183/1.jpg?6223",
-    }, {
+    },
+    {
       name: "Masque",
       price: 100,
       solde: true,
@@ -459,10 +414,7 @@ function HomePage() {
       solde: false,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/75/5044/1.jpg?2325",
     },
-   
-  
-  
-   
+
     {
       name: "Nutella",
       price: 45,
@@ -470,8 +422,7 @@ function HomePage() {
       discount: 40,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/67/1083/1.jpg?5706",
     },
-   
-    
+
     {
       name: "Infinix IRocker",
       price: 79,
@@ -479,7 +430,7 @@ function HomePage() {
       discount: 38,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/36/8234/1.jpg?0806",
     },
-   
+
     {
       name: "Rio Caviar kit",
       price: 110,
@@ -494,7 +445,7 @@ function HomePage() {
       discount: 29,
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/66/8564/1.jpg?6642",
     },
-  
+
     {
       name: "Huile d'olive",
       price: 45,
@@ -510,12 +461,12 @@ function HomePage() {
       img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/24/7183/1.jpg?6223",
     },
   ]);
-  
+
   const [itemsvisible, setItemsvisible] = useState(12);
   const [categories, setcategories] = useState([
     {
       id: 1,
-      icon:"https://i.postimg.cc/tTMFhwVJ/shop.png",
+      icon: "https://i.postimg.cc/tTMFhwVJ/shop.png",
       name: "Superette",
       subcat: [
         { id: 1, name: "Epeciere" },
@@ -526,7 +477,7 @@ function HomePage() {
     },
     {
       id: 1,
-      icon:"https://i.postimg.cc/tgD3gYqh/home.png",
+      icon: "https://i.postimg.cc/tgD3gYqh/home.png",
       name: "Maison",
       subcat: [
         { id: 1, name: "Cuisine" },
@@ -536,7 +487,7 @@ function HomePage() {
     },
     {
       id: 1,
-      icon:"https://i.postimg.cc/rpqGcSkV/cosmetics.png",
+      icon: "https://i.postimg.cc/rpqGcSkV/cosmetics.png",
       name: "Santé & Beauté",
       subcat: [
         { id: 1, name: "Maquillage" },
@@ -545,7 +496,7 @@ function HomePage() {
     },
     {
       id: 1,
-      icon:"https://i.postimg.cc/t70Pc6kH/tablet.png",
+      icon: "https://i.postimg.cc/t70Pc6kH/tablet.png",
       name: "Télephone & Portables",
       subcat: [
         { id: 2, name: "Télephone Portable" },
@@ -556,7 +507,7 @@ function HomePage() {
     },
     {
       id: 1,
-      icon:"https://i.postimg.cc/Y0LY8R13/tshirt.png",
+      icon: "https://i.postimg.cc/Y0LY8R13/tshirt.png",
       name: "Mode",
       subcat: [
         { id: 1, name: "Mode Homme" },
@@ -570,7 +521,7 @@ function HomePage() {
     },
     {
       id: 1,
-      icon:"https://i.postimg.cc/gJJvLmj1/responsive.png",
+      icon: "https://i.postimg.cc/gJJvLmj1/responsive.png",
       name: "Informatique",
       subcat: [
         { id: 1, name: "Ordinateur" },
@@ -580,7 +531,7 @@ function HomePage() {
     },
     {
       id: 1,
-      icon:"https://i.postimg.cc/fW1rsggM/washing-machine.png",
+      icon: "https://i.postimg.cc/fW1rsggM/washing-machine.png",
       name: "Electronique",
       subcat: [
         { id: 1, name: "Tv" },
@@ -591,7 +542,7 @@ function HomePage() {
     },
     {
       id: 1,
-      icon:"https://i.postimg.cc/BZjVdGph/video-console.png",
+      icon: "https://i.postimg.cc/BZjVdGph/video-console.png",
       name: "Jeux Video & Consoles",
       subcat: [
         { id: 1, name: "PS1" },
@@ -680,7 +631,13 @@ function HomePage() {
           <ul class="category_menu" ref={ref}>
             {categories.map((el) => (
               <li className="maincat">
-                <img className="cat_name" height="30px" width="30px" src={el.icon}/><span class="cat_name">{el.name}</span>
+                <img
+                  className="cat_name"
+                  height="30px"
+                  width="30px"
+                  src={el.icon}
+                />
+                <span class="cat_name">{el.name}</span>
                 <ul style={{ minHeight: height }} class="right_sliding">
                   {el.subcat.map((subcat) => (
                     <li>
@@ -692,15 +649,7 @@ function HomePage() {
             ))}
           </ul>
         </div>
-        <div
-          style={{
-            backgroundColor: "white",
-            borderRadius: "8px",
-            width: "700px",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        <div className="midprt">
           <div style={{ flex: 7, height: height * 0.7, borderRadius: 45 }}>
             <Carousel
               showArrows={false}
@@ -750,23 +699,11 @@ function HomePage() {
                 minWidth: "100%",
                 borderRadius: "10px",
               }}
-              src="https://kimcoder.github.io/demo/react-simple-image-slider/images/5.jpg"
+              src="https://tn.jumia.is/cms/000_BF21/00_Live/Generic/BF21_Hiver_SB.jpg"
             />
           </div>
         </div>
-        <div
-          className="gradientdiv"
-          style={{
-            padding: 15,
-            backgroundColor: "white",
-            borderRadius: "8px",
-            width: "240px",
-            display: "flex",
-            flexDirection: "column",
-            alignContent: "center",
-            justifyContent: "center",
-          }}
-        >
+        <div className="gradientdiv">
           <img
             style={{ alignSelf: "center" }}
             height={48}
@@ -790,15 +727,7 @@ function HomePage() {
           />
         </div>
       </div>
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-        }}
-      >
+      <div className="plussomething">
         <Plusdemande h2text={"Les plus demandés"} items={items}></Plusdemande>
         <Plusdemande
           h2text={"Nos Meilleurs Offres Black Friday | Jusqu'à -70%"}
@@ -816,77 +745,28 @@ function HomePage() {
         </p>
         <div className="khatt"></div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          flexDirection: "row",
-          textAlign: "center",
-          width: "1200px",
-          margin: "auto",
-        }}
-      >
+      <div className="allitems">
         {allItems.slice(0, itemsvisible).map((el) => (
-          <div
-            className="itemshadow"
-            style={{
-              flex: "1 0 190px",
-              margin: "5px",
-              height: "300px",
-              backgroundColor: "white",
-            }}
-          >
-            <div
-            
-            >
-              <img
-                style={{
-                  height: "190px",
-                  width: "100%",
-                  borderRadius: "8px",
-                }}
-                src={el.img}
-              />
+          <div className="itemshadow">
+            <div>
+              <img className="itmimg" src={el.img} />
               <p class="elementname">{el.name} </p>
               {el.solde ? (
-                <div >
-                  <p style={{fontSize:'10px',textAlign:'left',fontWeight:'500',margin:'0px 0px 0px 10px'}}>
-                    TND <span style={{fontSize:'18px',fontWeight:'700'}}>{(el.price - (el.price / 100) * el.discount).toFixed(2)}</span>
-                  </p><div style={{textAlign:'left'}}>
-                  <span
-                    style={{
-                      margin: "0px",
-                      padding: "0px 0px 0px 10px",
-                      textDecorationLine: "line-through",
-                      textAlign:'left',
-                      fontSize: "12px",
-                      
-                      color: "#75757a",
-                    }}
-                  >
-                    TND {el.price.toFixed(2)}
-                  </span>
-                  <span style={{ margin: "0px",
-                      textAlign:'left',
-                      opacity:'0.6',
-                      fontSize: "12px",
-                      color: "#75757a"}}> /  </span> <span style={{ margin: "0px",
-                      textAlign:'left',
-                      fontSize: "14px",
-                      color: '#ff6509'}}> - {el.discount}%  </span></div>
-                 
+                <div>
+                  <p className="prcsld">
+                    TND{" "}
+                    <span style={{ fontSize: "18px", fontWeight: "700" }}>
+                      {(el.price - (el.price / 100) * el.discount).toFixed(2)}
+                    </span>
+                  </p>
+                  <div style={{ textAlign: "left" }}>
+                    <span className="prcold">TND {el.price.toFixed(2)}</span>
+                    <span className="slash">/ </span>{" "}
+                    <span className="dscnt"> - {el.discount}% </span>
+                  </div>
                 </div>
               ) : (
-                <span
-                  style={{
-                    fontSize: "18px",
-                    padding: "0px 5px 0px 5px",
-                    fontWeight: "700",
-                    margin: "0px",
-                  }}
-                >
-                  TND {el.price.toFixed(2)}
-                </span>
+                <span className="prcnodsc">TND {el.price.toFixed(2)}</span>
               )}
             </div>
           </div>
