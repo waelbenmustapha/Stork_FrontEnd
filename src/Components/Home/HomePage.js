@@ -1,15 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import NavBar from "./NavBar";
-import ImageGallery from "react-image-gallery";
 import { Carousel } from "react-responsive-carousel";
-import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
-import home from '../../assets/home.png';
+
 import "../../css/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
   faInstagram,
-  faTwitch,
   faTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
