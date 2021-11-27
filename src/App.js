@@ -1,7 +1,10 @@
+import './App.css';
+import HomePage from './Components/Home/HomePage';
 
 function App() {
   return (
-<div style={{backgroundColor:'black',width:'100%'}}>f</div>  );
+  <HomePage/>
+  );
 }
 
 export default App;
