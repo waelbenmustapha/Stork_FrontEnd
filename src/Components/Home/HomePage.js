@@ -614,7 +614,7 @@ function HomePage() {
     console.log(height);
   });
   return (
-    <div>
+    <div style={{backgroundColor:'#f2f2f2'}}>
       <img
         style={{ maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom" }}
         src="https://ae01.alicdn.com/kf/Hac8dfb7c5a24489385475c2ae153f373m.jpg_Q90.jpg_.webp"
@@ -636,7 +636,7 @@ function HomePage() {
           maxWidth: "1200px",
           justifyContent: "center",
           backgroundColor: "#f2f2f2",
-          maxHeight: height,
+          minHeight: height,
           display: "flex",
           flexDirection: "row",
           gap: 30,
@@ -663,6 +663,7 @@ function HomePage() {
             backgroundColor: "white",
             borderRadius: "8px",
             width: "700px",
+            height:height,
             display: "flex",
             flexDirection: "column",
           }}
@@ -727,6 +728,7 @@ function HomePage() {
             backgroundColor: "white",
             borderRadius: "8px",
             width: "240px",
+            height:height,
             display: "flex",
             flexDirection: "column",
             alignContent: "center",
@@ -759,7 +761,7 @@ function HomePage() {
       <div
         style={{
           maxWidth: "1200px",
-          margin: "auto",
+          margin: "0 auto",
           display: "flex",
           flexDirection: "column",
           gap: "10px",
