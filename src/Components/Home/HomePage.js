@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import ImageGallery from "react-image-gallery";
 import { Carousel } from "react-responsive-carousel";
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
+import axios from "axios";
 import home from '../../assets/home.png';
 import "../../css/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,16 +40,16 @@ function Plusdemande(props) {
                 width: "185px",
                 borderRadius: "4px",
               }}
-              src={el.img}
+              src={el.src_images}
             />
-            <p class="elementname">{el.name} </p>
-            {el.solde ? (
+            <p class="elementname">{el.sku} </p>
+            {el.price_promotion ? (
               <div>
                 <span className="elementprice">
-                  TND {el.price - (el.price / 100) * el.discount}
+                  TND {el.price_promotion}
                 </span>
                 <span class="percentage">
-                  -{el.discount}
+                  -{((el.price-el.price_promotion)*100)/el.price}
                   <span style={{ fontSize: "14px", fontWeight: "400" }}>%</span>
                 </span>
                 <p
@@ -279,8 +280,14 @@ function Footer() {
 
 function HomePage() {
   const [height, setHeight] = useState(0);
+  const [items,setItems]=useState([]);
   const ref = useRef(null);
-  
+  const getitems=()=>{
+    axios.get("http://localhost:8090/product/get_all_product").then((res) => {
+      setItems(res.data.slice(0,5));
+      console.log("wtf")
+    });  
+  }
   const [allItems, setAllitems] = useState([
     {
       name: "Masque",
@@ -570,49 +577,13 @@ function HomePage() {
       ],
     },
   ]);
-  const items = [
-    {
-      name: "Masque",
-      price: 100,
-      solde: true,
-      discount: 15,
-
-      img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/81/1474/1.jpg?8226",
-    },
-    {
-      name: "Pince bien",
-      price: 105,
-      discount: 60,
-      solde: false,
-      img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/75/5044/1.jpg?2325",
-    },
-    {
-      name: "XIAOMI Mi Smart Brand 5",
-      price: 139,
-      solde: true,
-      discount: 29,
-      img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/66/8564/1.jpg?6642",
-    },
-    {
-      name: "Nutella",
-      price: 45,
-      solde: false,
-      discount: 40,
-      img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/67/1083/1.jpg?5706",
-    },
-    {
-      name: "Infinix IRocker",
-      price: 79,
-      solde: true,
-      discount: 38,
-      img: "https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/36/8234/1.jpg?0806",
-    },
-  ];
+ 
 
   useEffect(() => {
+    getitems();
     setHeight(ref.current.clientHeight);
     console.log(height);
-  });
+  },[]);
   return (
     <div style={{backgroundColor:'#f2f2f2'}}>
       <img
