@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { faEye, faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
+import { useNavigate, Link } from "react-router-dom";
+
 import "react-slideshow-image/dist/styles.css";
 import {
   faArrowDown,
@@ -23,14 +26,11 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
-import ModalAddImg from "./modals/ModalAddImg";
-import ModalAddTxt from "./modals/ModalAddTxt";
-import ModalAddSlide from "./modals/ModalAddSlide";
-import ModalAdd3el from "./modals/ModalAdd3el";
-import ModalAdd2el from "./modals/ModalAdd2el";
+
+import WidgetAddbottombar from "../WidgetAddbottombar";
 function StoreHomePageCreate() {
   const [showsidenav, setshowsidenav] = useState(false);
-  const [expanded,setExpanded]=useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [showtxt, setShowtxt] = useState(false);
   const [showimg, setShowimg] = useState(false);
   const [show2el, setShow2el] = useState(false);
@@ -42,7 +42,7 @@ function StoreHomePageCreate() {
   const [el2edit, set2eledit] = useState(false);
   const [idtoedit, setidtoedit] = useState();
   const [el3edit, set3eledit] = useState(false);
-  const [id, setid] = useState(1);
+  const [id, setid] = useState(3);
   const [margleft, setmargleft] = useState(false);
   const [show3el, setShow3el] = useState(false);
   const [txttoadd, settxttoadd] = useState("");
@@ -50,7 +50,12 @@ function StoreHomePageCreate() {
   const [imgtoadd, setimgtoadd] = useState("");
   const [el1, setel1] = useState("");
   const [el2, setel2] = useState("");
+  const [loading, setloading] = useState(false);
   const [el3, setel3] = useState("");
+  const messagesEndRef = useRef(null);
+
+  let navigate = useNavigate();
+
   const [elements, setelements] = useState([
     {
       id: 0,
@@ -89,10 +94,27 @@ function StoreHomePageCreate() {
       console.log(res.data);
     });
   }
+  function uploadimage(files) {
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    formData.append("upload_preset", "StorkCloud");
+    setloading(true);
+    axios
+      .post("https://api.cloudinary.com/v1_1/dq1i1g9th/image/upload", formData)
+      .then((res) => {
+        setimgtoadd(res.data.url);
+        setloading(false);
+        const prv = [...slideimgs, { original: res.data.url }];
+        setslideimgs(prv);
+    
+        console.log(res.data.url);
+      });
+  }
+
   function createhomepage() {
-    axios.post("http://localhost:5000/stores/addstore", {
+    axios.post("http://localhost:8090/store/addstore", {
       name: "store ml react",
-      home: JSON.stringify(elements),
+      homepage: JSON.stringify(elements),
     });
   }
   function arraymove(arr, fromIndex, toIndex) {
@@ -110,12 +132,14 @@ function StoreHomePageCreate() {
   }, []);
 
   return (
-    <div>
-      {" "}
+    <div style={{ backgroundColor: "#E8E8E8" }}>
       <div
+        className="zaama"
         style={{
           width: "240px",
+          boxShadow: "rgba(0, 0, 0, 0.35) 3px 5px 15px",
           height: "100vh",
+          overflowY: "scroll",
           backgroundColor: "white",
           position: "fixed",
           zIndex: "15555",
@@ -124,74 +148,486 @@ function StoreHomePageCreate() {
           opacity: showsidenav == true ? "1" : "0",
         }}
       >
-        <img className="hovercursor"  onClick={()=>{ setshowsidenav(false);
-                setmargleft(false);setExpanded(false)}}  src="https://cdn-icons.flaticon.com/png/512/2997/premium/2997911.png?token=exp=1639527848~hmac=1dba5b793edee86fcc3e974257c5550e" style={{margin:'10px',height:'25px',width:'25px',filter:'invert(60%) sepia(12%) saturate(4877%) hue-rotate(349deg) brightness(103%) contrast(93%)'}}/>
-      
-      <Form style={{ margin: 15 }}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Text</Form.Label>
-                <Form.Control
-                  value={txttoadd}
-                  onChange={(e)=>{
-              settxttoadd(e.target.value)}}
-                  type="text"
-                  placeholder="Enter text"
-                />
-              </Form.Group>
-{txtedit? <Button
-                onClick={(e) => {
-                  e.preventDefault();
+        <img
+          className="hovercursor"
+          onClick={() => {
+            setshowsidenav(false);
+            setmargleft(false);
+            setExpanded(false);
+            setShowtxt(false);
+            setShowimg(false);
+            setShow2el(false);
+            setShow3el(false);
+            settxtedit(false);
+            setimgedit(false);
+            set2eledit(false);
+            set3eledit(false);
+            setslideedit(false);
+          }}
+          src="https://cdn-icons-png.flaticon.com/512/1617/1617543.png"
+          style={{
+            margin: "10px 10px 0px 15px",
+            height: "25px",
+            width: "25px",
+            filter:
+              "invert(60%) sepia(12%) saturate(4877%) hue-rotate(349deg) brightness(103%) contrast(93%)",
+          }}
+        />
+        {showtxt || txtedit ? (
+          <Form style={{ margin: 15 }}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <p style={{ fontSize: "14px" }}>Color</p>
+              <Form.Control
+                value={txttoadd}
+                onChange={(e) => {
+                  settxttoadd(e.target.value);
+                }}
+                type="text"
+                placeholder="Enter text"
+              />
+              <div
+                style={{
+                  borderTop: "1px solid #ccc",
+                  margin: "10px 0px 10px 0px",
+                }}
+              ></div>
+              <p style={{ fontSize: "14px" }}>Text</p>
+              <Form.Control
+                value={txttoadd}
+                onChange={(e) => {
+                  settxttoadd(e.target.value);
+                }}
+                type="text"
+                placeholder="Choose Color"
+              />
+            </Form.Group>
+            {txtedit ? (
+              <WidgetAddbottombar
+                loading={loading}
+                onclick={() => {
+                  setshowsidenav(false);
+                  setmargleft(false);
+                  setExpanded(false);
+                  setShowtxt(false);
+                  setShowimg(false);
+                  setShow2el(false);
+                  setShow3el(false);
+                  settxtedit(false);
+                  setimgedit(false);
+                  set2eledit(false);
+                  set3eledit(false);
+                  setslideedit(false);
                   let newarr = elements;
                   const objIndex = newarr.findIndex(
-                    (obj) => obj.id === idtoedit);
+                    (obj) => obj.id === idtoedit
+                  );
                   newarr[objIndex].value = txttoadd;
                   setelements([...newarr]);
                   setShowtxt(false);
                 }}
-                style={{ marginTop: 25 }}
-                variant="primary"
-                type="submit"
-              >
-                Edit
-              </Button>:
-              <Button
-              onClick={(e) => {
-                e.preventDefault();
-                setid(id + 1);
-                setelements([
-                  ...elements,
-                  { id: id, type: "text", value: txttoadd },
-                ]);
-                setShowtxt(false);
+              />
+            ) : (
+              <WidgetAddbottombar
+                onclick={() => {
+                  setshowsidenav(false);
+                  setmargleft(false);
+                  setExpanded(false);
+                  setShowtxt(false);
+                  setShowimg(false);
+                  setShow2el(false);
+                  setShow3el(false);
+                  settxtedit(false);
+                  setimgedit(false);
+                  set2eledit(false);
+                  set3eledit(false);
+                  setslideedit(false);
+                  setid(id + 1);
+                  setelements([
+                    ...elements,
+                    { id: id, type: "text", value: txttoadd },
+                  ]);
+                  setShowtxt(false);
+                  setTimeout(() => {
+                    messagesEndRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }, 100);
+                }}
+              />
+            )}
+          </Form>
+        ) : showimg || imgedit ? (
+          <Form style={{ margin: 15 }}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Image Url</Form.Label>
+
+              <Form.Control
+                onChange={(e) => uploadimage(e.target.files)}
+                type="file"
+                placeholder="Enter image url"
+              />
+            </Form.Group>
+
+            {imgedit ? (
+              <WidgetAddbottombar
+                onclick={() => {
+                  setshowsidenav(false);
+                  setmargleft(false);
+                  setExpanded(false);
+                  setShowtxt(false);
+                  setShowimg(false);
+                  setShow2el(false);
+                  setShow3el(false);
+                  settxtedit(false);
+                  setimgedit(false);
+                  set2eledit(false);
+                  set3eledit(false);
+                  setslideedit(false);
+                  let newarr = elements;
+                  const objIndex = newarr.findIndex(
+                    (obj) => obj.id === idtoedit
+                  );
+                  newarr[objIndex].url = imgtoadd;
+                  setelements([...newarr]);
+                  setShowimg(false);
+                }}
+              />
+            ) : (
+              <WidgetAddbottombar
+                loading={loading}
+                onclick={() => {
+                  setshowsidenav(false);
+                  setmargleft(false);
+                  setExpanded(false);
+                  setShowtxt(false);
+                  setShowimg(false);
+                  setShow2el(false);
+                  setShow3el(false);
+                  settxtedit(false);
+                  setimgedit(false);
+                  set2eledit(false);
+                  set3eledit(false);
+                  setslideedit(false);
+                  setid(id + 1);
+
+                  setelements([
+                    ...elements,
+                    { id: id, type: "image", url: imgtoadd },
+                  ]);
+                  setShowimg(false);
+                  setTimeout(() => {
+                    messagesEndRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }, 100);
+                }}
+              />
+            )}
+          </Form>
+        ) : showaddslide || slideedit ? (
+          <Form style={{ margin: 15 }}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Image Url</Form.Label>
+              <Form.Control
+                onChange={(e) => uploadimage(e.target.files)}
+                type="file"
+                placeholder="Enter image url"
+              />
+            </Form.Group>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
               }}
-              style={{ marginTop: 25 }}
-              variant="primary"
-              type="submit"
             >
-              Submit
-            </Button>}
-            </Form>
+              {slideimgs.map((el) => (
+                <img
+                  style={{ maxWidth: "100%", maxHeight: "100%" }}
+                  alt="slide"
+                  src={el.original}
+                />
+              ))}
+            </div>
+          
+            {slideedit ? (
+              <WidgetAddbottombar
+              loading={loading}
+                onclick={() => {
+                  setshowsidenav(false);
+                  setmargleft(false);
+                  setExpanded(false);
+                  setShowtxt(false);
+                  setShowimg(false);
+                  setShow2el(false);
+                  setShow3el(false);
+                  settxtedit(false);
+                  setimgedit(false);
+                  set2eledit(false);
+                  set3eledit(false);
+                  setslideedit(false);
+
+                  let newarr = elements;
+                  const objIndex = newarr.findIndex(
+                    (obj) => obj.id === idtoedit
+                  );
+                  newarr[objIndex].img = slideimgs;
+                  setelements([...newarr]);
+                  setslideimgs([]);
+                  setShowaddslide(false);
+                }}
+              />
+            ) : (
+              <WidgetAddbottombar
+              loading={loading}
+                onclick={() => {
+                  setshowsidenav(false);
+                  setmargleft(false);
+                  setExpanded(false);
+                  setShowtxt(false);
+                  setShowimg(false);
+                  setShow2el(false);
+                  setShow3el(false);
+                  settxtedit(false);
+                  setimgedit(false);
+                  set2eledit(false);
+                  set3eledit(false);
+                  setslideedit(false);
+                  setid(id + 1);
+
+                  setelements([
+                    ...elements,
+                    { id: id, type: "slideshow", img: slideimgs },
+                  ]);
+                  setslideimgs([]);
+                  setShowaddslide(false);
+                  setTimeout(() => {
+                    messagesEndRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }, 100);
+                }}
+              />
+            )}
+          </Form>
+        ) : show2el || el2edit ? (
+          <Form style={{ margin: 15 }}>
+            <Form.Group className="mb-3">
+              <Form.Select
+                value={el1}
+                onChange={(e) => {
+                  setel1(e.target.value);
+                }}
+                aria-label="Default select example"
+              >
+                <option>Open this select menu</option>
+                {itemslist.map((val) => (
+                  <option value={val.id}>{val.name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Select
+                value={el2}
+                onChange={(e) => {
+                  setel2(e.target.value);
+                }}
+                aria-label="Default select example"
+              >
+                <option>Open this select menu</option>
+                {itemslist.map((val) => (
+                  <option value={val.id}>{val.name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+
+            {el2edit ? (
+              <WidgetAddbottombar
+                onclick={() => {
+                  setshowsidenav(false);
+                  setmargleft(false);
+                  setExpanded(false);
+                  setShowtxt(false);
+                  setShowimg(false);
+                  setShow2el(false);
+                  setShow3el(false);
+                  settxtedit(false);
+                  setimgedit(false);
+                  set2eledit(false);
+                  set3eledit(false);
+                  setslideedit(false);
+                  let newarr = elements;
+                  const objIndex = newarr.findIndex(
+                    (obj) => obj.id === idtoedit
+                  );
+                  console.log("objIndex");
+
+                  console.log(objIndex);
+                  newarr[objIndex].el = [el1, el2];
+                  setelements([...newarr]);
+                  setShow2el(false);
+                }}
+              />
+            ) : (
+              <WidgetAddbottombar
+                onclick={() => {
+                  setshowsidenav(false);
+                  setmargleft(false);
+                  setExpanded(false);
+                  setShowtxt(false);
+                  setShowimg(false);
+                  setShow2el(false);
+                  setShow3el(false);
+                  settxtedit(false);
+                  setimgedit(false);
+                  set2eledit(false);
+                  set3eledit(false);
+                  setslideedit(false);
+                  setid(id + 1);
+
+                  setelements([
+                    ...elements,
+                    { id: id, type: "2el", el: [el1, el2] },
+                  ]);
+                  setShow2el(false);
+                  setTimeout(() => {
+                    messagesEndRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }, 100);
+                }}
+              />
+            )}
+          </Form>
+        ) : show3el || el3edit ? (
+          <Form style={{ margin: 15 }}>
+            <Form.Group className="mb-3">
+              <Form.Select
+                value={el1}
+                onChange={(e) => {
+                  setel1(e.target.value);
+                }}
+                aria-label="Default select example"
+              >
+                <option>Open this select menu</option>
+                {itemslist.map((val) => (
+                  <option value={val.id}>{val.name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Select
+                value={el2}
+                onChange={(e) => {
+                  setel2(e.target.value);
+                }}
+                aria-label="Default select example"
+              >
+                <option>Open this select menu</option>
+                {itemslist.map((val) => (
+                  <option value={val.id}>{val.name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Select
+                value={el3}
+                onChange={(e) => {
+                  setel3(e.target.value);
+                }}
+                aria-label="Default select example"
+              >
+                <option>Open this select menu</option>
+                {itemslist.map((val) => (
+                  <option value={val.id}>{val.name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            {el3edit ? (
+              <WidgetAddbottombar
+                onclick={() => {
+                  setshowsidenav(false);
+                  setmargleft(false);
+                  setExpanded(false);
+                  setShowtxt(false);
+                  setShowimg(false);
+                  setShow2el(false);
+                  setShow3el(false);
+                  settxtedit(false);
+                  setimgedit(false);
+                  set2eledit(false);
+                  set3eledit(false);
+                  setslideedit(false);
+                  let newarr = elements;
+                  const objIndex = newarr.findIndex(
+                    (obj) => obj.id === idtoedit
+                  );
+                  console.log(objIndex);
+                  newarr[objIndex].el = [el1, el2, el3];
+                  setelements([...newarr]);
+                  setShow3el(false);
+                }}
+              />
+            ) : (
+              <WidgetAddbottombar
+                onclick={() => {
+                  setshowsidenav(false);
+                  setmargleft(false);
+                  setExpanded(false);
+                  setShowtxt(false);
+                  setShowimg(false);
+                  setShow2el(false);
+                  setShow3el(false);
+                  settxtedit(false);
+                  setimgedit(false);
+                  set2eledit(false);
+                  set3eledit(false);
+                  setslideedit(false);
+                  setid(id + 1);
+
+                  setelements([
+                    ...elements,
+                    {
+                      id: id,
+                      type: "3el",
+                      el: [el1, el2, el3],
+                    },
+                  ]);
+                  setShow3el(false);
+                  setTimeout(() => {
+                    messagesEndRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }, 100);
+                }}
+              />
+            )}
+          </Form>
+        ) : null}
       </div>
       <div
         style={{
           transition: "0.2s",
-
+          position: "relative",
           marginLeft: margleft == true ? "240px" : "0px",
         }}
       >
         <SideNav
           expanded={expanded}
           onToggle={(expanded) => {
-              setExpanded(expanded);
-              console.log(expanded)
-              if(expanded){  setmargleft(true);}
-              else{  setmargleft(false);}
-            
+            setExpanded(expanded);
+            console.log(expanded);
+            if (expanded) {
+              setmargleft(true);
+            } else {
+              setmargleft(false);
+            }
           }}
           style={{ position: "fixed", backgroundColor: "#f68b1e" }}
           onSelect={(selected) => {
             switch (selected) {
               case "addtxt":
+                setShowtxt(true);
                 setshowsidenav(true);
                 setmargleft(true);
                 settxtedit(false);
@@ -200,11 +636,13 @@ function StoreHomePageCreate() {
                 setshowsidenav(true);
                 setmargleft(true);
                 setimgedit(false);
+                setShowimg(true);
 
                 break;
               case "2el":
                 setshowsidenav(true);
                 setmargleft(true);
+                setShow2el(true);
                 set2eledit(false);
 
                 break;
@@ -212,23 +650,25 @@ function StoreHomePageCreate() {
                 setshowsidenav(true);
                 setmargleft(true);
                 set3eledit(false);
+                setShow3el(true);
 
                 break;
               case "addslide":
                 setshowsidenav(true);
                 setmargleft(true);
                 setslideedit(false);
-
+                setShowaddslide(true);
+                break;
+              case "preview":
+                navigate("/storepreview", { state: elements });
                 break;
               default:
               // code block
             }
           }}
         >
-          <SideNav.Toggle
-          
-          />
-          <SideNav.Nav defaultSelected="home">
+          <SideNav.Toggle />
+          <SideNav.Nav style={{ height: "100%" }} defaultSelected="home">
             <NavItem eventKey="addtxt">
               <NavIcon>
                 <FontAwesomeIcon
@@ -271,6 +711,27 @@ function StoreHomePageCreate() {
               </NavIcon>
               <NavText>Add Slide</NavText>
             </NavItem>
+
+            <NavItem
+              style={{ position: "absolute", bottom: "0px", width: "100%" }}
+            >
+              <NavIcon>
+                <Link
+                  onClick={() => {
+                    localStorage.setItem("elements", JSON.stringify(elements));
+                  }}
+                  target="_blank"
+                  to={{ pathname: "/storepreview" }}
+                >
+                  <FontAwesomeIcon
+                    size="lg"
+                    className="btniconwhite"
+                    icon={faEye}
+                  />
+                </Link>
+              </NavIcon>
+              <NavText>Preview</NavText>
+            </NavItem>
           </SideNav.Nav>
         </SideNav>
         <div>
@@ -292,80 +753,12 @@ function StoreHomePageCreate() {
             style={{
               minHeight: 600,
               textAlign: "center",
-              padding: 50,
+              width: "1050px",
+              paddingLeft: "36px",
+              margin: "0 auto",
               backgroundColor: "#E8E8E8",
             }}
           >
-            <ModalAddTxt
-              id={id}
-              setid={setid}
-              setelements={setelements}
-              elements={elements}
-              settxttoadd={settxttoadd}
-              txttoadd={txttoadd}
-              showtxt={showtxt}
-              txtedit={txtedit}
-              idtoedit={idtoedit}
-              setShowtxt={setShowtxt}
-            />
-            <ModalAddImg
-              id={id}
-              setid={setid}
-              setelements={setelements}
-              elements={elements}
-              setimgtoadd={setimgtoadd}
-              imgtoadd={imgtoadd}
-              imgedit={imgedit}
-              showimg={showimg}
-              idtoedit={idtoedit}
-              setShowimg={setShowimg}
-            />
-            <ModalAddSlide
-              id={id}
-              setid={setid}
-              setelements={setelements}
-              elements={elements}
-              slideedit={slideedit}
-              idtoedit={idtoedit}
-              showaddslide={showaddslide}
-              setShowaddslide={setShowaddslide}
-              setslideimgs={setslideimgs}
-              slideimgs={slideimgs}
-              imgtoadd={imgtoadd}
-              setimgtoadd={setimgtoadd}
-            />
-            <ModalAdd3el
-              id={id}
-              setid={setid}
-              idtoedit={idtoedit}
-              el3edit={el3edit}
-              setelements={setelements}
-              elements={elements}
-              show3el={show3el}
-              setShow3el={setShow3el}
-              el1={el1}
-              setel1={setel1}
-              itemslist={itemslist}
-              el2={el2}
-              setel2={setel2}
-              el3={el3}
-              setel3={setel3}
-            />
-            <ModalAdd2el
-              setid={setid}
-              id={id}
-              el2edit={el2edit}
-              idtoedit={idtoedit}
-              setelements={setelements}
-              elements={elements}
-              show2el={show2el}
-              setShow2el={setShow2el}
-              el1={el1}
-              setel1={setel1}
-              itemslist={itemslist}
-              el2={el2}
-              setel2={setel2}
-            />
             {elements.map((el, index) =>
               el.type === "text" ? (
                 <div
@@ -414,7 +807,7 @@ function StoreHomePageCreate() {
                     />
                   </div>
                   <p
-                    style={{ margin: 20, fontSize: "85px", fontWeight: "300" }}
+                    style={{ margin: 20, fontSize: "65px", fontWeight: "300" }}
                   >
                     {el.value}
                   </p>
@@ -436,7 +829,9 @@ function StoreHomePageCreate() {
                     <FontAwesomeIcon
                       onClick={() => {
                         settxtedit(true);
-                        setShowtxt(true);
+                        setShowtxt(false);
+                        setshowsidenav(true);
+                        setmargleft(true);
                         setidtoedit(el.id);
                       }}
                       className="btnicon"
@@ -563,6 +958,8 @@ function StoreHomePageCreate() {
                   >
                     <FontAwesomeIcon
                       onClick={() => {
+                        setshowsidenav(true);
+                        setmargleft(true);
                         set2eledit(true);
                         setShow2el(true);
                         setidtoedit(el.id);
@@ -657,6 +1054,8 @@ function StoreHomePageCreate() {
                   >
                     <FontAwesomeIcon
                       onClick={() => {
+                        setshowsidenav(true);
+                        setmargleft(true);
                         setslideedit(true);
                         setShowaddslide(true);
                         setidtoedit(el.id);
@@ -751,6 +1150,8 @@ function StoreHomePageCreate() {
                   >
                     <FontAwesomeIcon
                       onClick={() => {
+                        setshowsidenav(true);
+                        setmargleft(true);
                         setimgedit(true);
                         setShowimg(true);
                         setidtoedit(el.id);
@@ -885,9 +1286,10 @@ function StoreHomePageCreate() {
                   >
                     <FontAwesomeIcon
                       onClick={() => {
+                        setshowsidenav(true);
+                        setmargleft(true);
                         set3eledit(true);
                         setShow3el(true);
-                        console.log("hii");
                         setidtoedit(el.id);
                       }}
                       className="btnicon"
@@ -914,13 +1316,15 @@ function StoreHomePageCreate() {
                 </div>
               ) : null
             )}
+            <div ref={messagesEndRef}></div>
+
             <div
               style={{
                 display: "flex",
                 justifyContent: "center",
                 border: "1px dashed black",
                 width: "600px",
-                margin: "10px auto",
+                margin: "0px auto",
                 padding: "35px",
                 backgroundColor: "#d3ffd3",
               }}
@@ -931,8 +1335,6 @@ function StoreHomePageCreate() {
             </div>
           </div>
         </div>
-
-        <div className="footer">this is da footer boiii</div>
       </div>
     </div>
   );

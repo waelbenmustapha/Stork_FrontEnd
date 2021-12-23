@@ -9,6 +9,12 @@
   filter:drop-shadow(0 1px 1px #1a1a1a);
 color: #f68b1e;}
   
+.btniconwhite:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  filter:drop-shadow(0 1px 1px #1a1a1a);
+color: #fff;}
+  
 .footer{
   background-color: orangered;
 text-align: center;
@@ -21,3 +27,7 @@ height: 50px;
 visibility: visible;
 }
 .hovercursor:hover{cursor: pointer;}
+.zaama >::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}

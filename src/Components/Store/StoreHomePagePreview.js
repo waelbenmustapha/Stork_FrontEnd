@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Slide } from "react-slideshow-image";
+import { useLocation } from "react-router-dom";
+import ImageGallery from "react-image-gallery";
 
-function StoreHomePageShow() {
+function StoreHomePagePreview() {
+
+
     const [itemslist, setitemlist] = useState([]);
    const [elements, setelements] = useState([]);
-   function getelements() {
-    axios.get("http://localhost:8090/items/getitems").then((res) => {
-      setitemlist(res.data);
-    })}
-   function fetchstore(){
-       axios.get('http://localhost:8090/stores/getstores').then(result=>setelements(JSON.parse(result.data.home)));
-   }
+   const location = useLocation();
+
    useEffect(() => {
-    fetchstore();
-    getelements();
-   }, [])
+      console.log("kay kay");
+      console.log(localStorage.getItem("elements"));
+      setelements(JSON.parse(localStorage.getItem("elements")));
+console.log(elements);
+}, [])
     return (
         <div>
             {elements.map((el, index) =>
@@ -94,18 +95,15 @@ function StoreHomePageShow() {
                 }}
               >
                
-                <Slide>
-                  {el.img.map((slideImage, index) => (
-                    <div>
-                      <img
-                        alt="slide img"
-                        style={{ maxWidth: "100%", maxHeight: "100%" }}
-                        src={slideImage}
-                      />
-                    </div>
-                  ))}
-                </Slide>
-                =
+               <ImageGallery
+                    slideInterval={5000}
+                    autoPlay
+                    showPlayButton={false}
+                    showFullscreenButton={false}
+                    showThumbnails={false}
+                    items={el.img}
+                  />
+             
               </div>
             ) : el.type === "image" ? (
               <div
@@ -192,4 +190,4 @@ function StoreHomePageShow() {
     )
 }
 
-export default StoreHomePageShow
+export default StoreHomePagePreview
