@@ -1,39 +1,73 @@
 import React from 'react'
 // import {Link} from 'react-router-dom'
 import { useState, useEffect } from 'react';
-import { useRouteMatch, useHistory, useParams  } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import axios from 'axios';
+import { NutFill } from 'react-bootstrap-icons';
 
 export const EditProduct = () => {
-    //const { id } = useParams();
-    const match = useRouteMatch();
-    const id = match.params.id;
+    const { id } = useParams();
+    //const match = useRouteMatch();
+    //const id = match.params.id;
     const history = useHistory();
 
     //variable and State function
-    const [dataItems, setItems] = useState({"first":"","second":""})
-    const [newTitle, setNewTitle] = useState(dataItems.first);
-    const [newSku, setNewSku] = useState("");
-    const [newPrice, setNewPrice] = useState(0);
-    const [newPricePromotion, setNewPricePromotion] = useState(0);
-    const [newModel, setNewModel] = useState("");
-    const [newQuantity, setNewQuantity] = useState(0);
-    const [newDescription, setNewDescription] = useState("");
-    const [newWeight, setNewWeight] = useState(0);
-    const [newWeightUnit, setNewWeightUnit] = useState("kg");
-    const [newSize, setNewSize] = useState([]);
-    const [newColors, setNewcolors] = useState([]);
+    const [dataItems, setItems] = useState(
+        {
+            'id_categorie': '',
+            'id_store': '',
+            'title': '',
+            'sku': '',
+            'price': 0,
+            'price_promotion': 0,
+            'model': '',
+            'quantity': 0,
+            'description': '',
+            'weight': 0,
+            'weight_unit': 'kg',
+            'size': [],
+            'colors': [],
+            'available': true,
+            'visible': false,
+        }
+    )
+    // const [newTitle, setNewTitle] = useState(dataItems.first);
+    // const [newSku, setNewSku] = useState("");
+    // const [newPrice, setNewPrice] = useState(0);
+    // const [newPricePromotion, setNewPricePromotion] = useState(0);
+    // const [newModel, setNewModel] = useState("");
+    // const [newQuantity, setNewQuantity] = useState(0);
+    // const [newDescription, setNewDescription] = useState("");
+    // const [newWeight, setNewWeight] = useState(0);
+    // const [newWeightUnit, setNewWeightUnit] = useState("kg");
+    // const [newSize, setNewSize] = useState([]);
+    // const [newColors, setNewcolors] = useState([]);
     const [newSrc_images, setNewSrc_images] = useState([]);
-    const [newAvailable, setNewAvailable] = useState(true);
-    const [newVisible, setNewVisible] = useState(false);
+    const [newThumbnail, setNewThumbnail] = useState([]);
+    // const [newAvailable, setNewAvailable] = useState(true);
+    // const [newVisible, setNewVisible] = useState(false);
 
     // const dafaultImageInput = (listOfImage) => {
     //     setNewSrc_images(oldArray => [...oldArray, listOfImage]);
     //     // setNewSrc_images((prevImages) => prevImages.concat(image));
     //     listOfImage.forEach(image => { console.log(image) });
     // }
+
+    // set thumbnail images to array so it will be displayed later
+    const handleTumbnailChange = (e) => {
+        setNewThumbnail([]);
+        if (e.target.files) {
+            const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
+            setNewThumbnail((prevImages) => prevImages.concat(filesArray));
+            Array.from(e.target.files).map(
+                (file) => URL.revokeObjectURL(file)
+            );
+        };
+    };
+
+    // set image files to array so it will be displayed later
     const handleImageChange = (e) => {
         setNewSrc_images([]);
         if (e.target.files) {
@@ -45,34 +79,37 @@ export const EditProduct = () => {
         };
     };
 
+    // display the images
     const renderPhotos = (source) => {
         return source.map((photo) => {
             return <img className="p-2" src={photo} alt="" key={photo} style={{ width: "20%", height: "100px" }} />
         });
     };
 
+    //send data to server
     const uploadToServer = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         const obj = {
             'id_categorie': 22,
             'id_store': 22,
-            'title': newTitle,
-            'sku': newSku,
-            'price': newPrice,
-            'price_promotion': newPricePromotion,
-            'model': newModel,
-            'quantity': newQuantity,
-            'description': newDescription,
-            'weight': newWeight,
-            'weight_unit': newWeightUnit,
-            'size': JSON.stringify(newSize),
-            'colors': JSON.stringify(newColors),
-            'available': newAvailable,
-            'visible': newVisible,
+            'title': dataItems.title,
+            'sku': dataItems.sku,
+            'price': dataItems.price,
+            'price_promotion': dataItems.price_promotion,
+            'model': dataItems.model,
+            'quantity': dataItems.quantity,
+            'description': dataItems.description,
+            'weight': dataItems.weight,
+            'weight_unit': dataItems.weight_unit,
+            'size': JSON.stringify(dataItems.size),
+            'colors': JSON.stringify(dataItems.colors),
+            'available': dataItems.available,
+            'visible': dataItems.visible,
         };
+        var thumbnail = e.target['thumbnail'].files;
         formData.append('values', JSON.stringify(obj));
-
+        formData.append('thumbnail', thumbnail[0]);
         //check if there is an images input
         var files = e.target['src_images'].files;
         if (files.length > 0) {
@@ -96,22 +133,20 @@ export const EditProduct = () => {
 
     // initializing data
     useEffect(() => {
+
         // get the product by Id
         const getTodos = (id) => {
             axios.get(`http://localhost:8090/product/get_single_product/${id}`).then((response) => {
-                setItems(prevstate => ({ ...prevstate, first: response.data.title }));
-                console.log(newTitle)
+                setItems(response.data);
             });
         };
-        
         getTodos(id);
-        
-        //dafaultImageInput(JSON.parse("[\"http://localhost:8090/images/2021-11-27@183831-7722-12.jpg\", \"http://localhost:8090/images/2021-11-27@183831-5756-1.jpg\"]"));
+
     }, []);
 
 
-    if (dataItems === []) {
-        return <h1>Loading ...</h1>;
+    if (dataItems == null) {
+        return <h1 style={{ textAlign: 'center', marginTop: '200px' }}>404 Not Found!</h1>;
     } else {
         return (
             <div className="container-fluid px-4">
@@ -158,9 +193,9 @@ export const EditProduct = () => {
                                             type="text"
                                             name="title"
                                             className="form-control"
-                                            value={newTitle}
+                                            value={dataItems.title }
                                             onChange={(event) => {
-                                                setNewTitle(event.target.value);
+                                                setItems({ "title": event.target.value });
                                             }} />
                                     </div>
                                     <div className="form-group mb-3 col-md-4">
@@ -168,9 +203,9 @@ export const EditProduct = () => {
                                         <input type="text"
                                             name="SKU"
                                             className="form-control"
-                                            value={newSku}
+                                            value={dataItems.sku}
                                             onChange={(event) => {
-                                                setNewSku(event.target.value);
+                                                setItems({ "sku": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -179,9 +214,9 @@ export const EditProduct = () => {
                                         <input type="text"
                                             name="Price"
                                             className="form-control"
-                                            value={newPrice}
+                                            value={dataItems.price}
                                             onChange={(event) => {
-                                                setNewPrice(event.target.value);
+                                                setItems({ "price": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -190,9 +225,9 @@ export const EditProduct = () => {
                                         <input type="number"
                                             name="PricePromotion"
                                             className="form-control"
-                                            value={newPricePromotion}
+                                            value={dataItems.price_promotion}
                                             onChange={(event) => {
-                                                setNewPricePromotion(event.target.value);
+                                                setItems({ "price_promotion": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -201,9 +236,9 @@ export const EditProduct = () => {
                                         <input type="text"
                                             name="model"
                                             className="form-control"
-                                            value={newModel}
+                                            value={dataItems.model}
                                             onChange={(event) => {
-                                                setNewModel(event.target.value);
+                                                setItems({ "model": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -212,9 +247,9 @@ export const EditProduct = () => {
                                         <input type="number"
                                             name="quantity"
                                             className="form-control"
-                                            value={newQuantity}
+                                            value={dataItems.quantity}
                                             onChange={(event) => {
-                                                setNewQuantity(event.target.value);
+                                                setItems({ "quantity": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -223,9 +258,9 @@ export const EditProduct = () => {
                                         <textarea type="text"
                                             name="description"
                                             className="form-control"
-                                            value={newDescription}
+                                            value={dataItems.description}
                                             onChange={(event) => {
-                                                setNewDescription(event.target.value);
+                                                setItems({ "description": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -237,9 +272,9 @@ export const EditProduct = () => {
                                         <input type="text"
                                             name="weight"
                                             className="form-control"
-                                            value={newWeight}
+                                            value={dataItems.weight}
                                             onChange={(event) => {
-                                                setNewWeight(event.target.value);
+                                                setItems({ "weight": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -267,12 +302,25 @@ export const EditProduct = () => {
                                             name="colors"
                                             className="form-control"
                                             // onChange={(event) => {
-                                            //     setNewcolors(event.target.value);
+                                            //     setItems({ "colors": event.target.value });
                                             // }}
                                         />
                                     </div>
+                                    
                                     <div className="form-group mb-3 col-md-4">
-                                        <label>Image <span style={{ color: "red" }}>*</span></label>
+                                        <label>Thumbnail <span style={{color:"red"}}>*</span></label>
+                                        <input
+                                            type="file"
+                                            name="thumbnail"
+                                            id="thumbnail"
+                                            className="form-control"
+                                            onChange={handleTumbnailChange}
+                                        />
+                                    </div>
+                                    <div className="result  form-group mb-3">{renderPhotos(newThumbnail)}</div>
+                               
+                                    <div className="form-group mb-3 col-md-4">
+                                        <label>Images <span style={{ color: "red" }}>*</span></label>
                                         <input
                                             type="file"
                                             name="src_images"
@@ -293,7 +341,7 @@ export const EditProduct = () => {
                                                 className="w-50 h-50"
                                                 //value="true"
                                                 onChange={(event) => {
-                                                    setNewVisible(!newVisible);
+                                                    setItems({ "visible": !dataItems.visible });
                                                 }}
                                             />
                                         </div>

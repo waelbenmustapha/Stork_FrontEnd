@@ -2,13 +2,16 @@ import React from 'react'
 // import {Link} from 'react-router-dom'
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import { components } from "react-select";
+import { default as ReactSelect } from "react-select";
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
-import axios from 'axios';
 
 export const AddProduct = () => {
     const history = useHistory();
 
+    const [newIdCategorie, setNewIdCategorie] = useState(1);
     const [newTitle, setNewTitle] = useState("");
     const [newSku, setNewSku] = useState("");
     const [newPrice, setNewPrice] = useState(0);
@@ -21,9 +24,66 @@ export const AddProduct = () => {
     const [newSize, setNewSize] = useState([]);
     const [newColors, setNewcolors] = useState([]);
     const [newSrc_images, setNewSrc_images] = useState([]);
-    const [newAvailable, setNewAvailable] = useState(true);
+    const [newThumbnail, setNewThumbnail] = useState([]);
     const [newVisible, setNewVisible] = useState(false);
+    const [optionSelected, setOptionSelected] = useState(null);
 
+    const colourOptions = [
+        { value: "ocean", label: "Ocean" },
+        { value: "blue", label: "Blue" },
+        { value: "purple", label: "Purple" },
+        { value: "red", label: "Red" },
+        { value: "orange", label: "Orange" },
+        { value: "yellow", label: "Yellow" },
+        { value: "green", label: "Green" },
+        { value: "forest", label: "Forest" },
+        { value: "slate", label: "Slate" },
+        { value: "silver", label: "Silver" }
+    ];
+    const categorieOptions = [
+        {
+            label: "Homme",
+            value: 1,
+        },
+        {
+            label: "Femme",
+            value: 2,
+        },
+    ];
+    const Option = (props) => {
+        return (
+            <div>
+            <components.Option {...props}>
+                <input
+                type="checkbox"
+                checked={props.isSelected}
+                onChange={() => null}
+                />{" "}
+                <label>{props.label}</label>
+            </components.Option>
+            </div>
+        );
+    };
+
+    // set 
+    const handleSelectColorChange = (e) => {
+        setOptionSelected(e);
+        setNewcolors(Array.isArray(e) ? e.map(x => x.value) : []);
+    };
+
+    // set thumbnail images to array so it will be displayed later
+    const handleTumbnailChange = (e) => {
+        setNewThumbnail([]);
+        if (e.target.files) {
+            const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
+            setNewThumbnail((prevImages) => prevImages.concat(filesArray));
+            Array.from(e.target.files).map(
+                (file) => URL.revokeObjectURL(file)
+            );
+        };
+    };
+
+    // set image files to array so it will be displayed later
     const handleImageChange = (e) => {
         setNewSrc_images([]);
         if (e.target.files) {
@@ -35,19 +95,22 @@ export const AddProduct = () => {
         };
     };
 
+    // display the images
     const renderPhotos = (source) => {
         return source.map((photo) => {
             return <img className="p-2" src={photo} alt="" key={photo} style={{ width: "20%", height: "100px" }} />
         });
     };
-
+    
+    // send data to server
     const uploadToServer = async (e) => {
         e.preventDefault();
         var files = e.target['src_images'].files;
+        var thumbnail = e.target['thumbnail'].files;
         if (files.length > 0) {
             const formData = new FormData();
             const obj = {
-                'id_categorie': 22,
+                'id_categorie': newIdCategorie,
                 'id_store': 22,
                 'title': newTitle,
                 'sku': newSku,
@@ -60,12 +123,11 @@ export const AddProduct = () => {
                 'weight_unit': newWeightUnit,
                 'size': JSON.stringify(newSize),
                 'colors': JSON.stringify(newColors),
-                'available': newAvailable,
+                'available': true,
                 'visible': newVisible,
             };
-
             formData.append('values', JSON.stringify(obj));
-            
+            formData.append('thumbnail', thumbnail[0]);
             for (let i = 0; i < files.length; i++) {
                 formData.append('src_images', files[i]);
             };
@@ -110,15 +172,16 @@ export const AddProduct = () => {
                         <div className="tab-content" id="myTabContent">
                             <div className="tab-pane card-body border fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                     <label>Select Category <span style={{color:"red"}}>*</span></label>
                                     <select name="category_id" className="form-control">
                                         <option>Select Category</option>
-                                        <option>Homme</option>
-                                        <option>Femme</option>
+                                        {categorieOptions.map((option) => (
+                                        <option value={option.value}>{option.label}</option>
+                                        ))}
                                     </select>
                                 </div>
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                     <label>Title <span style={{color:"red"}}>*</span></label>
                                     <input
                                         type="text"
@@ -128,7 +191,7 @@ export const AddProduct = () => {
                                             setNewTitle(event.target.value);
                                         }}/>
                                     </div>
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                 <label>SKU <span style={{color:"red"}}>*</span></label>
                                 <input type="text"
                                     name="SKU"
@@ -138,7 +201,7 @@ export const AddProduct = () => {
                                         }}
                                     />
                                 </div>
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                     <label>Price <span style={{color:"red"}}>*</span></label>
                                     <input type="text"
                                         name="Price"
@@ -148,7 +211,7 @@ export const AddProduct = () => {
                                             }}
                                     />
                                 </div>
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                     <label>Price Promotion</label>
                                     <input type="number"
                                             name="PricePromotion"
@@ -158,7 +221,7 @@ export const AddProduct = () => {
                                             }}
                                     />
                                 </div>
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                 <label>Model <span style={{color:"red"}}>*</span></label>
                                 <input type="text"
                                         name="model"
@@ -168,7 +231,7 @@ export const AddProduct = () => {
                                         }}
                                 />
                                 </div>
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                     <label>Quantity <span style={{color:"red"}}>*</span></label>
                                         <input type="number"
                                             name="quantity"
@@ -178,7 +241,7 @@ export const AddProduct = () => {
                                             }}
                                         />
                                 </div>  
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                     <label>Description <span style={{color:"red"}}>*</span></label>
                                         <textarea type="text"
                                             name="description"
@@ -191,7 +254,7 @@ export const AddProduct = () => {
 
                             </div>
                             <div className="tab-pane card-body border fade" id="seotags" role="tabpanel" aria-labelledby="seotags-tab">
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                 <label>weight</label>
                                 <input type="text"
                                         name="weight"
@@ -201,7 +264,7 @@ export const AddProduct = () => {
                                         }}
                                 />
                                 </div>
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                     <label>Weight Unit</label>
                                     <select name="weightUnit" className="form-control">
                                         <option>KiloGramme</option>
@@ -209,7 +272,7 @@ export const AddProduct = () => {
                                         <option>oz</option>
                                     </select>
                                 </div>
-                                <div className="form-group mb-3">
+                                <div className="form-group mb-3 col-md-4">
                                     <label>Size</label>
                                     <select name="size" className="form-control">
                                         <option>Select Size</option>
@@ -218,34 +281,58 @@ export const AddProduct = () => {
                                 </div>
                             </div>
                             <div className="tab-pane card-body border fade" id="otherdetails" role="tabpanel" aria-labelledby="otherdetails-tab">
+
+                            <span
+                                className="d-inline-block form-group mb-3 col-md-4"
+                                data-toggle="popover"
+                                data-trigger="focus"
+                                data-content="Please select a colors"
+                            >
+                                <ReactSelect
+                                options={colourOptions}
+                                isMulti
+                                closeMenuOnSelect={false}
+                                hideSelectedOptions={false}
+                                components={{
+                                    Option
+                                }}
+                                onChange={handleSelectColorChange}
+                                allowSelectAll={true}
+                                value={optionSelected}
+                                />
+                            </span>
+                            
+                            <div className="form-group mb-3 col-md-4">
+                                <label>Thumbnail <span style={{color:"red"}}>*</span></label>
+                                <input
+                                    type="file"
+                                    name="thumbnail"
+                                    id="thumbnail"
+                                    className="form-control"
+                                    onChange={handleTumbnailChange}
+                                />
+                            </div>
+                            <div className="result  form-group mb-3">{renderPhotos(newThumbnail)}</div>
                                 
-                            <div className="row">
-                                <div className="form-group mb-3">
-                                    <label>Colors</label>
-                                        <input
-                                            type="color"
-                                            name="colors"
-                                            className="form-control"
-                                        />
-                                </div>
-                                <div className="form-group mb-3">
-                                <label>Image <span style={{color:"red"}}>*</span></label>
-                                    <input
-                                        type="file"
-                                        name="src_images"
-                                        id="src_images"
-                                        className="form-control"
-                                        onChange={handleImageChange}
-                                        multiple
-                                    />
-                                </div>
-                                <div className="result  form-group mb-3">{ renderPhotos(newSrc_images) }</div>
-                                <div className="col md-4 form-group mb-3">
-                                    <label>Show Product (checked=showed)</label>
+                            <div className="form-group mb-3 col-md-4">
+                                <label>Images <span style={{color:"red"}}>*</span></label>
+                                <input
+                                    type="file"
+                                    name="src_images"
+                                    id="src_images"
+                                    className="form-control"
+                                    onChange={handleImageChange}
+                                    multiple
+                                />
+                            </div>
+                            <div className="result  form-group mb-3">{renderPhotos(newSrc_images)}</div>
+                                
+                            <div className="row form-group mb-3">
+                                <div className="">
+                                    <label>Show Product (checked=showed)&nbsp;&nbsp;&nbsp;</label>
                                         <input
                                             type="checkbox"
                                             name="visible"
-                                            className="w-50 h-50"
                                             onChange={(event) => {
                                                 setNewVisible(!newVisible);
                                             }}
