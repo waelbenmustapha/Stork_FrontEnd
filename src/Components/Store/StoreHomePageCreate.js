@@ -89,7 +89,7 @@ function StoreHomePageCreate() {
   ]);
 
   function getelements() {
-    axios.get("http://localhost:8090/store/getstoreitems/1").then((res) => {
+    axios.get("http://localhost:8090/store/get_store_products/1").then((res) => {
       setitemlist(res.data);
       console.log(res.data);
     });
@@ -176,7 +176,7 @@ function StoreHomePageCreate() {
         {showtxt || txtedit ? (
           <Form style={{ margin: 15 }}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <p style={{ fontSize: "14px" }}>Color</p>
+              <p style={{ fontSize: "14px" }}>Text</p>
               <Form.Control
                 value={txttoadd}
                 onChange={(e) => {
@@ -185,21 +185,8 @@ function StoreHomePageCreate() {
                 type="text"
                 placeholder="Enter text"
               />
-              <div
-                style={{
-                  borderTop: "1px solid #ccc",
-                  margin: "10px 0px 10px 0px",
-                }}
-              ></div>
-              <p style={{ fontSize: "14px" }}>Text</p>
-              <Form.Control
-                value={txttoadd}
-                onChange={(e) => {
-                  settxttoadd(e.target.value);
-                }}
-                type="text"
-                placeholder="Choose Color"
-              />
+            
+            
             </Form.Group>
             {txtedit ? (
               <WidgetAddbottombar
@@ -259,12 +246,11 @@ function StoreHomePageCreate() {
         ) : showimg || imgedit ? (
           <Form style={{ margin: 15 }}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Image Url</Form.Label>
+              <Form.Label>Choose Image to add</Form.Label>
 
               <Form.Control
                 onChange={(e) => uploadimage(e.target.files)}
                 type="file"
-                placeholder="Enter image url"
               />
             </Form.Group>
 
@@ -327,11 +313,10 @@ function StoreHomePageCreate() {
         ) : showaddslide || slideedit ? (
           <Form style={{ margin: 15 }}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Image Url</Form.Label>
+              <Form.Label>Choose Image to upload</Form.Label>
               <Form.Control
                 onChange={(e) => uploadimage(e.target.files)}
                 type="file"
-                placeholder="Enter image url"
               />
             </Form.Group>
             <div
@@ -422,7 +407,7 @@ function StoreHomePageCreate() {
               >
                 <option>Open this select menu</option>
                 {itemslist.map((val) => (
-                  <option value={val.id}>{val.name}</option>
+                  <option value={val.id}>{val.title}</option>
                 ))}
               </Form.Select>
             </Form.Group>
@@ -436,7 +421,7 @@ function StoreHomePageCreate() {
               >
                 <option>Open this select menu</option>
                 {itemslist.map((val) => (
-                  <option value={val.id}>{val.name}</option>
+                  <option value={val.id}>{val.title}</option>
                 ))}
               </Form.Select>
             </Form.Group>
@@ -511,7 +496,7 @@ function StoreHomePageCreate() {
               >
                 <option>Open this select menu</option>
                 {itemslist.map((val) => (
-                  <option value={val.id}>{val.name}</option>
+                  <option value={val.id}>{val.title}</option>
                 ))}
               </Form.Select>
             </Form.Group>
@@ -525,7 +510,7 @@ function StoreHomePageCreate() {
               >
                 <option>Open this select menu</option>
                 {itemslist.map((val) => (
-                  <option value={val.id}>{val.name}</option>
+                  <option value={val.id}>{val.title}</option>
                 ))}
               </Form.Select>
             </Form.Group>
@@ -539,7 +524,7 @@ function StoreHomePageCreate() {
               >
                 <option>Open this select menu</option>
                 {itemslist.map((val) => (
-                  <option value={val.id}>{val.name}</option>
+                  <option value={val.id}>{val.title}</option>
                 ))}
               </Form.Select>
             </Form.Group>
@@ -914,7 +899,7 @@ function StoreHomePageCreate() {
                           alt="item"
                           height="250"
                           width="250"
-                          src={found.image}
+                          src={found.src_images}
                         />
                         <p
                           style={{
@@ -925,7 +910,7 @@ function StoreHomePageCreate() {
                             opacity: 0.75,
                           }}
                         >
-                          {found.name}
+                          {found.title}
                         </p>
                         <p
                           style={{
@@ -1227,13 +1212,20 @@ function StoreHomePageCreate() {
                   {el.el.map((val) => {
                     const found = itemslist.find((x) => x.id === parseInt(val));
                     return (
-                      <div className="test">
+                      <div style={{display:'flex',boxShadow:'rgba(163, 131, 85, 0.08) 0px 4px 24px 0px',flexDirection:'column',
+                      borderRadius:'8px',padding:'16px',
+                      border:'2px solid rgb(219, 181, 128)',
+                      backgroundColor:'rgb(255,255,255)',
+                      
+                      
+                      
+                      }}>
                         <img
                           alt="item"
                           height="160"
                           width="200"
                           style={{ maxWidth: "100%", maxHeight: "100%" }}
-                          src={found.image}
+                          src={found.src_images}
                         />
                         <div
                           style={{
@@ -1251,7 +1243,7 @@ function StoreHomePageCreate() {
                               opacity: 0.75,
                             }}
                           >
-                            {found.name}
+                            {found.title}
                           </p>
                           <p
                             style={{
