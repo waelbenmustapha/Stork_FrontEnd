@@ -1,5 +1,13 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
+.App {
+  text-align: center;
+}
+body{margin:0}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
 
 .btnicon:hover{
   cursor: pointer;
@@ -22,7 +30,17 @@ height: 50px;
 
 .tohide{visibility: hidden;}
 .onhoverhide:hover>.tohide{
-visibility: visible;
+visibility: visible;}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 .hovercursor:hover{cursor: pointer;}
 .zaama >::-webkit-scrollbar {
