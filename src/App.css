@@ -1,3 +1,5 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
 .App {
   text-align: center;
 }
@@ -7,12 +9,28 @@ body{margin:0}
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btnicon:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  filter:drop-shadow(0 1px 1px #1a1a1a);
+color: #f68b1e;}
+  
+.btniconwhite:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  filter:drop-shadow(0 1px 1px #1a1a1a);
+color: #fff;}
+  
+.footer{
+  background-color: orangered;
+text-align: center;
+vertical-align: center;
+height: 50px;
 }
 
+.tohide{visibility: hidden;}
+.onhoverhide:hover>.tohide{
+visibility: visible;}
 
 .App-header {
   background-color: #282c34;
@@ -24,16 +42,8 @@ body{margin:0}
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hovercursor:hover{cursor: pointer;}
+.zaama >::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
 }
