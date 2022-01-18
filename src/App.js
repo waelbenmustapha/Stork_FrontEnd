@@ -1,4 +1,5 @@
 import './App.css';
+import HomePage from './Components/Home/HomePage';
 
 import StoreHomePageCreate from './Views/Store/StoreHomePageCreate'
 import {
@@ -6,7 +7,7 @@ import {
   Routes,
   Route,Link
 } from "react-router-dom";
-import StoreHomePageShow from './Views/Store/StoreHomePageShow';
+import StoreHomePagyeShow from './Views/Store/StoreHomePageShow';
 import StoreHomePagePreview from './Views/Store/StoreHomePagePreview';
 function App() {
   function About() {
@@ -48,7 +49,7 @@ function App() {
    
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Home />}/>
+      <Route path="/" element={<HomePage />}/>
       <Route path="/storecreate" element={<StoreHomePageCreate />}/>
       <Route path="/storepreview" element={<StoreHomePagePreview />}/>
 
