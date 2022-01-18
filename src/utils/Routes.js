@@ -6,8 +6,8 @@ import Panier from "../views/Panier";
 import SearchItem from "../views/SearchItem";
 import SignIn from "../views/SignIn";
 import SignUp from "../views/SignUp";
-import StoreHomePageCreate from "../views/storee/StoreHomePageCreate";
-import StoreHomePagePreview from "../views/storee/StoreHomePagePreview";
+import StoreHomePageCreate from "../views/store/StoreHomePageCreate";
+import StoreHomePagePreview from "../views/store/StoreHomePagePreview";
 
 export const routes = [
     // {
