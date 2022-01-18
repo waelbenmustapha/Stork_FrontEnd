@@ -1,60 +1,32 @@
 import './App.css';
-import HomePage from './Components/Home/HomePage';
+import HomePage from './Views/HomePage';
 
-import StoreHomePageCreate from './Views/Store/StoreHomePageCreate'
+import StoreHomePageCreate from './Views/store/StoreHomePageCreate'
 import {
   BrowserRouter,
   Routes,
   Route,Link
 } from "react-router-dom";
-import StoreHomePagyeShow from './Views/Store/StoreHomePageShow';
-import StoreHomePagePreview from './Views/Store/StoreHomePagePreview';
+import {routes} from './utils/Routes';
+import StoreHomePagePreview from './Views/store/StoreHomePagePreview';
 function App() {
-  function About() {
-    return (
-      <div>
-        <h2>About</h2>
-      </div>
-    );
-    
-  }
 
-  function Home() {
-    return (
-      <div>
-        
-        <h2>home</h2>
-        <nav>
-        <Link to="/storecreate">Store Home Page Create</Link> |{" "}
-          <Link
-        to={"storepreview"}
-        state={{ from: "the-page-id",date:"someting too" }}
-    >Store Home Page idk</Link>
-      </nav>
-      </div>
-    );
-    
-  }
+  function getRoutes () {
+    return routes.map((route) => {
+      return <Route path={route.path} element={<route.component />}/>;
 
-  function Help() {
-    return (
-      <div>
-        <h2>help</h2>
-      </div>
-    );
-    
-  }
-
+    });
+  };
   return (
    
     <BrowserRouter>
+  {
     <Routes>
-      <Route path="/" element={<HomePage />}/>
-      <Route path="/storecreate" element={<StoreHomePageCreate />}/>
-      <Route path="/storepreview" element={<StoreHomePagePreview />}/>
-
+      {getRoutes()}
     </Routes>
+}
   </BrowserRouter>
+
   );
 }
 

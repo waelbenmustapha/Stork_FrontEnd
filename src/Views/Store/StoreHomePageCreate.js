@@ -27,7 +27,7 @@ import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 
-import WidgetAddbottombar from "../../Components/Store/WidgetAddbottombar";
+import WidgetAddbottombar from "../../components/store/WidgetAddbottombar";
 function StoreHomePageCreate() {
   const [showsidenav, setshowsidenav] = useState(false);
   const [expanded, setExpanded] = useState(false);

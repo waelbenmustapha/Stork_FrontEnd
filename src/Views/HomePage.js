@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import NavBar from "./NavBar";
+import NavBar from "../components/home/NavBar"
 import ImageGallery from "react-image-gallery";
 import { Carousel } from "react-responsive-carousel";
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
-import home from '../../assets/home.png';
-import "../../css/home.css";
+import home from '../assets/home.png';
+import "../css/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -16,6 +18,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 function Plusdemande(props) {
+  let navigate = useNavigate();
   return (
     <div className="itemsdiv">
       <h2 className="h2onitemsdiv">{props.h2text}</h2>
@@ -29,7 +32,8 @@ function Plusdemande(props) {
       >
         { props.items.map((el) => (
           <div
-            className="box"
+          onClick={()=>{navigate('/itemPreview')}}
+            className="box hovercursor"
             style={{
               width: "185px",
             }}
@@ -279,6 +283,8 @@ function Footer() {
 }
 
 function HomePage() {
+  let navigate = useNavigate();
+
   const [height, setHeight] = useState(0);
   const [items,setItems]=useState([]);
   const ref = useRef(null);
@@ -592,7 +598,7 @@ function HomePage() {
       />
       <div className="sellonstork">
         <div>
-          <p className="sellonstorktxt">Vendez sur Stork</p>
+          <p onClick={()=>{navigate('/becomeSeller')}} className="sellonstorktxt">Vendez sur Stork</p>
         </div>
         <div></div>
         <div></div>
@@ -718,8 +724,8 @@ function HomePage() {
             Bienvenue sur Stork
           </p>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <span class="inscr">S'inscrire</span>
-            <span class="connect">Se Connecter</span>
+            <span onClick={()=>{navigate('/signup')}} class="inscr">S'inscrire</span>
+            <span onClick={()=>{navigate('/signin')}} class="connect">Se Connecter</span>
           </div>
           <img
             style={{ marginTop: 15, borderRadius: 15 }}
@@ -767,6 +773,7 @@ function HomePage() {
       >
         {allItems.slice(0, itemsvisible).map((el) => (
           <div
+          onClick={()=>navigate("/itemPreview")}
             className="itemshadow"
             style={{
               flex: "1 0 190px",

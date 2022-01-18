@@ -1,6 +1,8 @@
 import React from "react";
 import logo from "../../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
+
 import {
   fas,
   faShoppingCart,
@@ -11,6 +13,8 @@ import {
 import "../../css/home.css";
 import { faUserCircle, faUser } from "@fortawesome/free-regular-svg-icons";
 function NavBar() {
+  let navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -33,15 +37,15 @@ function NavBar() {
           className="input"
           placeholder="Cherchez un produit, une marque ou une catégorie "
         />
-        <button className="recherchebtn">RECHERCHER</button>
+        <button onClick={()=>{navigate('/search')}} className="recherchebtn">RECHERCHER</button>
 
       </div>
       <div style={{ display: 'flex', flexDirection: 'row', flex: 1, justifySelf: 'center', justifyContent: 'center' }}>
         <div className="iconhover" > <FontAwesomeIcon icon={faUser} size="lg" style={{ marginRight: 5 }} />
-          <a style={{ marginRight: 15 }}>Compte</a></div>
+          <a onClick={()=>{navigate('/compte')}} style={{ marginRight: 15 }}>Compte</a></div>
         <div className="iconhover" >
           <FontAwesomeIcon size="lg" icon={faShoppingCart} style={{ marginRight: 5 }} />
-          <a>Panier</a>
+          <a onClick={()=>{navigate('/panier')}}>Panier</a>
         </div>
       </div>
     </div>
