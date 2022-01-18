@@ -1,5 +1,4 @@
 import './App.css';
-import Sidebar from './Components/Store/Sidebar';
 
 import StoreHomePageCreate from './Views/Store/StoreHomePageCreate'
 import {
