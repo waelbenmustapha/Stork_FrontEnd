@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import NavBar from "../componentss/home/NavBar"
+import NavBar from "../components/home/NavBar"
 import ImageGallery from "react-image-gallery";
 import { Carousel } from "react-responsive-carousel";
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
