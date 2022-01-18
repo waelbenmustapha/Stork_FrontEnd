@@ -1,13 +1,13 @@
-import BecomeSeller from "../views/BecomeSeller";
-import Compte from "../views/Compte";
-import HomePage from "../views/HomePage";
-import ItemPreview from "../views/ItemPreview";
-import Panier from "../views/Panier";
-import SearchItem from "../views/SearchItem";
-import SignIn from "../views/SignIn";
-import SignUp from "../views/SignUp";
-import StoreHomePageCreate from "../views/store/StoreHomePageCreate";
-import StoreHomePagePreview from "../views/store/StoreHomePagePreview";
+import BecomeSeller from "../viewss/BecomeSeller";
+import Compte from "../viewss/Compte";
+import HomePage from "../viewss/HomePage";
+import ItemPreview from "../viewss/ItemPreview";
+import Panier from "../viewss/Panier";
+import SearchItem from "../viewss/SearchItem";
+import SignIn from "../viewss/SignIn";
+import SignUp from "../viewss/SignUp";
+import StoreHomePageCreate from "../viewss/storee/StoreHomePageCreate";
+import StoreHomePagePreview from "../viewss/storee/StoreHomePagePreview";
 
 export const routes = [
     // {

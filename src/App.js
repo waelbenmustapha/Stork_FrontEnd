@@ -1,14 +1,14 @@
 import './App.css';
-import HomePage from './views/HomePage';
+import HomePage from './viewss/HomePage';
 
-import StoreHomePageCreate from './views/store/StoreHomePageCreate'
+import StoreHomePageCreate from './viewss/storee/StoreHomePageCreate'
 import {
   BrowserRouter,
   Routes,
   Route,Link
 } from "react-router-dom";
 import {routes} from './utils/Routes';
-import StoreHomePagePreview from './views/store/StoreHomePagePreview';
+import StoreHomePagePreview from './viewss/storee/StoreHomePagePreview';
 function App() {
 
   function getRoutes () {
