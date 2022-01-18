@@ -1,6 +1,5 @@
 import './App.css';
 import HomePage from './Components/Home/HomePage';
-import StoreHomePageCreate from './Components/Store/StoreHomePageCreate';
 
 import StoreHomePageCreate from './Views/Store/StoreHomePageCreate'
 import {
@@ -8,7 +7,7 @@ import {
   Routes,
   Route,Link
 } from "react-router-dom";
-import StoreHomePageShow from './Views/Store/StoreHomePageShow';
+import StoreHomePagyeShow from './Views/Store/StoreHomePageShow';
 import StoreHomePagePreview from './Views/Store/StoreHomePagePreview';
 function App() {
   function About() {
