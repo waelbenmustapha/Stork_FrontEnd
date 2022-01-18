@@ -27,7 +27,7 @@ import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 
-import WidgetAddbottombar from "../WidgetAddbottombar";
+import WidgetAddbottombar from "../../Components/Store/WidgetAddbottombar";
 function StoreHomePageCreate() {
   const [showsidenav, setshowsidenav] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -143,9 +143,9 @@ function StoreHomePageCreate() {
           backgroundColor: "white",
           position: "fixed",
           zIndex: "15555",
-          visibility: showsidenav == true ? "visible" : "hidden",
+          visibility: showsidenav === true ? "visible" : "hidden",
           transition: "0.5s",
-          opacity: showsidenav == true ? "1" : "0",
+          opacity: showsidenav === true ? "1" : "0",
         }}
       >
         <img
@@ -594,7 +594,7 @@ function StoreHomePageCreate() {
         style={{
           transition: "0.2s",
           position: "relative",
-          marginLeft: margleft == true ? "240px" : "0px",
+          marginLeft: margleft === true ? "240px" : "0px",
         }}
       >
         <SideNav

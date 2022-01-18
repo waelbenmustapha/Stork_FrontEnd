@@ -1,14 +1,14 @@
 import './App.css';
 import Sidebar from './Components/Store/Sidebar';
 
-import StoreHomePageCreate from './Components/Store/StoreHomePageCreate'
+import StoreHomePageCreate from './Views/Store/StoreHomePageCreate'
 import {
   BrowserRouter,
   Routes,
   Route,Link
 } from "react-router-dom";
-import StoreHomePageShow from './Components/Store/StoreHomePageShow';
-import StoreHomePagePreview from './Components/Store/StoreHomePagePreview';
+import StoreHomePageShow from './Views/Store/StoreHomePageShow';
+import StoreHomePagePreview from './Views/Store/StoreHomePagePreview';
 function App() {
   function About() {
     return (
