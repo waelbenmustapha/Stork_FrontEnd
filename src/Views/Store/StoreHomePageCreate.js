@@ -623,6 +623,8 @@ function StoreHomePageCreate() {
                 setimgedit(false);
                 setShowimg(true);
 
+                
+
                 break;
               case "2el":
                 setshowsidenav(true);
