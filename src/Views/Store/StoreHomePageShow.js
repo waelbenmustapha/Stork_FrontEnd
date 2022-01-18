@@ -6,11 +6,11 @@ function StoreHomePageShow() {
     const [itemslist, setitemlist] = useState([]);
    const [elements, setelements] = useState([]);
    function getelements() {
-    axios.get("http://localhost:5000/items/getitems").then((res) => {
+    axios.get("http://localhost:8090/items/getitems").then((res) => {
       setitemlist(res.data);
     })}
    function fetchstore(){
-       axios.get('http://localhost:5000/stores/getstores').then(result=>setelements(JSON.parse(result.data.home)));
+       axios.get('http://localhost:8090/stores/getstores').then(result=>setelements(JSON.parse(result.data.home)));
    }
    useEffect(() => {
     fetchstore();
