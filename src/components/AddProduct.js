@@ -1,7 +1,8 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
+
 // import {Link} from 'react-router-dom'
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
 import { components } from "react-select";
 import { default as ReactSelect } from "react-select";
 import axios from 'axios';
@@ -9,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
 export const AddProduct = () => {
-    const history = useHistory();
+    let navigate = useNavigate();
 
     const [newIdCategorie, setNewIdCategorie] = useState(1);
     const [newTitle, setNewTitle] = useState("");
@@ -136,7 +137,7 @@ export const AddProduct = () => {
                 method: 'POST',
                 data: formData,
             });
-            history.push("/");
+            navigate("/");
         };
     };
     

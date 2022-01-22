@@ -1,7 +1,9 @@
 import React from 'react'
 // import {Link} from 'react-router-dom'
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { useParams } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import axios from 'axios';
@@ -9,15 +11,15 @@ import { NutFill } from 'react-bootstrap-icons';
 
 export const EditProduct = () => {
     const { id } = useParams();
+    let navigate = useNavigate();
+
     //const match = useRouteMatch();
     //const id = match.params.id;
-    const history = useHistory();
 
     //variable and State function
     const [dataItems, setItems] = useState(
         {
-            'id_categorie': '',
-            'id_store': '',
+ 
             'title': '',
             'sku': '',
             'price': 0,
@@ -91,8 +93,7 @@ export const EditProduct = () => {
         e.preventDefault();
         const formData = new FormData();
         const obj = {
-            'id_categorie': 22,
-            'id_store': 22,
+           
             'title': dataItems.title,
             'sku': dataItems.sku,
             'price': dataItems.price,
@@ -122,11 +123,11 @@ export const EditProduct = () => {
 
         //send data to server
         await axios({
-            url: `http://localhost:8090/product/update_product/${id}`,
+            url: `http://localhost:8090/product/update_product/1/1/${id}`,
             method: 'PUT',
             data: formData,
         });
-        history.push("/");
+        navigate("/");
     };
 
     
