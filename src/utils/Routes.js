@@ -76,7 +76,7 @@ export const routes = [
         component: EditProduct,
       },
       {
-        path: "/productdetails",
+        path: "/productdetails/:id",
         name: "productdetails",
         component: ProductDetails,
       },

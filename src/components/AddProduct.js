@@ -72,6 +72,10 @@ export const AddProduct = () => {
         setNewcolors(Array.isArray(e) ? e.map(x => x.value) : []);
     };
 
+    //
+    const handleCategorieChange = (e) => {
+        console.log(e.target.value);
+    }
     // set thumbnail images to array so it will be displayed later
     const handleTumbnailChange = (e) => {
         setNewThumbnail([]);
@@ -108,11 +112,9 @@ export const AddProduct = () => {
         e.preventDefault();
         var files = e.target['src_images'].files;
         var thumbnail = e.target['thumbnail'].files;
-        if (files.length > 0) {
+        if (thumbnail.length > 0 && files.length > 0) {
             const formData = new FormData();
             const obj = {
-                'id_categorie': newIdCategorie,
-                'id_store': 22,
                 'title': newTitle,
                 'sku': newSku,
                 'price': newPrice,
@@ -133,7 +135,7 @@ export const AddProduct = () => {
                 formData.append('src_images', files[i]);
             };
             await axios({
-                url: 'http://localhost:8090/product/create_product',
+                url: `http://localhost:8090/product/create_product/1/${newIdCategorie}`,
                 method: 'POST',
                 data: formData,
             });
@@ -175,8 +177,8 @@ export const AddProduct = () => {
                                 
                                 <div className="form-group mb-3 col-md-4">
                                     <label>Select Category <span style={{color:"red"}}>*</span></label>
-                                    <select name="category_id" className="form-control">
-                                        <option>Select Category</option>
+                                    <select name="category_id" className="form-control" onChange={handleCategorieChange}>
+                                        <option value="-1">Select Category</option>
                                         {categorieOptions.map((option) => (
                                         <option value={option.value}>{option.label}</option>
                                         ))}

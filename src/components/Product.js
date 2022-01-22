@@ -65,8 +65,8 @@ export const Product = () => {
         {
             name: 'Action',
             selector: row => <div className="">
-                                <Link to={`/product_details/${row.id}`}>View</Link><br/>
-                                <Link to={`/edit/${row.id}`}><button>Edit</button></Link><br/>
+                                <Link to={`/productdetails/${row.id}`}>View</Link><br/>
+                                <Link to={`/editproduct/${row.id}`}><button>Edit</button></Link><br/>
                                 <button onClick={() => {deleteData(row.id);}}>Delete</button>
                             </div>,
         },
