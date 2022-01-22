@@ -49,134 +49,101 @@ export const ProductDetails = () => {
     return(
       <div className="app">
         {
-            <div className="details" key={dataItems.id}>
-              <div className="box-product-image">
-                <div className="big-img">
-                  <img src={dataItems.src[index]} alt=""/>
-                </div>
-                <div className="thumb" ref={myRef}>
-                    {
-                    dataItems.src.map((img, index) =>(
-                        <img src={img} alt="" key={index} 
-                        onClick={() => handleTab(index)}
-                        />
-                    ))
-                    }
-                </div>
+          <div className="details" key={dataItems.id}>
+            {/* *************** Product Images ************** */}
+            <div className="box-product-image">
+              <div className="big-img">
+                <img src={dataItems.src[index]} alt=""/>
               </div>
-
-              <div className="box-product-content">
-                <div className="product-title"><h1 className="product-title-text">{ dataItems.title }</h1></div>
-
-                {/* star rate */}
-                <div className="product-reviewer"
-                  data-spm-anchor-id="a2g0o.detail.1000016.i22.5cc9377aEMX9Ew">
-                  <div className="overview-rating"
-                    aria-haspopup="true"
-                    aria-expanded="false">
-                    <div class="next-rating next-rating-large next-rating-grade-high"
-                      tabindex="0"
-                      role="group"
-                      aria-label="">
-                      <div className="next-rating-base next-rating-base-disabled">
-                        <div className="next-rating-underlay" aria-hidden="true">
-                          <span className="next-rating-icon">
-                            <i className="next-icon next-icon-favorites-filling next-medium"/>
-                          </span>
-                          <span className="next-rating-icon">
-                            <i className="next-icon next-icon-favorites-filling next-medium" />
-                          </span>
-                          <span className="next-rating-icon">
-                            <i className="next-icon next-icon-favorites-filling next-medium" />
-                          </span>
-                          <span className="next-rating-icon">
-                            <i className="next-icon next-icon-favorites-filling next-medium"></i>
-                          </span>
-                          <span className="next-rating-icon">
-                            <i className="next-icon next-icon-favorites-filling next-medium"></i>
-                          </span></div><div className="next-rating-overlay" style={{width: "83px"}}>
-                          <form action="#">
-                            <label className="next-rating-icon">
-                              <i className="next-icon next-icon-favorites-filling next-medium"></i>
-                            </label>
-                            <label className="next-rating-icon">
-                              <i className="next-icon next-icon-favorites-filling next-medium"/>
-                            </label>
-                            <label className="next-rating-icon">
-                              <i className="next-icon next-icon-favorites-filling next-medium"
-                                data-spm-anchor-id="a2g0o.detail.1000016.i21.5cc9377aEMX9Ew"></i>
-                            </label>
-                            <label className="next-rating-icon">
-                              <i className="next-icon next-icon-favorites-filling next-medium" data-spm-anchor-id="a2g0o.detail.1000016.i4.5cc9377aEMX9Ew"></i>
-                            </label>
-                            <label className="next-rating-icon">
-                              <i className="next-icon next-icon-favorites-filling next-medium"></i>
-                            </label>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                    <span className="overview-rating-average">4.4</span>
-                    <i className="next-icon next-icon-arrow-down next-xxs" style={{ marginLeft: "0px;"}}/>
-                  </div>
-                  <span className="product-reviewer-reviews black-link">5248 Avis</span>
-                  <span className="product-reviewer-sold">15584 Commandes</span>
-                </div>
-
-                <div class="split-line-thin"></div>
-
-                <div className="product-price">
-                  <div class="product-price-current">
-                    <span className="product-price-value">€ {dataItems.price}</span>
-                  </div>
-                  <div className="product-price-original">
-                    <div className="product-price-del">
-                      <span className="product-price-value">€ 6,12</span>
-                    </div>
-                    <span className="product-price-mark">-28%</span>
-                  </div>
-                </div>
-
-                <div className="colors">
-                    {
-                    dataItems.colors.map((color, index) =>(
-                        <button style={{background: color}} key={index}></button>
-                    ))
-                    }
-                </div>
-
-                {/* <p>{item.description}</p> */}
-                {/* <p>{item.content}</p> */}
-
-                
-
-                <div className="product-quantity clearfix">
-                  <div className="product-quantity-title">Quantité:</div>
-                </div>
-
-
-
-                <div className="product-action">
-                  <span className="buy-now-wrap" aria-haspopup="true" aria-expanded="false">
-                    <button title="" type="button" className="next-btn next-large next-btn-primary">
-                      Acheter maintenant
-                    </button>
-                  </span>
-                  <span class="addcart-wrap" aria-haspopup="true" aria-expanded="false">
-                    <button title="" type="button" class="next-btn next-large next-btn-primary" >
-                      Ajouter au panier
-                    </button>
-                  </span>
-                  <span className="add-wishlist-wrap">
-                    <div className="add-wishlist">
-                      <i className="next-icon next-icon-favourite next-large" />
-                      <span className="add-wishlist-num">397</span>
-                    </div>
-                  </span>
-                </div>
-
+              <div className="thumb" ref={myRef}>
+                  {
+                  dataItems.src.map((img, index) =>(
+                      <img src={img} alt="" key={index} 
+                      onClick={() => handleTab(index)}
+                      />
+                  ))
+                  }
               </div>
             </div>
+            {/* *************** Product Contents ************** */}
+            <div className="box-product-content">
+              <div className="product-title"><h1 className="product-title-text">{ dataItems.title }</h1></div>
+
+              {/* *************** Product Review ************** */}
+              <div className="product-reviewer" data-spm-anchor-id="a2g0o.detail.1000016.i22.5cc9377aEMX9Ew">
+                {/* *************** Star Rate ************** */}
+                <div className="overview-rating" aria-haspopup="true" aria-expanded="false">
+                  <label className="next-rating-icon">
+                    <i className="next-icon next-icon-favorites-filling next-medium"></i>
+                  </label>
+                  <span className="overview-rating-average">4.3</span>
+                  <i className="next-icon next-icon-arrow-down next-xxs" style={{ marginLeft: "0px;"}}/>
+                </div>
+                <span className="product-reviewer-reviews black-link">5248 Avis</span>
+                {/* *************** How many he sell ************** */}
+                <span className="product-reviewer-sold">15584 Commandes</span>
+              </div>
+
+              <div class="split-line-thin"></div>
+
+              {/* *************** Product Price ************** */}
+              <div className="product-price">
+                <div class="product-price-current">
+                  <span className="product-price-value">€ {dataItems.price}</span>
+                </div>
+                <div className="product-price-original">
+                  <div className="product-price-del">
+                    <span className="product-price-value">€ 6,12</span>
+                  </div>
+                  <span className="product-price-mark">-28%</span>
+                </div>
+              </div>
+
+              {/* *************** Product Colors ************** */}
+              <div className="colors">
+                  {
+                  dataItems.colors.map((color, index) =>(
+                      <button style={{background: color}} key={index}></button>
+                  ))
+                  }
+              </div>
+
+              {/* <p>{item.description}</p> */}
+              {/* <p>{item.content}</p> */}
+
+              
+
+              <div className="product-quantity clearfix">
+                <div className="product-quantity-title">Quantité:</div>
+              </div>
+
+
+              {/* *************** Buttons ************** */}
+              <div className="product-action">
+                <span className="buy-now-wrap" aria-haspopup="true" aria-expanded="false">
+                  <button title="" type="button" className="next-btn next-large next-btn-primary">
+                    Acheter maintenant
+                  </button>
+                </span>
+                <span class="addcart-wrap" aria-haspopup="true" aria-expanded="false">
+                  <button title="" type="button" class="next-btn next-large next-btn-primary" >
+                    Ajouter au panier
+                  </button>
+                </span>
+                <span className="add-wishlist-wrap">
+                  <div className="add-wishlist">
+                    <i className="next-icon next-icon-favourite next-large" />
+                    <span className="add-wishlist-num">397</span>
+                  </div>
+                </span>
+              </div>
+
+            </div>
+            {/* *************** Product description ************** */}
+            <div>
+              
+            </div>
+          </div>
           
         }
       </div>

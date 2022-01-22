@@ -19,9 +19,6 @@ function App() {
               <Link to="/create" className="nav-link">Add Product</Link>
             </li>
             <li className="navbar-item">
-              <Link to="/edit/:id" className="nav-link">Edit Product</Link>
-            </li>
-            <li className="navbar-item">
               <Link to="/product_details" className="nav-link">Product Details</Link>
             </li>
           </ul>

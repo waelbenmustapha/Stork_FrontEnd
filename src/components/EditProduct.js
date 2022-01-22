@@ -5,7 +5,6 @@ import { useParams, useHistory } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import axios from 'axios';
-import { NutFill } from 'react-bootstrap-icons';
 
 export const EditProduct = () => {
     const { id } = useParams();
@@ -16,8 +15,6 @@ export const EditProduct = () => {
     //variable and State function
     const [dataItems, setItems] = useState(
         {
-            'id_categorie': '',
-            'id_store': '',
             'title': '',
             'sku': '',
             'price': 0,
@@ -33,27 +30,31 @@ export const EditProduct = () => {
             'visible': false,
         }
     )
-    // const [newTitle, setNewTitle] = useState(dataItems.first);
-    // const [newSku, setNewSku] = useState("");
-    // const [newPrice, setNewPrice] = useState(0);
-    // const [newPricePromotion, setNewPricePromotion] = useState(0);
-    // const [newModel, setNewModel] = useState("");
-    // const [newQuantity, setNewQuantity] = useState(0);
-    // const [newDescription, setNewDescription] = useState("");
-    // const [newWeight, setNewWeight] = useState(0);
-    // const [newWeightUnit, setNewWeightUnit] = useState("kg");
-    // const [newSize, setNewSize] = useState([]);
-    // const [newColors, setNewcolors] = useState([]);
+    const [newIdCategorie, setNewIdCategorie] = useState(1);
     const [newSrc_images, setNewSrc_images] = useState([]);
     const [newThumbnail, setNewThumbnail] = useState([]);
-    // const [newAvailable, setNewAvailable] = useState(true);
-    // const [newVisible, setNewVisible] = useState(false);
 
     // const dafaultImageInput = (listOfImage) => {
     //     setNewSrc_images(oldArray => [...oldArray, listOfImage]);
     //     // setNewSrc_images((prevImages) => prevImages.concat(image));
     //     listOfImage.forEach(image => { console.log(image) });
     // }
+
+    const categorieOptions = [
+        {
+            label: "Homme",
+            value: 1,
+        },
+        {
+            label: "Femme",
+            value: 2,
+        },
+    ];
+
+    //
+    const handleCategorieChange = (e) => {
+        console.log(e.target.value);
+    }
 
     // set thumbnail images to array so it will be displayed later
     const handleTumbnailChange = (e) => {
@@ -91,8 +92,6 @@ export const EditProduct = () => {
         e.preventDefault();
         const formData = new FormData();
         const obj = {
-            'id_categorie': 22,
-            'id_store': 22,
             'title': dataItems.title,
             'sku': dataItems.sku,
             'price': dataItems.price,
@@ -102,8 +101,8 @@ export const EditProduct = () => {
             'description': dataItems.description,
             'weight': dataItems.weight,
             'weight_unit': dataItems.weight_unit,
-            'size': JSON.stringify(dataItems.size),
-            'colors': JSON.stringify(dataItems.colors),
+            'size': dataItems.size,
+            'colors': dataItems.colors,
             'available': dataItems.available,
             'visible': dataItems.visible,
         };
@@ -122,7 +121,7 @@ export const EditProduct = () => {
 
         //send data to server
         await axios({
-            url: `http://localhost:8090/product/update_product/${id}`,
+            url: `http://localhost:8090/product/update_product/1/${newIdCategorie}/${id}`,
             method: 'PUT',
             data: formData,
         });
@@ -133,7 +132,6 @@ export const EditProduct = () => {
 
     // initializing data
     useEffect(() => {
-
         // get the product by Id
         const getTodos = (id) => {
             axios.get(`http://localhost:8090/product/get_single_product/${id}`).then((response) => {
@@ -141,7 +139,6 @@ export const EditProduct = () => {
             });
         };
         getTodos(id);
-
     }, []);
 
 
@@ -180,11 +177,12 @@ export const EditProduct = () => {
                                 <div className="tab-pane card-body border fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 
                                     <div className="form-group mb-3 col-md-4">
-                                        <label>Select Category <span style={{ color: "red" }}>*</span></label>
-                                        <select name="category_id" className="form-control">
-                                            <option>Select Category</option>
-                                            <option>Homme</option>
-                                            <option>Femme</option>
+                                        <label>Select Category <span style={{color:"red"}}>*</span></label>
+                                        <select name="category_id" className="form-control" onChange={handleCategorieChange}>
+                                            <option value="-1">Select Category</option>
+                                            {categorieOptions.map((option) => (
+                                            <option value={option.value}>{option.label}</option>
+                                            ))}
                                         </select>
                                     </div>
                                     <div className="form-group mb-3 col-md-4">
@@ -195,7 +193,7 @@ export const EditProduct = () => {
                                             className="form-control"
                                             value={dataItems.title }
                                             onChange={(event) => {
-                                                setItems({ "title": event.target.value });
+                                                setItems({...dataItems, 'title': event.target.value });
                                             }} />
                                     </div>
                                     <div className="form-group mb-3 col-md-4">
@@ -205,7 +203,7 @@ export const EditProduct = () => {
                                             className="form-control"
                                             value={dataItems.sku}
                                             onChange={(event) => {
-                                                setItems({ "sku": event.target.value });
+                                                setItems({...dataItems, "sku": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -216,7 +214,7 @@ export const EditProduct = () => {
                                             className="form-control"
                                             value={dataItems.price}
                                             onChange={(event) => {
-                                                setItems({ "price": event.target.value });
+                                                setItems({...dataItems, "price": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -227,7 +225,7 @@ export const EditProduct = () => {
                                             className="form-control"
                                             value={dataItems.price_promotion}
                                             onChange={(event) => {
-                                                setItems({ "price_promotion": event.target.value });
+                                                setItems({...dataItems, "price_promotion": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -238,7 +236,7 @@ export const EditProduct = () => {
                                             className="form-control"
                                             value={dataItems.model}
                                             onChange={(event) => {
-                                                setItems({ "model": event.target.value });
+                                                setItems({...dataItems, "model": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -249,7 +247,7 @@ export const EditProduct = () => {
                                             className="form-control"
                                             value={dataItems.quantity}
                                             onChange={(event) => {
-                                                setItems({ "quantity": event.target.value });
+                                                setItems({...dataItems, "quantity": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -260,7 +258,7 @@ export const EditProduct = () => {
                                             className="form-control"
                                             value={dataItems.description}
                                             onChange={(event) => {
-                                                setItems({ "description": event.target.value });
+                                                setItems({...dataItems, "description": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -274,7 +272,7 @@ export const EditProduct = () => {
                                             className="form-control"
                                             value={dataItems.weight}
                                             onChange={(event) => {
-                                                setItems({ "weight": event.target.value });
+                                                setItems({...dataItems, "weight": event.target.value });
                                             }}
                                         />
                                     </div>
@@ -302,7 +300,7 @@ export const EditProduct = () => {
                                             name="colors"
                                             className="form-control"
                                             // onChange={(event) => {
-                                            //     setItems({ "colors": event.target.value });
+                                            //     setItems({...dataItems, "colors": event.target.value });
                                             // }}
                                         />
                                     </div>
@@ -341,7 +339,7 @@ export const EditProduct = () => {
                                                 className="w-50 h-50"
                                                 //value="true"
                                                 onChange={(event) => {
-                                                    setItems({ "visible": !dataItems.visible });
+                                                    setItems({...dataItems, "visible": !dataItems.visible });
                                                 }}
                                             />
                                         </div>
