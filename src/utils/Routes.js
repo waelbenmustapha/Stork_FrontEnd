@@ -1,3 +1,7 @@
+import { AddProduct } from "../components/AddProduct";
+import { EditProduct } from "../components/EditProduct";
+import { Product } from "../components/Product";
+import { ProductDetails } from "../components/ProductDetails";
 import BecomeSeller from "../views/BecomeSeller";
 import Compte from "../views/Compte";
 import HomePage from "../views/HomePage";
@@ -60,10 +64,26 @@ export const routes = [
         name: "Signin",
         component: BecomeSeller,
       },
+   
       {
-        path: "/itemPreview",
-        name: "Signin",
-        component: ItemPreview,
+        path: "/addproduct",
+        name: "addproduct",
+        component: AddProduct,
+      },
+      {
+        path: "/editproduct/:id",
+        name: "editproduct",
+        component: EditProduct,
+      },
+      {
+        path: "/productdetails",
+        name: "productdetails",
+        component: ProductDetails,
+      },
+      {
+        path: "/products",
+        name: "products",
+        component: Product,
       },
     
 
