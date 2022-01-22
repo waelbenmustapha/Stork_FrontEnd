@@ -1,0 +1,70 @@
+import BecomeSeller from "../views/BecomeSeller";
+import Compte from "../views/Compte";
+import HomePage from "../views/HomePage";
+import ItemPreview from "../views/ItemPreview";
+import Panier from "../views/Panier";
+import SearchItem from "../views/SearchItem";
+import SignIn from "../views/SignIn";
+import SignUp from "../views/SignUp";
+import StoreHomePageCreate from "../views/store/StoreHomePageCreate";
+import StoreHomePagePreview from "../views/store/StoreHomePagePreview";
+
+export const routes = [
+    // {
+    //   path: "/:page",
+    //   name: "Main",
+    //   component: <Main />,
+    // },
+    {
+      path: "/signup",
+      name: "Signup",
+      component: SignUp,
+    },
+    {
+        path: "/signin",
+        name: "Signin",
+        component: SignIn,
+      },
+      {
+        path: "/",
+        name: "Signin",
+        component: HomePage,
+      },
+      {
+        path: "/panier",
+        name: "Signin",
+        component: Panier,
+      },
+      {
+        path: "/createStore",
+        name: "Signin",
+        component: StoreHomePageCreate,
+      },
+      {
+        path: "/storePreview",
+        name: "Signin",
+        component: StoreHomePagePreview,
+      },
+      {
+        path: "/compte",
+        name: "Signin",
+        component: Compte,
+      },
+      {
+        path: "/search",
+        name: "Signin",
+        component: SearchItem,
+      },
+      {
+        path: "/becomeSeller",
+        name: "Signin",
+        component: BecomeSeller,
+      },
+      {
+        path: "/itemPreview",
+        name: "Signin",
+        component: ItemPreview,
+      },
+    
+
+  ];

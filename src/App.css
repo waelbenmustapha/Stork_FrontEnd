@@ -173,6 +173,43 @@ h6 {
   font-size: 16px;
   border-width: 1px;
 }
+.App {
+  text-align: center;
+}
+body{margin:0}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.btnicon:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  filter:drop-shadow(0 1px 1px #1a1a1a);
+color: #f68b1e;}
+  
+.btniconwhite:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  filter:drop-shadow(0 1px 1px #1a1a1a);
+color: #fff;}
+  
+.footer{
+  background-color: orangered;
+text-align: center;
+vertical-align: center;
+height: 50px;
+}
+.input {
+padding: 7px;
+width: 100%;
+border: solid 1px;
+border-color: #f68b1e;
+border-radius: 10px;
+}
+.tohide{visibility: hidden;}
+.onhoverhide:hover>.tohide{
+visibility: visible;}
 
 .next-icon-favourite:before {
   content: "❤";
@@ -445,5 +482,9 @@ h6 {
 }
 
 .dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+  background-color: #3e8e41;}
+.hovercursor:hover{cursor: pointer;}
+.zaama >::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
 }
