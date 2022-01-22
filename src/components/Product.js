@@ -1,15 +1,16 @@
 import React from 'react'
 import { useState, useEffect, useMemo } from 'react';
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Axios from 'axios';
 import eyeOff from '../media/eye-off-thin.svg';
 import eyeOn from '../media/eye-thin.svg';
 import DataTable from 'react-data-table-component';
+import { useNavigate } from "react-router-dom";
 
 
 export const Product = () => {
-    const history = useHistory();
     const [dataItems, setItems] = useState([])
+    let navigate = useNavigate();
 
     const getTodos = () => {
         Axios.get('http://localhost:8090/product/get_all_product').then((response)=> {
@@ -21,7 +22,7 @@ export const Product = () => {
         if (window.confirm("Are you sure you want to delete this product!")) {
             Axios.delete(`http://localhost:8090/product/delete_product/${id}`).then((response)=> {
                 if (response.status === 200) {
-                    history.push("/");
+                    navigate("/");
                 }
             });
         }   

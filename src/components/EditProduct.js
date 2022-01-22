@@ -1,16 +1,19 @@
 import React from 'react'
 // import {Link} from 'react-router-dom'
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { useParams } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import axios from 'axios';
 
 export const EditProduct = () => {
     const { id } = useParams();
+    let navigate = useNavigate();
+
     //const match = useRouteMatch();
     //const id = match.params.id;
-    const history = useHistory();
 
     //variable and State function
     const [dataItems, setItems] = useState(
@@ -125,7 +128,7 @@ export const EditProduct = () => {
             method: 'PUT',
             data: formData,
         });
-        history.push("/");
+        navigate("/");
     };
 
     
