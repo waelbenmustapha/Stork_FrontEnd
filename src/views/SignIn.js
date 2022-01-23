@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { login } from '../api/Auth';
+import cross from '../assets/cross.png';
 import '../css/Signin.css';
 const FormHeader = props => (
     <h2 id="headerTitle">{props.title}</h2>
@@ -51,9 +53,29 @@ const Google = props => (
   <a href="#" id="googleIcon"></a>
 );
 
-function SignIn() {
 
+function SignIn() {
+let navigate = useNavigate();
+function login(){
+  axios.post("http://localhost:8090/Users/Login",{email:email,password:password}).then((res)=>{navigate("/")}).catch(function (error) {
+    if (error.response) {
+      // Request made and server responded
+      console.log(error.response.data);
+      setErr(true);
+    
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+
+  });
+
+}
     const [email,setEmail]=useState("");
+const [err,setErr]=useState(false);
 const [password,setPassword]=useState("");
     return (
      <div className='bodyy'>
@@ -61,8 +83,13 @@ const [password,setPassword]=useState("");
              <div className='centerdiv'>
          <FormHeader title="Login" />
         <Form setEmail={setEmail} setPassword={setPassword} />
+
         <div id="button" class="row">
-    <button onClick={(e)=>{e.preventDefault();login(email,password);}}>Login</button>
+        {err&&<a style={{textAlign:'center',backgroundColor:'rgba(255,59,98,.08)',padding:'5px',marginBottom:'25px',width:'90%'}}><img style={{marginRight:'15px',marginLeft:'15px'}} src={cross} height={20} width={20}/>
+        Your account email or password is incorrect.
+</a>}
+
+    <button onClick={(e)=>{e.preventDefault();login();}}>Login</button>
   </div>
         <OtherMethods /></div></div>
      </div>
