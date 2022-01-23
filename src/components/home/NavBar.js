@@ -16,21 +16,24 @@ function NavBar() {
   let navigate = useNavigate();
 
   return (
-    <div
+  <div
       style={{
         position: "sticky",
-        alignItems: "center",
         top: 0,
         zIndex: 10,
         backgroundColor: "white",
         height: "100%",
         height: "72px",
-        display: "flex",
-        justifyContent: "space-around",
+      
       }}
     >
-      <div style={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
-        <img style={{ margin: '0 auto' }} src={logo} height={60} width={90} />
+      <div style={{width:'1200px',  display: "flex",
+        justifyContent: "space-around",       margin:'0px auto',
+        alignItems: "center",
+
+}}>
+      <div style={{ display: 'flex', justifyContent: 'left' }}>
+        <img style={{ }} src={logo} height={60} width={90} />
       </div>
       <div style={{ flex: 2, display: "flex", flexDirection: "row" }}>
         <input
@@ -40,14 +43,19 @@ function NavBar() {
         <button onClick={()=>{navigate('/search')}} className="recherchebtn">RECHERCHER</button>
 
       </div>
-      <div style={{ display: 'flex', flexDirection: 'row', flex: 1, justifySelf: 'center', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', flex: 1, justifySelf: 'center', justifyContent: 'left' }}>
         <div className="iconhover" > <FontAwesomeIcon icon={faUser} size="lg" style={{ marginRight: 5 }} />
           <a onClick={()=>{navigate('/compte')}} style={{ marginRight: 15 }}>Compte</a></div>
         <div className="iconhover" >
           <FontAwesomeIcon size="lg" icon={faShoppingCart} style={{ marginRight: 5 }} />
           <a onClick={()=>{navigate('/panier')}}>Panier</a>
+        </div>  <div className="iconhover" > <FontAwesomeIcon icon={faUser} size="lg" style={{ marginRight: 5 }} />
+          <a onClick={()=>{navigate('/compte')}} style={{ marginRight: 15 }}>Compte</a></div>
+        <div className="iconhover" >
+          <FontAwesomeIcon size="lg" icon={faShoppingCart} style={{ marginRight: 5 }} />
+          <a onClick={()=>{navigate('/panier')}}>Panier</a>
         </div>
-      </div>
+      </div></div>
     </div>
   );
 }

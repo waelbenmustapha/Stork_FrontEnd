@@ -13,6 +13,8 @@ import {
 } from "react-router-dom";
 import {routes} from './utils/Routes';
 import StoreHomePagePreview from './views/store/StoreHomePagePreview';
+import NavBar from './components/home/NavBar';
+import Footer from './components/Footer';
 function App() {
 
   function getRoutes () {
@@ -22,15 +24,18 @@ function App() {
     });
   };
   return (
-   
+    <div>
     <BrowserRouter>
+    <NavBar/>
+
   {
     <Routes>
       {getRoutes()}
     </Routes>
 }
+<Footer/>
   </BrowserRouter>
-
+</div>
   );
 }
 
