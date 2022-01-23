@@ -27,6 +27,10 @@ body {
   font-weight: 500;
   cursor: pointer;
 }
+.hovercolor:hover {
+  color: #f68b1e;
+  cursor: pointer;
+}
 .recherchebtn {
   margin-left: 5px;
 
