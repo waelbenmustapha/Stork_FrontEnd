@@ -1,4 +1,8 @@
 import './App.css';
+import { Product } from './components/Product'
+import { AddProduct } from './components/AddProduct';
+import { EditProduct } from './components/EditProduct';
+import { ProductDetails } from './components/ProductDetails'
 import HomePage from './views/HomePage';
 
 import StoreHomePageCreate from './views/store/StoreHomePageCreate'

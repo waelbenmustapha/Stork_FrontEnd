@@ -32,7 +32,7 @@ function Plusdemande(props) {
       >
         { props.items.map((el) => (
           <div
-          onClick={()=>{navigate('/itemPreview')}}
+          onClick={()=>{navigate('/productdetails')}}
             className="box hovercursor"
             style={{
               width: "185px",
@@ -44,7 +44,7 @@ function Plusdemande(props) {
                 width: "185px",
                 borderRadius: "4px",
               }}
-              src={el.src_images}
+              src={el.thumbnail}
             />
             <p class="elementname">{el.sku} </p>
             {el.price_promotion ? (
@@ -773,7 +773,7 @@ function HomePage() {
       >
         {allItems.slice(0, itemsvisible).map((el) => (
           <div
-          onClick={()=>navigate("/itemPreview")}
+          onClick={()=>navigate("/productdetails")}
             className="itemshadow"
             style={{
               flex: "1 0 190px",
