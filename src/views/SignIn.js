@@ -57,7 +57,7 @@ const Google = props => (
 function SignIn() {
 let navigate = useNavigate();
 function login(){
-  axios.post("http://localhost:8090/Users/Login",{email:email,password:password}).then((res)=>{navigate("/")}).catch(function (error) {
+  axios.post("http://localhost:8090/Users/Login",{email:email,password:password}).then((res)=>{localStorage.setItem("jwt",res.data.access_token);navigate("/")}).catch(function (error) {
     if (error.response) {
       // Request made and server responded
       console.log(error.response.data);
