@@ -1,0 +1,25 @@
+.PannierCards{
+    width: 775px;
+    height: 167px;
+    margin: 20px;
+    padding: 10px 0 15px;
+    display: flex;
+    border: 5px solid;
+    border-radius: 10px;
+}
+.PannierCardInput{
+    width:7%
+}
+.PannierCardImg{
+    width:28%;
+}
+.PannierCardText{
+    width:47%;
+    padding-left: 15px;
+}
+.PannierCardEmoji{
+    width:18%
+}
+.iconn:hover{
+    cursor: pointer;
+}
