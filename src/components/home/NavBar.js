@@ -1,12 +1,14 @@
 import React from "react";
 import logo from "../../assets/logo.png";
+import shopping from "../../assets/shopping-cart.png";
+import wish from "../../assets/heart.png";
+import usr from "../../assets/user.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 
 import {
   fas,
   faShoppingCart,
-
   faUserAlt,
   faUserAltSlash,
 } from "@fortawesome/free-solid-svg-icons";
@@ -19,33 +21,87 @@ function NavBar() {
     <div
       style={{
         position: "sticky",
-        alignItems: "center",
         top: 0,
         zIndex: 10,
+        display:'flex',
+        borderTop:'1px solid #ddd',
+        borderBottom:'1px solid #ddd',
         backgroundColor: "white",
         height: "100%",
         height: "72px",
-        display: "flex",
-        justifyContent: "space-around",
       }}
     >
-      <div style={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
-        <img style={{ margin: '0 auto' }} src={logo} height={60} width={90} />
-      </div>
-      <div style={{ flex: 2, display: "flex", flexDirection: "row" }}>
-        <input
-          className="input"
-          placeholder="Cherchez un produit, une marque ou une catégorie "
-        />
-        <button onClick={()=>{navigate('/search')}} className="recherchebtn">RECHERCHER</button>
+      <div
+        style={{
+          width: "1200px",
+          display: "flex",
+          justifyContent: "space-around",
+          margin: "0px auto",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "left" }}>
+          <img className="hovercursor" onClick={()=>{navigate("/")}} style={{}} src={logo} height={60} width={90} />
+        </div>
+        <div style={{ flex: 2, display: "flex", flexDirection: "row" }}>
+          <input
+            className="input"
+            placeholder="Cherchez un produit, une marque ou une catégorie "
+          />
+          <button
+            onClick={() => {
+              navigate("/search");
+            }}
+            className="recherchebtn"
+          >
+            RECHERCHER
+          </button>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flex: 1,
+            gap:'10px',
+                       justifySelf: "center",
+            justifyContent: "left",
+          }}
+        >
+          <div
+            onClick={() => {
+              navigate("/panier");
+            }}
+            className="hovercolor"
+          >
+<div style={{display:'inline-block',position:'relative'}}>
+            <img  src={shopping} height={30} width={30} />
+            <span className="cart-number nav-cart-num">4</span>
+</div>
+            <a style={{padding:'5px'}}>Panier</a>
+          </div>
+          <div className="hovercolor">
+            
+            <img src={wish} height={27} width={27} />
+            <a style={{padding:'5px'}}
+              onClick={() => {
+                navigate("/compte");
+              }}
+             
+            >
+              WishList
+            </a>
+          </div>
+          <div className="hovercolor">
+          <img src={usr} height={27} width={27} />
 
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'row', flex: 1, justifySelf: 'center', justifyContent: 'center' }}>
-        <div className="iconhover" > <FontAwesomeIcon icon={faUser} size="lg" style={{ marginRight: 5 }} />
-          <a onClick={()=>{navigate('/compte')}} style={{ marginRight: 15 }}>Compte</a></div>
-        <div className="iconhover" >
-          <FontAwesomeIcon size="lg" icon={faShoppingCart} style={{ marginRight: 5 }} />
-          <a onClick={()=>{navigate('/panier')}}>Panier</a>
+            <a style={{padding:'5px'}}
+              onClick={() => {
+                navigate("/panier");
+              }}
+            >
+              Account
+            </a>
+          </div>
         </div>
       </div>
     </div>

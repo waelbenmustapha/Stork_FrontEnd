@@ -13,6 +13,14 @@ import SignUp from "../views/SignUp";
 import StoreHomePageCreate from "../views/store/StoreHomePageCreate";
 import StoreHomePagePreview from "../views/store/StoreHomePagePreview";
 
+export const privateRoutes=[
+  {
+    path: "/compte",
+    name: "Signin",
+    component: Compte,
+  },
+]
+
 export const routes = [
     // {
     //   path: "/:page",
@@ -49,11 +57,7 @@ export const routes = [
         name: "Signin",
         component: StoreHomePagePreview,
       },
-      {
-        path: "/compte",
-        name: "Signin",
-        component: Compte,
-      },
+    
       {
         path: "/search",
         name: "Signin",
