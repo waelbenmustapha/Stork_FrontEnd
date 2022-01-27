@@ -33,7 +33,7 @@ function Plusdemande(props) {
         { props.items.map((el) => (
           <div
           onClick={()=>{navigate('/productdetails')}}
-            className="box hovercursor"
+            className="box hover"
             style={{
               width: "185px",
             }}
@@ -520,7 +520,7 @@ function HomePage() {
             src="//ae01.alicdn.com/kf/Hf768b4fa794e44bfb7cc86e4a528a035h.png"
           />
           <p
-            style={{ fontWeight: "700", fontSize: "15px", textAlign: "center" }}
+            style={{ fontWeight: "700", fontSize: "13px", textAlign: "center" }}
           >
             Bienvenue sur Stork
           </p>

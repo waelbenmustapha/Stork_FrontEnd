@@ -149,7 +149,7 @@ function StoreHomePageCreate() {
         }}
       >
         <img
-          className="hovercursor"
+          className="hover"
           onClick={() => {
             setshowsidenav(false);
             setmargleft(false);

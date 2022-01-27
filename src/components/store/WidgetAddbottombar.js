@@ -38,7 +38,7 @@ function WidgetAddbottombar(props) {
               color: "white",
               marginLeft: "15px",
             }}
-            className="hovercursor"
+            className="hover"
           >
             Save
           </div>:
