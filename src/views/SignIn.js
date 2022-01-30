@@ -48,7 +48,7 @@ const OtherMethods = (props) => (
 );
 
 const Facebook = (props) => <a href="#" id="facebookIcon"></a>;
-
+//good
 const Twitter = (props) => <a href="#" id="twitterIcon"></a>;
 
 const Google = (props) => <a href="#" id="googleIcon"></a>;
