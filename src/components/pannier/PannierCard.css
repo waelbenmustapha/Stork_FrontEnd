@@ -1,25 +1,45 @@
 .PannierCards{
-    width: 775px;
+    width: 740px;
     height: 167px;
-    margin: 20px;
-    padding: 10px 0 15px;
+    padding: 10px 0 ;
     display: flex;
-    border: 5px solid;
-    border-radius: 10px;
+    border: 1px solid;
+    /* border-radius: 10px; */
 }
-.PannierCardInput{
-    width:7%
-}
+
 .PannierCardImg{
-    width:28%;
+    width:32%;
+    margin-left: 1%;
+    
 }
 .PannierCardText{
-    width:47%;
+    width:55%;
     padding-left: 15px;
 }
 .PannierCardEmoji{
-    width:18%
+    width:13%;
+    margin-right: 1%;
+    
 }
 .iconn:hover{
     cursor: pointer;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding-top: 50%;
+}
+.buttonsIncressDecress{
+border: none;
+height: 25px;
+width: 25px;
+margin: 5px;
+border-radius: 50%;
+
+}
+.panier{
+    border: 3px solid;
+    border-radius: 5px;
 }

@@ -40,10 +40,10 @@ function NavBar() {
           alignItems: "center",
         }}
       >
-        <div style={{ display: "flex", justifyContent: "left" }}>
+        <div style={{ display: "flex", justifyContent: "right", flex:1 }}>
           <img className="hovercursor" onClick={()=>{navigate("/")}} style={{}} src={logo} height={60} width={90} />
         </div>
-        <div style={{ flex: 2, display: "flex", flexDirection: "row" }}>
+        <div style={{ flex: 8, display: "flex", flexDirection: "row" }}>
           <input
             className="input"
             placeholder="Cherchez un produit, une marque ou une catégorie "

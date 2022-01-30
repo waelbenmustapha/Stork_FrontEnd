@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import "./PannierCard.css"
 import favorit from "../../assets/favoris.png"
+import delet from "../../assets/delete.png"
+
 const PannierCard = ({el, setTotalPrice, totalPrice}) => {
   const [total,setTotal]= useState(0)
 var prixApresSolde=(el.prix-el.solde/100).toFixed(2)
@@ -20,26 +22,24 @@ const decress=()=>{
 }
 
   return <div className="PannierCards">
-<div className="PannierCardInput"> <input type="checkbox" /> </div>
-<div className="PannierCardImg"><img src={el.img} alt="cart" style={{width:'100%', height:'100%'}} /></div>
+<div className="PannierCardImg"><img src={el.img} alt="cart" style={{width:'100%', height:'100%', borderRadius:'8px'}} /></div>
 <div className="PannierCardText">
-  text
-  {el.id}<br/>
+  {el.desc}<br/>
   {el.name}<br/>
-  <b>€{el.prix}</b><br/>
+  <b>€{el.prix}</b>
   <a style={{backgroundColor:"red"}}>%{el.solde}<br/></a>
   <b>Color</b> {el.color}<br/>
   <b>Livraison</b> {el.livraison}<br/>
 </div>
 <div className="PannierCardEmoji">
-<div>emoji
-<img src={favorit} width={30} height={30} className="iconn" onClick={()=>console.log("favorit")}/>
-<button>d</button>
+<div style={{display:'flex', justifyContent:'end', paddingRight:'5%'}}>
+<img src={favorit} width={25} height={25} className="iconn" style={{marginRight:'4px', marginTop:'auto'}} onClick={()=>console.log("favorit")}/>
+<img src={delet} width={30} height={30} className="iconn" onClick={()=>console.log("delete")}/>
 </div>
-<div>
-<button onClick={incress} >+</button>
+<div className="buttons">
+<button onClick={incress} className="buttonsIncressDecress" >+</button>
 <p>{total}</p>
-<button onClick={decress}>-</button>
+<button onClick={decress} className="buttonsIncressDecress">-</button>
 </div>
 </div>
 
