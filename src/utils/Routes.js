@@ -6,12 +6,21 @@ import BecomeSeller from "../views/BecomeSeller";
 import Compte from "../views/Compte";
 import HomePage from "../views/HomePage";
 import ItemPreview from "../views/ItemPreview";
+import Logout from "../views/Logout";
 import Panier from "../views/Panier";
 import SearchItem from "../views/SearchItem";
 import SignIn from "../views/SignIn";
 import SignUp from "../views/SignUp";
 import StoreHomePageCreate from "../views/store/StoreHomePageCreate";
 import StoreHomePagePreview from "../views/store/StoreHomePagePreview";
+
+export const privateRoutes=[
+  {
+    path: "/compte",
+    name: "Signin",
+    component: Compte,
+  },
+]
 
 export const routes = [
     // {
@@ -49,11 +58,7 @@ export const routes = [
         name: "Signin",
         component: StoreHomePagePreview,
       },
-      {
-        path: "/compte",
-        name: "Signin",
-        component: Compte,
-      },
+    
       {
         path: "/search",
         name: "Signin",
@@ -84,6 +89,11 @@ export const routes = [
         path: "/products",
         name: "products",
         component: Product,
+      },
+      {
+        path: "/logout",
+        name: "logout",
+        component: Logout,
       },
     
 
