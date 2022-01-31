@@ -113,7 +113,7 @@ function StoreHomePageCreate() {
 
   function createhomepage() {
     axios.post("http://localhost:8090/store/addstore", {
-      name: "store ml react",
+      name: "Noice",
       homepage: JSON.stringify(elements),
     });
   }
@@ -901,7 +901,7 @@ function StoreHomePageCreate() {
                           alt="item"
                           height="250"
                           width="250"
-                          src={found.src_images}
+                          src={found.thumbnail}
                         />
                         <p
                           style={{
@@ -1227,7 +1227,7 @@ function StoreHomePageCreate() {
                           height="160"
                           width="200"
                           style={{ maxWidth: "100%", maxHeight: "100%" }}
-                          src={found.src_images}
+                          src={found.thumbnail}
                         />
                         <div
                           style={{
@@ -1326,6 +1326,7 @@ function StoreHomePageCreate() {
               <p style={{ fontSize: "25px", fontWeight: "400" }}>
                 Widget Will Be Added Here
               </p>
+              <h1 onClick={()=>createhomepage()}>Save</h1>
             </div>
           </div>
         </div>
