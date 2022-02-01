@@ -5,12 +5,22 @@
 }
 
 body {
-  font-family: "Open Sans", Roboto, Arial, Helvetica, sans-serif, SimSun;
+  font-family: "Open Sans", Roboto, Arial, Helvetica, sans-serif, SimSun,  ;
+
   color: rgb(34, 34, 34);
   font-size: 14px;
   font-variant: tabular-nums;
   line-height: 1.5;
   font-feature-settings: "tnum";
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato'), url(./fonts/Lato-Light.ttf) format('truetype');
+}
+.lato {
+  font-family: Lato, Arial, serif;
+  font-weight: black;
 }
 
 h1,
