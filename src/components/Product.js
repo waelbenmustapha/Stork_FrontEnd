@@ -2,8 +2,8 @@ import React from 'react'
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
-import eyeOff from '../media/eye-off-thin.svg';
-import eyeOn from '../media/eye-thin.svg';
+import eyeOff from '../assets/eye-off-thin.svg';
+import eyeOn from '../assets/eye-thin.svg';
 import DataTable from 'react-data-table-component';
 import { useNavigate } from "react-router-dom";
 

@@ -32,7 +32,7 @@ function Plusdemande(props) {
       >
         { props.items.map((el) => (
           <div
-          onClick={()=>{navigate('/productdetails')}}
+          onClick={()=>{navigate('/productdetails/2')}}
             className="box hovercursor"
             style={{
               width: "185px",
@@ -769,11 +769,10 @@ function HomePage() {
           textAlign: "center",
           width: "1200px",
           margin: "auto",
-        }}
-      >
+        }}>
         {allItems.slice(0, itemsvisible).map((el) => (
           <div
-          onClick={()=>navigate("/productdetails")}
+          onClick={()=>navigate("/productdetails/2")}
             className="itemshadow"
             style={{
               flex: "1 0 190px",

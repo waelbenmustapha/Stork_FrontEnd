@@ -70,12 +70,12 @@ body {
 }
 .gradientdiv {
   padding: 15;
-border-radius: white;
-width: 8px;
-display: 240px;
-flex-direction: flex;
-align-content: column;
-justify-content: center;
+  border-radius: white;
+  width: 8px;
+  display: 240px;
+  flex-direction: flex;
+  align-content: column;
+  justify-content: center;
   background: rgb(245, 136, 24);
   background: linear-gradient(
     0deg,
@@ -353,9 +353,9 @@ li > a:hover {
   border-radius: 8px;
   font-size: 12px;
   flex: 1 0 190px;
-margin: 5px;
-height: 300px;
-background-color: white;
+  margin: 5px;
+  height: 300px;
+  background-color: white;
 }
 
 .prcsld {
@@ -396,28 +396,38 @@ background-color: white;
   width: 100%;
   border-radius: 8px;
 }
-.allitems{display: flex;
+.allitems {
+  display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   text-align: center;
   width: 1200px;
-  margin: auto;}
-  .plussomething{max-width: 1200px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;}
-    .prcprc{margin: 0px;
-      padding: 0px 5px 0px 5px;
-      text-decoration-line: line-through;
-      font-size: 1rem;
-      color: #75757a;}
-      .prcnrml{font-size: 18px;
-        padding: 0px 5px 0px 5px;
-        font-weight: 700;
-        margin: 0px;}
-       .midprt{background-color: white;
-        border-radius: 8px;
-        width: 700px;
-        display: flex;
-        flex-direction: column;}
+  margin: auto;
+}
+.plussomething {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.prcprc {
+  margin: 0px;
+  padding: 0px 5px 0px 5px;
+  text-decoration-line: line-through;
+  font-size: 1rem;
+  color: #75757a;
+}
+.prcnrml {
+  font-size: 18px;
+  padding: 0px 5px 0px 5px;
+  font-weight: 700;
+  margin: 0px;
+}
+.midprt {
+  background-color: white;
+  border-radius: 8px;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+}
