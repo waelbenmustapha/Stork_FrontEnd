@@ -14,6 +14,7 @@ import {
   Route,
   Link,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 import { routes, privateRoutes } from "./utils/Routes";
 import StoreHomePagePreview from "./views/store/StoreHomePagePreview";
@@ -23,11 +24,12 @@ import { useEffect, useState } from "react";
 function App() {
   const location = useLocation();
   const token = localStorage.getItem("jwt");
-  
+  let navigate = useNavigate();
   function checkexpiration() {
     if (token !== null) {
       if (jwt_decode(token).exp < Date.now() / 1000) {
-        console.log("expired");
+        navigate("/logout");
+
       } else {
         console.log(jwt_decode(token).exp - Date.now() / 1000);
       }
@@ -47,7 +49,7 @@ function App() {
       return (
         <Route
           path={route.path}
-          element={false ? <route.component /> : <Navigate to="/signin" />}
+          element={localStorage.getItem("jwt") ? <route.component /> : <Navigate to="/signin" />}
         />
       );
     });
