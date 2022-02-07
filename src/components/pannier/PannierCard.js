@@ -5,6 +5,7 @@ import delet from "../../assets/delete.png"
 
 const PannierCard = ({el, setTotalPrice, totalPrice}) => {
   const [total,setTotal]= useState(0)
+
 var prixApresSolde=(el.prix-el.solde/100).toFixed(2)
 const incress=()=>{
   setTotal(total+1)
@@ -20,7 +21,6 @@ const decress=()=>{
     console.log("incress" ,TOT2)
   }
 }
-
   return <div className="PannierCards">
 <div className="PannierCardImg"><img src={el.img} alt="cart" style={{width:'100%', height:'100%', borderRadius:'8px'}} /></div>
 <div className="PannierCardText">
@@ -29,7 +29,7 @@ const decress=()=>{
   <b>€{el.prix}</b>
   <a style={{backgroundColor:"red"}}>%{el.solde}<br/></a>
   <b>Color</b> {el.color}<br/>
-  <b>Livraison</b> {el.livraison}<br/>
+  <b>Livraison</b> {el.livraison.temp}<br/>
 </div>
 <div className="PannierCardEmoji">
 <div style={{display:'flex', justifyContent:'end', paddingRight:'5%'}}>
