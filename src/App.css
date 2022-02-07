@@ -411,7 +411,11 @@ display: flex;
 }
 
 .listacc a:hover {background-color: #ddd;}
+.hovercolororange:hover{
+  filter: invert(79%) sepia(57%) saturate(5852%) hue-rotate(349deg) brightness(106%) contrast(93%);
+cursor: pointer;
 
+}
 
 
 .cart-number {

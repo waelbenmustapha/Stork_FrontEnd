@@ -59,6 +59,7 @@ function NavBar() {
             placeholder="Cherchez un produit, une marque ou une catégorie "
           />
           <button
+          style={{fontSize:'14px',fontWeight:'400'}}
             onClick={() => {
               navigate("/search");
             }}
