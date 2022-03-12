@@ -3,7 +3,8 @@ import React from 'react'
 function Panier() {
     return (
         <div>
-<ul><li>1</li><li>2</li></ul>        </div>
+            <h1>Cart</h1>
+        </div>
     )
 }
 
