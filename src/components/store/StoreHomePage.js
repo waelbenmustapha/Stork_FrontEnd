@@ -34,7 +34,7 @@ function StoreHomePage(props) {
             (x) => x.id === parseInt(val)
           );
           return (
-            <div>
+            <div className='scaleitup' style={{width:'250px'}}>
               <img
                 style={{
                   border: "solid 2px rgb(219, 181, 128)",
@@ -120,8 +120,10 @@ function StoreHomePage(props) {
             (x) => x.id === parseInt(val)
           );
           return (
-            <div
+            <div 
+            className='scaleitup'
               style={{
+                width:'250px',
                 display: "flex",
                 boxShadow:
                   "rgba(163, 131, 85, 0.08) 0px 4px 24px 0px",

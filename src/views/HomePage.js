@@ -55,7 +55,7 @@ function Plusdemande(props) {
                   TND {el.price_promotion}
                 </span>
                 <span class="percentage">
-                  -{((el.price-el.price_promotion)*100)/el.price}
+                  -{(((el.price-el.price_promotion)*100)/el.price).toFixed(0)}
                   <span style={{ fontSize: "14px", fontWeight: "400" }}>%</span>
                 </span>
                 <p
@@ -423,13 +423,13 @@ function HomePage() {
         }}
       >
         <div className="categories" style={{ width: "240px" }}>
-          <ul class="category_menu" ref={ref}>
+          <ul  class="ullist category_menu" ref={ref}>
             {categories.map((el) => (
-              <li className="maincat">
+              <li  className="lilist maincat">
                 <img className="cat_name" height="30px" width="30px" src={el.icon}/><span class="cat_name">{el.name}</span>
-                <ul style={{ minHeight: height }} class="right_sliding">
+                <ul style={{ minHeight: height }} class="ullist right_sliding">
                   {el.subcat.map((subcat) => (
-                    <li>
+                    <li className="lilist" >
                       <span class="cat_name">{subcat.name}</span>
                     </li>
                   ))}

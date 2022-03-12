@@ -200,7 +200,7 @@ height:'40px'              }}
             {selected == "storehome" ? (
               <StoreHomePage store={store} elements={elements} />
             ) : selected == "products" ? (
-              <StoreProducts setCategory={setCategory} store={store} category={category}/>
+              <StoreProducts setCategory={setCategory} store={store} products={store.products} category={category}/>
             ) : selected == "feedback" ? (
               <StoreFeedbacks />
             ) : null}

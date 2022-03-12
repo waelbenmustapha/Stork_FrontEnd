@@ -303,6 +303,14 @@ visibility: visible;}
   font-weight: 600;
   vertical-align: middle;
 }
+.scaleitup{
+  transition: 0.3s;
+}
+
+.scaleitup:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+}
 
 .product-quantity {
   font-size: 12px;
