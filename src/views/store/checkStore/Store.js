@@ -1,17 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ImageGallery from "react-image-gallery";
-import "./store.css";
-import maginifier from "../../assets/magnifier.png";
+import "../store.css";
+import maginifier from "../../../assets/magnifier.png";
 import { Rating } from "react-simple-star-rating";
-import arrowdown from "../../assets/arrowdown.png";
+import arrowdown from "../../../assets/arrowdown.png";
 
 
-import lato from "../../fonts/Lato-Light.ttf";
-import StoreHomePage from "../../components/store/StoreHomePage";
-import StoreProducts from "../../components/store/StoreProducts";
-import StoreFeedbacks from "../../components/store/StoreFeedbacks";
+import StoreHomePage from "../../../components/store/checkStore/StoreHomePage";
+import StoreProducts from "../../../components/store/checkStore/StoreProducts";
+import StoreFeedbacks from "../../../components/store/checkStore/StoreFeedbacks";
 function Store() {
   const { name } = useParams();
   const [category,setCategory]=useState(null);
@@ -34,7 +32,7 @@ function Store() {
     getstore();
   }, []);
 
-  if (store == null) {
+  if (store===null) {
     return <p>Loading</p>;
   } else {
     return (
@@ -72,7 +70,7 @@ function Store() {
               }}
             >
               <a>Open </a>
-              <a style={{ color: "rgb(237, 69, 0)" }}>3 month(s)</a>
+              <a href="#" style={{ color: "rgb(237, 69, 0)" }}>3 month(s)</a>
              
             </div>
             <Rating
@@ -81,7 +79,7 @@ function Store() {
             style={{padding:'0px',margin:'0px',verticalAlign:'none',marginTop:'3px'}}
                 ratingValue={72} /* Available Props */
               />
-              <a style={{fontSize:'15px',fontWeight:'500'}}>{(72/20).toFixed(1)}</a>
+              <a href="#" style={{fontSize:'15px',fontWeight:'500'}}>{(72/20).toFixed(1)}</a>
           </div>
         </div>
         <div
@@ -133,7 +131,7 @@ function Store() {
               onClick={() => setSelected("storehome")}
               className="hovergraynav"
               style={{
-                backgroundColor:selected=="storehome"?'rgba(255, 255, 255, 0.2)':"",
+                backgroundColor:selected==="storehome"?'rgba(255, 255, 255, 0.2)':"",
                 color: "white",
                 fontSize: "17px",
                 fontWeight: "400",
@@ -146,7 +144,7 @@ function Store() {
             onClick={() => {setSelected("products")}}
               className="hovergraynav prodhov"
               style={{
-                backgroundColor:selected=="products"?'rgba(255, 255, 255, 0.2)':"",
+                backgroundColor:selected==="products"?'rgba(255, 255, 255, 0.2)':"",
 
                 color: "white",
                 position:'relative',
@@ -160,7 +158,7 @@ height:'40px'              }}
             >
              <p style={{margin:'0px'}} onClick={()=>setCategory("")} >Products <img src={arrowdown} style={{height:'15px',width:'15px'}}/></p> 
             <div className="storecategories showme" > 
-            {store.storeCategories.map((el)=><a onClick={()=>setCategory(el)}>{el.name}</a>)}
+            {store.storeCategories.map((el)=><a href="#" onClick={()=>setCategory(el)}>{el.name}</a>)}
             
             </div> 
             </div>
@@ -168,7 +166,7 @@ height:'40px'              }}
               onClick={() => setSelected("feedback")}
               className="hovergraynav"
               style={{
-                backgroundColor:selected=="feedback"?'rgba(255, 255, 255, 0.2)':"",
+                backgroundColor:selected==="feedback"?'rgba(255, 255, 255, 0.2)':"",
 
                 color: "white",
                 fontSize: "17px",
@@ -197,11 +195,11 @@ height:'40px'              }}
               padding: "25px",
             }}
           >
-            {selected == "storehome" ? (
+            {selected==="storehome" ? (
               <StoreHomePage store={store} elements={elements} />
-            ) : selected == "products" ? (
+            ) : selected==="products" ? (
               <StoreProducts setCategory={setCategory} store={store} products={store.products} category={category}/>
-            ) : selected == "feedback" ? (
+            ) : selected==="feedback" ? (
               <StoreFeedbacks />
             ) : null}
           </div>

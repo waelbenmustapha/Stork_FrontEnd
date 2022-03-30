@@ -5,15 +5,14 @@ import { ProductDetails } from "../components/ProductDetails";
 import BecomeSeller from "../views/BecomeSeller";
 import Compte from "../views/Compte";
 import HomePage from "../views/HomePage";
-import ItemPreview from "../views/ItemPreview";
 import Logout from "../views/Logout";
 import Panier from "../views/Panier";
 import SearchItem from "../views/SearchItem";
-import SignIn from "../views/SignIn";
-import SignUp from "../views/SignUp";
-import Store from "../views/store/Store";
+import SignIn from "../views/auth/SignIn";
+import SignUp from "../views/auth/SignUp";
 import StoreHomePageCreate from "../views/store/StoreHomePageCreate";
 import StoreHomePagePreview from "../views/store/StoreHomePagePreview";
+import Store from "../views/store/checkStore/Store";
 
 export const privateRoutes=[
   {

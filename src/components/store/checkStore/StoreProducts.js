@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import magnifier from "../../assets/magnifier.png";
-import downarr from "../../assets/downarr.png";
-import square from "../../assets/square.png";
+import magnifier from "../../../assets/magnifier.png";
+import downarr from "../../../assets/downarr.png";
+import square from "../../../assets/square.png";
 import axios from "axios";
-import discount from "../../assets/discount.png";
-import PaginationBar from "../PaginationBar";
+import discount from "../../../assets/discount.png";
+import PaginationBar from "../../PaginationBar";
 function StoreProducts(props) {
   const [products, setProducts] = useState([]);
   const [clicknmbr, setClicknmbr] = useState(0);
