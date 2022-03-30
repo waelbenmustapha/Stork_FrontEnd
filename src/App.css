@@ -5,12 +5,22 @@
 }
 
 body {
-  font-family: "Open Sans", Roboto, Arial, Helvetica, sans-serif, SimSun;
+  font-family: "Open Sans", Roboto, Arial, Helvetica, sans-serif, SimSun,  ;
+
   color: rgb(34, 34, 34);
   font-size: 14px;
   font-variant: tabular-nums;
   line-height: 1.5;
   font-feature-settings: "tnum";
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato'), url(./fonts/Lato-Light.ttf) format('truetype');
+}
+.lato {
+  font-family: Lato, Arial, serif;
+  font-weight: black;
 }
 
 h1,
@@ -293,6 +303,14 @@ visibility: visible;}
   font-weight: 600;
   vertical-align: middle;
 }
+.scaleitup{
+  transition: 0.3s;
+}
+
+.scaleitup:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+}
 
 .product-quantity {
   font-size: 12px;
@@ -385,6 +403,8 @@ display: flex;
 
 }
 
+
+
 .listacc{
  
   background-color: #f1f1f1;
@@ -399,7 +419,11 @@ display: flex;
 }
 
 .listacc a:hover {background-color: #ddd;}
+.hovercolororange:hover{
+  filter: invert(79%) sepia(57%) saturate(5852%) hue-rotate(349deg) brightness(106%) contrast(93%);
+cursor: pointer;
 
+}
 
 
 .cart-number {

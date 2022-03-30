@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../api/Auth";
-import cross from "../assets/cross.png";
-import "../css/Signin.css";
+import cross from "../../assets/cross.png";
+import "../../css/Signin.css";
 const FormHeader = (props) => <h2 id="headerTitle">{props.title}</h2>;
 
 const Form = (props) => (
@@ -47,7 +46,7 @@ const OtherMethods = (props) => (
   </div>
 );
 
-const Facebook = (props) => <a href="#" id="facebookIcon"></a>;
+const Facebook = (props) => <a   id="facebookIcon"></a>;
 //good
 const Twitter = (props) => <a href="#" id="twitterIcon"></a>;
 

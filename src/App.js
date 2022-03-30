@@ -1,26 +1,18 @@
 import "./App.css";
-import { Product } from "./components/Product";
-import { AddProduct } from "./components/AddProduct";
-import { EditProduct } from "./components/EditProduct";
-import { ProductDetails } from "./components/ProductDetails";
-import HomePage from "./views/HomePage";
+
 import jwt_decode from "jwt-decode";
 
-import StoreHomePageCreate from "./views/store/StoreHomePageCreate";
 import {
-  BrowserRouter,
   Routes,
   useLocation,
   Route,
-  Link,
   Navigate,
   useNavigate,
 } from "react-router-dom";
 import { routes, privateRoutes } from "./utils/Routes";
-import StoreHomePagePreview from "./views/store/StoreHomePagePreview";
 import NavBar from "./components/home/NavBar";
 import Footer from "./components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect  } from "react";
 function App() {
   const location = useLocation();
   const token = localStorage.getItem("jwt");

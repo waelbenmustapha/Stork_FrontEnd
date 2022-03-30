@@ -5,14 +5,14 @@ import { ProductDetails } from "../components/ProductDetails";
 import BecomeSeller from "../views/BecomeSeller";
 import Compte from "../views/Compte";
 import HomePage from "../views/HomePage";
-import ItemPreview from "../views/ItemPreview";
 import Logout from "../views/Logout";
 import Panier from "../views/Panier";
 import SearchItem from "../views/SearchItem";
-import SignIn from "../views/SignIn";
-import SignUp from "../views/SignUp";
+import SignIn from "../views/auth/SignIn";
+import SignUp from "../views/auth/SignUp";
 import StoreHomePageCreate from "../views/store/StoreHomePageCreate";
 import StoreHomePagePreview from "../views/store/StoreHomePagePreview";
+import Store from "../views/store/checkStore/Store";
 
 export const privateRoutes=[
   {
@@ -94,6 +94,10 @@ export const routes = [
         path: "/logout",
         name: "logout",
         component: Logout,
+      },  {
+        path: "/store/:name",
+        name: "store",
+        component: Store,
       },
     
 

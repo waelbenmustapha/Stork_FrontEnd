@@ -4,7 +4,9 @@ import ImageGallery from "react-image-gallery";
 import { Carousel } from "react-responsive-carousel";
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useNavigate } from "react-router-dom";
-
+import orders from "../assets/orders.png";
+import user2 from "../assets/user2.png";
+import shoppingcart from "../assets/shopping-cart.png";
 import axios from "axios";
 import home from '../assets/home.png';
 import "../css/home.css";
@@ -53,7 +55,7 @@ function Plusdemande(props) {
                   TND {el.price_promotion}
                 </span>
                 <span class="percentage">
-                  -{((el.price-el.price_promotion)*100)/el.price}
+                  -{(((el.price-el.price_promotion)*100)/el.price).toFixed(0)}
                   <span style={{ fontSize: "14px", fontWeight: "400" }}>%</span>
                 </span>
                 <p
@@ -421,13 +423,13 @@ function HomePage() {
         }}
       >
         <div className="categories" style={{ width: "240px" }}>
-          <ul class="category_menu" ref={ref}>
+          <ul  class="ullist category_menu" ref={ref}>
             {categories.map((el) => (
-              <li className="maincat">
+              <li  className="lilist maincat">
                 <img className="cat_name" height="30px" width="30px" src={el.icon}/><span class="cat_name">{el.name}</span>
-                <ul style={{ minHeight: height }} class="right_sliding">
+                <ul style={{ minHeight: height }} class="ullist right_sliding">
                   {el.subcat.map((subcat) => (
-                    <li>
+                    <li className="lilist" >
                       <span class="cat_name">{subcat.name}</span>
                     </li>
                   ))}
@@ -513,12 +515,18 @@ function HomePage() {
             justifyContent: "center",
           }}
         >
-          <img
+           {!localStorage.getItem("jwt")?<img
             style={{ alignSelf: "center" }}
             height={48}
             width={48}
             src="//ae01.alicdn.com/kf/Hf768b4fa794e44bfb7cc86e4a528a035h.png"
-          />
+          />:<img
+          style={{ alignSelf: "center",borderRadius:'50%' }}
+          height={48}
+          width={48}
+          src="https://media-exp1.licdn.com/dms/image/C5603AQEZIMZilsqA6A/profile-displayphoto-shrink_200_200/0/1608994757336?e=1648684800&v=beta&t=dYS8ndTACYXL4UDoykvG9ZWrmRskE52xBrrSSBErBCQ"
+        />}
+          {!localStorage.getItem("jwt")?<div>
           <p
             style={{ fontWeight: "700", fontSize: "13px", textAlign: "center" }}
           >
@@ -528,6 +536,15 @@ function HomePage() {
             <span onClick={()=>{navigate('/signup')}} class="inscr">S'inscrire</span>
             <span onClick={()=>{navigate('/signin')}} class="connect">Se Connecter</span>
           </div>
+          </div>:<div><p style={{fontWeight:'700',fontSize:'15px',textAlign:'center',padding:'5px',margin:'0px',opacity:'0.85'}}>Hi, {JSON.parse(localStorage.getItem("user")).name}</p>
+          <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around',alignContent:'center',alignItems:'center'}}>
+        <div> <div className="hover" style={{backgroundColor:'#f0f0f0',height:'55px',width:'55px',padding:'5px',borderRadius:'50%',display:'flex',justifyContent:'center',alignItems:'center'}}> <img src={user2} style={{height:'35px',width:'35px'}}/></div><p style={{margin:'0px',fontSize:'14px',textAlign:'center'}}>Account</p></div>
+        <div> <div className="hover" style={{backgroundColor:'#f0f0f0',height:'55px',width:'55px',padding:'5px',borderRadius:'50%',display:'flex',justifyContent:'center',alignItems:'center'}}> <img src={orders} style={{height:'35px',width:'35px'}}/></div><p style={{margin:'0px',fontSize:'14px',textAlign:'center'}}>Orders</p></div>
+        <div> <div className="hover" style={{backgroundColor:'#f0f0f0',height:'55px',width:'55px',padding:'5px',borderRadius:'50%',display:'flex',justifyContent:'center',alignItems:'center'}}> <img src={shoppingcart} style={{height:'35px',width:'35px'}}/></div><p style={{margin:'0px',fontSize:'14px',textAlign:'center'}}>Cart</p></div>
+
+            </div>
+          
+          </div>}
           <img
             style={{ marginTop: 15, borderRadius: 15 }}
             height={270}
