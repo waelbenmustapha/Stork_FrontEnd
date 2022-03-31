@@ -3,7 +3,7 @@ import { EditProduct } from "../components/EditProduct";
 import { Product } from "../components/Product";
 import { ProductDetails } from "../components/ProductDetails";
 import BecomeSeller from "../views/BecomeSeller";
-import Compte from "../views/Compte";
+import Compte from "../views/account/Compte";
 import HomePage from "../views/HomePage";
 import Logout from "../views/Logout";
 import Panier from "../views/Panier";
@@ -15,11 +15,7 @@ import StoreHomePagePreview from "../views/store/StoreHomePagePreview";
 import Store from "../views/store/checkStore/Store";
 
 export const privateRoutes=[
-  {
-    path: "/compte",
-    name: "Signin",
-    component: Compte,
-  },
+
 ]
 
 export const routes = [

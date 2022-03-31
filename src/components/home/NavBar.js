@@ -16,7 +16,7 @@ import "../../css/home.css";
 import { faUserCircle, faUser } from "@fortawesome/free-regular-svg-icons";
 function NavBar() {
   let navigate = useNavigate();
-  useEffect(() => {}, []);
+  useEffect(() => {console.log("navbar rendering")}, [localStorage.getItem("user")]);
   const [showaccountsettings, setshowaccountsettings] = useState(false);
   return (
     <div
@@ -113,12 +113,12 @@ function NavBar() {
             
             >
               <img  onClick={() => {
-                navigate("/compte");
+                navigate("/account");
               }} className="centerimg" src={usr} height={30} width={30} />
 
               <a
                onClick={() => {
-                navigate("/compte");
+                navigate("/account");
               }}
                 style={{ padding: "5px" }}
                
@@ -149,7 +149,7 @@ function NavBar() {
                     }}
                   >
                     <img
-                      src="https://media-exp1.licdn.com/dms/image/C5603AQEZIMZilsqA6A/profile-displayphoto-shrink_200_200/0/1608994757336?e=1648684800&v=beta&t=dYS8ndTACYXL4UDoykvG9ZWrmRskE52xBrrSSBErBCQ"
+                      src={JSON.parse(localStorage.getItem("user")).image==null?'https://forwardsummit.ca/wp-content/uploads/2019/01/avatar-default.png':JSON.parse(localStorage.getItem("user")).image}
                       height={50}
                       width={50}
                       style={{ borderRadius: "50%" }}
@@ -161,7 +161,7 @@ function NavBar() {
                     </a>
                   </div>
                   <div className="listacc">
-    <a onClick={()=>navigate("/compte")}>Account</a>
+    <a onClick={()=>navigate("/account")}>Account</a>
     <a onClick={()=>navigate("/panier")}>My Orders</a>
     <a onClick={()=>navigate("/panier")}>My Wish List</a>
     <a onClick={()=>navigate("/logout")}>Sign Out</a>
@@ -171,7 +171,7 @@ function NavBar() {
             </div>
           ) : (
             <div    onClick={() => {
-              navigate("/compte");
+              navigate("/account");
             }} className="hovercolor">
               <img className="centerimg" src={usr} height={30} width={30} />
 

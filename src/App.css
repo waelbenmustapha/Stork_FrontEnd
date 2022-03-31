@@ -69,6 +69,22 @@ h6 {
   word-break: break-all;
 }
 
+.hovergray:hover{
+  cursor: pointer;
+  color: black;
+  background-color: rgb(242, 242, 242);
+}
+.hovergray{
+  color: black;
+  height: 36px;
+padding: 5px 5px 5px 15px;
+}
+
+.selecteddd{
+background-color: rgb(242, 242, 242);
+border-left: 4px solid #ff5235;
+padding: 5px 5px 5px 20px;
+}
 .product-title-text {
   font-size: 14px;
   line-height: 19px;

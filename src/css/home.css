@@ -72,6 +72,15 @@ body {
   height: 40px;
   font-weight: 600;
   border-radius: 5px;
+}.recherchebtnn {
+ 
+
+
+  border: 1px solid #f68b1e;
+  background-color: #f68b1e;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
 }
 .sliderimg {
   width: 500px;
