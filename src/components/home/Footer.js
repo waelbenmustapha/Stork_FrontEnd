@@ -2,7 +2,6 @@ import React from 'react';
 import {
   faFacebook,
   faInstagram,
-  faTwitch,
   faTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";

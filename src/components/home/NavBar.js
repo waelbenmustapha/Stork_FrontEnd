@@ -1,17 +1,11 @@
 import React from "react";
-import logo from "../../assets/logo.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-
-import {
-  fas,
-  faShoppingCart,
-
-  faUserAlt,
-  faUserAltSlash,
-} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import logo from "../../assets/logo.png";
 import "../../css/home.css";
-import { faUserCircle, faUser } from "@fortawesome/free-regular-svg-icons";
+
 function NavBar() {
   let navigate = useNavigate();
 

@@ -1,12 +1,9 @@
 import React from 'react'
-// import {Link} from 'react-router-dom'
 import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
-
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
-import axios from 'axios';
 
 export const EditProduct = () => {
     const { id } = useParams();

@@ -1,21 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import NavBar from "../components/home/NavBar"
+import home from '../assets/home.png';
 import ImageGallery from "react-image-gallery";
+import { faFacebook, faInstagram, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Carousel } from "react-responsive-carousel";
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
-import { useNavigate } from "react-router-dom";
-
-import axios from "axios";
-import home from '../assets/home.png';
 import "../css/home.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faInstagram,
-  faTwitch,
-  faTwitter,
-  faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
 
 function Plusdemande(props) {
   let navigate = useNavigate();

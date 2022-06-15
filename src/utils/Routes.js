@@ -12,6 +12,7 @@ import SignIn from "../views/SignIn";
 import SignUp from "../views/SignUp";
 import StoreHomePageCreate from "../views/store/StoreHomePageCreate";
 import StoreHomePagePreview from "../views/store/StoreHomePagePreview";
+import { Add } from "../components/Add";
 
 export const routes = [
     // {
@@ -85,6 +86,10 @@ export const routes = [
         name: "products",
         component: Product,
       },
-    
+      {
+        path: "/add",
+        name: "add",
+        component: Add,
+      },
 
   ];

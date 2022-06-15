@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from "../components/home/NavBar";
 import Footer from "../components/home/Footer";
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../css/home.css';
 
 export const ProductDetails = () => {
@@ -93,7 +93,7 @@ export const ProductDetails = () => {
   });
 
   return(
-    <>
+    <div className='desktop-size'>
       <NavBar />
       <div className='wrapper'>
         <div className='product-main'>
@@ -261,7 +261,7 @@ export const ProductDetails = () => {
             </div>
             <div className='user-location-detail'>
               <div className="user-location-title">
-                titletitle
+                ads here
               </div>
             </div>
           </div>
@@ -270,7 +270,7 @@ export const ProductDetails = () => {
         <div className='product-extend'>
           <div className='detail-container flex'>
             <div className="product-detail">
-              <div className="detail-extend-tab">
+              <div className="detail-extend-tab card-no-border">
                 <div className="detail-tab-bar">
                   <ul className="tab-lists avoid-user-select">
                     <li className="tab-item active" onClick={(e) => openTab(e, 'presentation')}>
@@ -486,8 +486,7 @@ export const ProductDetails = () => {
               </div>
               <div className='rcmds-v-products'>
                 <span>Recommandations du vendeur</span>
-                <div className='items'>
-                  
+                <div className='items card-no-border'>
                   <div className="itemshadow" style={{flex: "1 0 190px", margin: "5px", height: "300px", backgroundColor: "white"}}>
                     <div>
                       <img src="https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/66/8564/1.jpg?6642" style={{height: "190px", width: "100%", borderRadius: "8px"}}/>
@@ -604,8 +603,7 @@ export const ProductDetails = () => {
               </div>
               <div className='rcmds-v-products'>
                 <span>Autre produits</span>
-                <div className='items'>
-                  
+                <div className='items card-no-border'>
                   <div className="itemshadow" style={{flex: "1 0 190px", margin: "5px", height: "300px", backgroundColor: "white"}}>
                     <div>
                       <img src="https://tn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/66/8564/1.jpg?6642" style={{height: "190px", width: "100%", borderRadius: "8px"}}/>
@@ -722,44 +720,53 @@ export const ProductDetails = () => {
               </div>
             </div>
             <div className='product-extend-side-container'>
-              <div className='side-container'>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
+              <div className='side-container card-no-border'>
+                <a href="#" className="-d-f -i-center -a-text-upper">
+                  <h2 className="-fw-500 -fs-14 -mg-0-pad-0">Seller Information</h2>
+                  <span className='gt-symbol'>&gt;</span>
+                </a>
+                <div className="-hr">
+                  <span className="-fw-500 -fs-14 -pbs">Prestige Stores</span>
+                  <div className="-d-f -j-bet -fs-12">
+                    <div className="-d-f -d-co -j-bet -prs">
+                      <span><bdo dir="ltr" className="-fw-500 -prxs">80%</bdo>Seller Score</span>
+                      <span className="-mg-0-pad-0">
+                        <span className="-fw-500">3728 </span>
+                        <span>Followers</span>
+                      </span>
+                    </div>
+                    <a className="btn _sm _prim -fsh0 -me-end" href="#">Follow</a>
+                  </div>
+                </div>
+                <div className="-brd-top -fs-12">
+                  <h3 className="-d-f -i-center -fw-500 -fs-14 -mg-0-pad-0">
+                    Seller Performance
+                    <button aria-label="Seller Performance" className="-cp -hov-or5 -out0 -fs0 -phxs">
+                      !
+                    </button>
+                  </h3>
+                  <div className="-d-f -i-center -pts">
+                    <span className="-mg-0-pad-0">Order Fulfillment Rate:&nbsp;<span className="-fw-500">Excellent</span></span>
+                  </div>
+                  <div className="-d-f -i-center -pts">
+                    <span className="-mg-0-pad-0">Quality Score:&nbsp;<span className="-fw-500">Good</span></span>
+                  </div>
+                  <div className="-d-f -i-center -pts">
+                    <span className="-mg-0-pad-0">Customer Rating:&nbsp;<span className="-fw-500">Average</span></span>
+                  </div>
+                </div>
               </div>
-              <div className='side-container'>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
-                <span>side container</span>
+              <div className='side-container card-no-border'>
+                <a className="sell-in -i-center" href="#" target="_blank">
+                  <div>
+                    <p className="sc-title">Have one to sell?</p>
+                    <p className="sc-sub-title">Click here to list your product</p>
+                  </div>
+                  <span className='gt-symbol'>&gt;</span>
+                </a>
               </div>
-              <div className='side-container'>
-                <span>side container</span>
+              <div className='side-container card-no-border'>
+                <span>another ads here</span>
                 <span>side container</span>
                 <span>side container</span>
                 <span>side container</span>
@@ -782,7 +789,7 @@ export const ProductDetails = () => {
         
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
